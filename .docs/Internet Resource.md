@@ -58,4 +58,10 @@
 - [SmartFoxServer 2X](https://www.smartfoxserver.com/products)
   - [SmartFoxServer 2X CE Download](https://www.smartfoxserver.com/download/sfs2x#client&p=installer)
   - [Godot Sample](https://www.smartfoxserver.com/download/get/316)
+- [GodotNetProjectTemplate \(VS2022)](https://github.com/silenuz/GodotNetProjectTemplate)
+- [Command line tutorial \(Godot Engine 4.1 Stable)](https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html)
+- [ [WIP] Godot4 Visual Studio 2022 Guide](https://github.com/godotengine/godot-csharp-visualstudio/issues/48)
+- [VisualScript module for Godot](https://github.com/godotengine/godot-visual-script)
 - []()
+- []()
+
