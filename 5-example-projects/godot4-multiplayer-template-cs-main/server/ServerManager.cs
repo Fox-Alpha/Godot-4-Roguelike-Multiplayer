@@ -59,11 +59,20 @@ public partial class ServerManager : Node
             States = new NetMessage.UserState[entityArray.Count]
         };
 
-        for (int i = 0; i < entityArray.Count; i++)
-        {
-            var player = entityArray[i] as ServerPlayer; //player
-            snapshot.States[i] = player.GetCurrentState();
-        }
+	private void BroadcastSnapshot()
+	{
+		var snapshot = new NetMessage.GameSnapshot
+		{
+			Time = (int)Time.GetTicksMsec(),
+			States = new NetMessage.UserState[entityArray.Count]
+		};
+
+		for (int i = 0; i < entityArray.Count; i++)
+		{
+			var player = entityArray[i] as ServerPlayer; //player
+			if (GodotObject.IsInstanceValid(player))
+				snapshot.States[i] = player.GetCurrentState();
+		}
 
         byte[] data = MessagePackSerializer.Serialize<NetMessage.ICommand>(snapshot);
 
