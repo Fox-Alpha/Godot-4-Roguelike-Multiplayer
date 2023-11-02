@@ -38,14 +38,31 @@ public class SnapshotInterpolator
             for (int i = 0; i < futureStates.Length; i++)
             {
                 //TODO: check if the player is aviable in both states
-                NetMessage.UserState futureState = _snapshotBuffer[NextFuture].States[i];
-                NetMessage.UserState pastState = _snapshotBuffer[RecentPast].States[i];
-
-                var dummy = playersArray.GetNode<Node3D>(futureState.Id.ToString());
-
-                if (dummy.IsMultiplayerAuthority() == false)
+                try
                 {
-                    dummy.Position = pastState.Position.Lerp(futureState.Position, InterpolationFactor);
+                    NetMessage.UserState futureState = _snapshotBuffer[NextFuture].States[i];
+                    NetMessage.UserState pastState = _snapshotBuffer[RecentPast].States[i];
+
+                    var dummy = playersArray.GetNodeOrNull<Node3D>(futureState.Id.ToString());
+
+                    if (dummy != null && dummy.IsMultiplayerAuthority() == false)
+                    {
+                        dummy.Position = pastState.Position.Lerp(futureState.Position, InterpolationFactor);
+                    }
+                }
+                catch (System.NullReferenceException nrEx)
+                {
+                    GD.Print($"Error: {nrEx.Message}\nGet Node: {_snapshotBuffer[NextFuture].States[i].Id.ToString()}");
+                }
+                catch (System.IndexOutOfRangeException ioorEx)
+                {
+                    
+                    GD.PrintErr($"Error: {ioorEx.Message}");
+
+                    foreach (var item in ioorEx.Data.Keys)
+                    {
+                        GD.Print($"{item}={ioorEx.Data[item]}");
+                    }
                 }
             }
         }
