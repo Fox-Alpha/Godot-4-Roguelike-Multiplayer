@@ -68,3 +68,4 @@ packages/**
 /course-assets/
 *.old
 /5-example-projects/godot4-multiplayer-template-cs-main/.vscode/
+*.vsix
