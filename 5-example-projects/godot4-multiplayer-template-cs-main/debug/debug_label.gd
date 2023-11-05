@@ -1,8 +1,8 @@
 extends Label
 
 func _process(_delta):
-	self.text = ""
 	if $"/root/Main/ServerAuthority/EntityArray".get_child_count() > 0:
+		self.text = ""
 		var entities = get_node("/root/Main/ServerAuthority/EntityArray").get_children()
 
 		for entity in entities:
