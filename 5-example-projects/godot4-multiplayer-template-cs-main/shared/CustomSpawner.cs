@@ -7,16 +7,20 @@ public partial class CustomSpawner : MultiplayerSpawner
 	[Export] private PackedScene _serverPlayerScene;
 	[Export] private PackedScene _dummyScene;
 
-    private static ClientPlayer localPlayer;
+	[Export] private int startmode = -1;
 
-    public static ClientPlayer LocalPlayer { get => localPlayer; set => localPlayer = value; }
+	private static ClientPlayer localPlayer;
 
-    public override void _Ready()
+	public static ClientPlayer LocalPlayer { get => localPlayer; set => localPlayer = value; }
+
+	public override void _Ready()
 	{
 		Callable customSpawnFunctionCallable = new (this, nameof(CustomSpawnFunction));
 		this.SpawnFunction = customSpawnFunctionCallable;
 
-		this.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
+		var uid = Multiplayer.GetUniqueId();
+
+		this.SetMultiplayerAuthority(uid);
 	}
 
 	private Node CustomSpawnFunction(Variant data)

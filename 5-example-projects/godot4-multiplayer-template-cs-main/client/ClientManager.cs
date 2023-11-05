@@ -22,7 +22,7 @@ public partial class ClientManager : Node
 	{
 		Connect();
 
-		_entityArray = GetNode("/root/Main/EntityArray");
+		_entityArray = GetNode("/root/Main/ServerAuthority/EntityArray");
 
 		_netClock = GetNode<NetworkClock>("NetworkClock");
 		_netClock.Initialize(_multiplayer);
@@ -45,7 +45,9 @@ public partial class ClientManager : Node
 
 			foreach (NetMessage.UserState state in snapshot.States)
 			{
-				if (state.Id == Multiplayer.GetUniqueId())
+				long mpuid = Multiplayer.GetUniqueId();
+
+                if (state.Id == mpuid)
 				{
 					CustomSpawner.LocalPlayer.ReceiveState(state);
 				}
@@ -72,8 +74,13 @@ public partial class ClientManager : Node
 		ENetMultiplayerPeer peer = new();
 		peer.CreateClient(_address, _port);
 		_multiplayer.MultiplayerPeer = peer;
+		
 		GetTree().SetMultiplayer(_multiplayer);
-		GD.Print("Client connected to ", _address, ":", _port);
+        // ToDo: Make a dedicated node for Client peer
+        //GD.Print("ClientManager::connect() -> NodePath: " + GetPath());
+        //GetTree().SetMultiplayer(_multiplayer, GetPath());
+        //GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
+        GD.Print("Client connected to ", _address, ":", _port);
 	}
 
 	private async void OnServerDisconnected()

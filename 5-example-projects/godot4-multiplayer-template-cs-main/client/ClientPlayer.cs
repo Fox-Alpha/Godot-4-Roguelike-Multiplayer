@@ -4,6 +4,7 @@ using MessagePack;
 using NetMessage;
 
 // Wrapper scene spawned by the MultiplayerSpawner
+[GlobalClass]
 public partial class ClientPlayer : CharacterBody3D
 {
     public int RedundantInputs { get; private set; } = 0;

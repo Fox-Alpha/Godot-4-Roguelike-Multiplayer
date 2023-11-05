@@ -4,6 +4,7 @@ using MessagePack;
 using System.Linq;
 
 // Code executed on the server side only, handles network events
+[GlobalClass]
 public partial class ServerManager : Node
 {
 	[Export] private int _port = 9999;
@@ -33,7 +34,7 @@ public partial class ServerManager : Node
 
 	public override void _PhysicsProcess(double delta)
 	{
-		entityArray = GetNode("/root/Main/EntityArray").GetChildren();
+		entityArray = GetNode("/root/Main/ServerAuthority/EntityArray").GetChildren();
 		ProcessPendingPackets();
 	}
 
@@ -80,7 +81,7 @@ public partial class ServerManager : Node
 		switch (command)
 		{
 			case NetMessage.UserCommand userCmd:
-				ServerPlayer player = GetNode($"/root/Main/EntityArray/{userCmd.Id}") as ServerPlayer;
+				ServerPlayer player = GetNode($"/root/Main/ServerAuthority/EntityArray/{userCmd.Id}") as ServerPlayer;
 				player.PushCommand(userCmd);
 				break;
 
@@ -94,14 +95,14 @@ public partial class ServerManager : Node
 
 	private void OnPeerConnected(long id)
 	{
-		//Node playerInstance = 
-		GetNode<MultiplayerSpawner>("/root/Main/MultiplayerSpawner").Spawn(id);
+		//Node playerInstance =
+		GetNode<MultiplayerSpawner>("/root/Main/ServerAuthority/MultiplayerSpawner").Spawn(id);
 		GD.Print("Peer ", id, " connected");
 	}
 
 	private void OnPeerDisconnected(long id)
 	{
-		GetNode($"/root/Main/EntityArray/{id}").QueueFree();
+		GetNode($"/root/Main/ServerAuthority/EntityArray/{id}").QueueFree();
 		GD.Print("Peer ", id, " disconnected");
 	}
 
@@ -116,11 +117,12 @@ public partial class ServerManager : Node
 
 		_multiplayer.MultiplayerPeer = peer;
 		// ToDo: Make a dedicated node for Server peer
-		//GetTree().SetMultiplayer(_multiplayer);
-		GD.Print("ServerManager::create() -> NodePath: " + GetPath());
-		GetTree().SetMultiplayer(_multiplayer, GetPath());
-
-		GD.Print("Server listening on ", _port);
+		GetTree().SetMultiplayer(_multiplayer);
+		//GD.Print("ServerManager::create() -> NodePath: " + GetPath());
+		//GetTree().SetMultiplayer(_multiplayer, GetPath());
+        //GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
+        
+        GD.Print("Server listening on ", _port);
 	}
 
 	private void DebugInfo()
