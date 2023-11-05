@@ -50,7 +50,7 @@ func CustomSpawnFunction(data:int):
 
 	#// Client player
 	#if (localID == spawnedPlayerID)
-	if localID == spawnedPlayerID:
+	elif localID == spawnedPlayerID:
 	#{
 		#GD.Print("Spawned client player");
 		print("Spawned client player")
@@ -65,18 +65,13 @@ func CustomSpawnFunction(data:int):
 		return player;
 	#}
 
-	print("Spawned dummy");
-	#Node player = _dummyScene.Instantiate();
-	var player : Node = _dummyScene.instantiate()
-	#player.Name = spawnedPlayerID.ToString();
-	player.name = str(spawnedPlayerID)
-	#player.SetMultiplayerAuthority(spawnedPlayerID);
-	player.set_multiplayer_authority(spawnedPlayerID)
-	return player;
+	else:
+		print("Spawned dummy");
+		#Node player = _dummyScene.Instantiate();
+		var player : Node = _dummyScene.instantiate()
+		#player.Name = spawnedPlayerID.ToString();
+		player.name = str(spawnedPlayerID)
+		#player.SetMultiplayerAuthority(spawnedPlayerID);
+		player.set_multiplayer_authority(spawnedPlayerID)
+		return player;
 
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
