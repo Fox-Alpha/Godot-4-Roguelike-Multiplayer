@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "multiplayer-base", "multiplayer-base.csproj", "{55D81ECA-2F65-4280-B713-0832380F5661}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "multiplayer-base", "multiplayer-base.csproj", "{8BB9BEA6-1D68-4DC6-AFAE-80EEA51E8295}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{55D81ECA-2F65-4280-B713-0832380F5661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55D81ECA-2F65-4280-B713-0832380F5661}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55D81ECA-2F65-4280-B713-0832380F5661}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{55D81ECA-2F65-4280-B713-0832380F5661}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{55D81ECA-2F65-4280-B713-0832380F5661}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{55D81ECA-2F65-4280-B713-0832380F5661}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{8BB9BEA6-1D68-4DC6-AFAE-80EEA51E8295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB9BEA6-1D68-4DC6-AFAE-80EEA51E8295}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB9BEA6-1D68-4DC6-AFAE-80EEA51E8295}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{8BB9BEA6-1D68-4DC6-AFAE-80EEA51E8295}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{8BB9BEA6-1D68-4DC6-AFAE-80EEA51E8295}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{8BB9BEA6-1D68-4DC6-AFAE-80EEA51E8295}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal
