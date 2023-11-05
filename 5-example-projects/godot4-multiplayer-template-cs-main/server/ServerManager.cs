@@ -1,9 +1,10 @@
-using Godot;
-using System;
-using MessagePack;
 using System.Linq;
+using Godot;
+using MessagePack;
 
 // Code executed on the server side only, handles network events
+namespace multiplayerbase.server;
+
 [GlobalClass]
 public partial class ServerManager : Node
 {
@@ -22,11 +23,11 @@ public partial class ServerManager : Node
 
 	public override void _Process(double delta)
 	{
-		DebugInfo();
 
 		_netTickCounter += delta;
 		if (_netTickCounter >= (1.0 / NET_TICKRATE))
 		{
+			DebugInfo();
 			NetworkProcess();
 			_netTickCounter = 0;
 		}
@@ -55,23 +56,31 @@ public partial class ServerManager : Node
 	// Pack and send GameSnapshot with all entities and their information
 	private void BroadcastSnapshot()
 	{
-		var snapshot = new NetMessage.GameSnapshot
-		{
-			Time = (int)Time.GetTicksMsec(),
-			States = new NetMessage.UserState[entityArray.Count]
-		};
+		var peers = this.Multiplayer.GetPeers();
 
-		for (int i = 0; i < entityArray.Count; i++)
+		if (peers.Length == 0)
+			return;
+
+		if (entityArray.Count > 0)
 		{
-			var player = entityArray[i] as ServerPlayer; //player
-			if (GodotObject.IsInstanceValid(player))
-				snapshot.States[i] = player.GetCurrentState();
+			var snapshot = new NetMessage.GameSnapshot
+			{
+				Time = (int)Time.GetTicksMsec(),
+				States = new NetMessage.UserState[entityArray.Count]
+			};
+
+			for (int i = 0; i < entityArray.Count; i++)
+			{
+				var player = entityArray[i] as ServerPlayer; //player
+				if (GodotObject.IsInstanceValid(player))
+					snapshot.States[i] = player.GetCurrentState();
+			}
+
+			byte[] data = MessagePackSerializer.Serialize<NetMessage.ICommand>(snapshot);
+
+			_multiplayer.SendBytes(data, 0,
+				MultiplayerPeer.TransferModeEnum.UnreliableOrdered, 0);
 		}
-
-		byte[] data = MessagePackSerializer.Serialize<NetMessage.ICommand>(snapshot);
-
-		_multiplayer.SendBytes(data, 0,
-			MultiplayerPeer.TransferModeEnum.UnreliableOrdered, 0);
 	}
 
 	private void OnPacketReceived(long id, byte[] data)
@@ -88,7 +97,7 @@ public partial class ServerManager : Node
 			case NetMessage.Sync sync:
 				sync.ServerTime = (int)Time.GetTicksMsec();
 				_multiplayer.SendBytes(MessagePackSerializer.Serialize<NetMessage.ICommand>(sync), (int)id,
-				MultiplayerPeer.TransferModeEnum.Unreliable, 1);
+					MultiplayerPeer.TransferModeEnum.Unreliable, 1);
 				break;
 		}
 	}
@@ -120,9 +129,9 @@ public partial class ServerManager : Node
 		GetTree().SetMultiplayer(_multiplayer);
 		//GD.Print("ServerManager::create() -> NodePath: " + GetPath());
 		//GetTree().SetMultiplayer(_multiplayer, GetPath());
-        //GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
+		//GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
         
-        GD.Print("Server listening on ", _port);
+		GD.Print("Server listening on ", _port);
 	}
 
 	private void DebugInfo()
