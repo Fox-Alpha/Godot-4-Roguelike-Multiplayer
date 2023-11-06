@@ -1,0 +1,79 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Play in Editor",
+            "type": "godot-mono",
+            "mode": "playInEditor",
+            "request": "launch"
+        },
+        {
+            "name": "Godot",
+            "type": "godot",
+            "request": "launch",
+            "project": "${workspaceFolder}",
+            "port": 6006,
+            "debugServer": 6006,
+            "address": "127.0.0.1",
+            //"launch_game_instance": true,
+            //"launch_scene": false
+        },
+        {
+            "name": "Play",
+            "type": "coreclr",
+            "request": "launch",
+            //"preLaunchTask": "build",
+            "program": "C:/Proggen/Godot/Godot_v4.1.1-stable/Godot_v4.1.1-stable_mono_win64/Godot_v4.1.1-stable_mono_win64.exe",
+            "args": [
+                "--path",
+                "${workspaceRoot}",
+                "--build-solution",
+                "--verbose"
+                //"-e"
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "debugServer": 6006
+          },
+        {
+            "name": "Launch",
+            "type": "godot-mono",
+            "request": "launch",
+            "mode": "executable",
+            //"preLaunchTask": "build",
+            //"executable": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta4_mono_win64\\Godot_v4.2-beta4_mono_win64.exe",
+            "executable": "C:/Proggen/Godot/Godot_v4.1.1-stable/Godot_v4.1.1-stable_mono_win64/Godot_v4.1.1-stable_mono_win64.exe",
+            
+            "executableArguments": [
+                "--path",
+                "${workspaceRoot}",
+                "--build-solution"
+            ],
+            "debugServer": 6006,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "Launch (Select Scene)",
+            "type": "godot-mono",
+            "request": "launch",
+            "mode": "executable",
+            "preLaunchTask": "build",
+            "executable": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta4_mono_win64\\Godot_v4.2-beta4_mono_win64.exe",
+            "executableArguments": [
+                "--path",
+                "${workspaceRoot}",
+                "${command:SelectLaunchScene}"
+            ]
+        },
+        {
+            "name": "Attach",
+            "type": "godot-mono",
+            "request": "attach",
+            "address": "localhost",
+            "port": 6008
+        }
+    ]
+}
