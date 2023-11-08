@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://main.gd" id="1_p1h7k"]
 [ext_resource type="Texture2D" uid="uid://dq8x5q5oprcak" path="res://icon.svg" id="1_p2xut"]
-[ext_resource type="Script" path="res://CharacterBody2D.cs" id="1_sbaoq"]
+[ext_resource type="Script" path="res://Character.cs" id="1_sbaoq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_omyt8"]
 size = Vector2(126, 128)
