@@ -5,7 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Play in Editor",
+            "name": "Launch Godot Core XXX",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-core",
+            "program": "C:/Proggen/Godot/Godot_v4.1.1-stable/Godot_v4.1.1-stable_mono_win64/Godot_v4.1.1-stable_mono_win64.exe",
+            //"program": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta4_mono_win64\\Godot_v4.2-beta4_mono_win64.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "debugServer": 6006,
+        },
+
+
+        {
+            "name": "Play in Editor XXX",
             "type": "godot-mono",
             "mode": "playInEditor",
             "request": "launch"
@@ -22,35 +37,37 @@
             //"launch_scene": false
         },
         {
-            "name": "Play",
+            "name": "Play XXX",
             "type": "coreclr",
             "request": "launch",
-            //"preLaunchTask": "build",
+            "preLaunchTask": "build-core",
             "program": "C:/Proggen/Godot/Godot_v4.1.1-stable/Godot_v4.1.1-stable_mono_win64/Godot_v4.1.1-stable_mono_win64.exe",
+            //"program": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta4_mono_win64\\Godot_v4.2-beta4_mono_win64.exe",
             "args": [
                 "--path",
                 "${workspaceRoot}",
-                "--build-solution",
+                //"--build-solution",
                 "--verbose"
                 //"-e"
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
-            "debugServer": 6006
+            "console": "internalConsole",
+            "debugServer": 6006,
           },
         {
             "name": "Launch",
             "type": "godot-mono",
             "request": "launch",
             "mode": "executable",
-            //"preLaunchTask": "build",
+            "preLaunchTask": "build-core",
             //"executable": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta4_mono_win64\\Godot_v4.2-beta4_mono_win64.exe",
             "executable": "C:/Proggen/Godot/Godot_v4.1.1-stable/Godot_v4.1.1-stable_mono_win64/Godot_v4.1.1-stable_mono_win64.exe",
             
             "executableArguments": [
                 "--path",
                 "${workspaceRoot}",
-                "--build-solution"
+            //    "--build-solution"
             ],
             "debugServer": 6006,
             "internalConsoleOptions": "openOnSessionStart"
