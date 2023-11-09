@@ -70,3 +70,4 @@ packages/**
 /5-example-projects/godot4-multiplayer-template-cs-main/.vscode/
 *.vsix
 /5-example-projects/godot4-multiplayer-template-cs-main/.idea/
+/5-example-projects/Godot4-DotNet-VSC-Config-Test/.idea/
