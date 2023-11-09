@@ -4,90 +4,60 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
-            "name": "Launch Godot Core XXX",
+        { // Godot DotNet (C# only) - Works !
+            // Debug CSharp but not GDScript
+            // Launch instance w/o GD Editor
+            // DotNet CLR to build
+            "name": "Godot DotNet (C# only)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-dotnet",
+            //Work
+            "program": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta5_mono_win64\\Godot_v4.2-beta5_mono_win64.exe",
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "justMyCode": true,            
+        },
+        
+        { // Godot DotNet (GD only) - Works!
+            // Debug GDScript but not C#
+            // Launch instance in GD Editor
+            // DotNet CLR to build
+            // Used GD debug adapter
+            "name": "Godot DotNet (GD only))",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-core",
-            "program": "C:/Proggen/Godot/Godot_v4.1.1-stable/Godot_v4.1.1-stable_mono_win64/Godot_v4.1.1-stable_mono_win64.exe",
+            // Work
+            //"program": "C:/Proggen/Godot/Godot_v4.1.1-stable/Godot_v4.1.1-stable_mono_win64/Godot_v4.1.1-stable_mono_win64.exe",
             //"program": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta4_mono_win64\\Godot_v4.2-beta4_mono_win64.exe",
+            "program": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta5_mono_win64\\Godot_v4.2-beta5_mono_win64.exe",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopAtEntry": false,
-            "debugServer": 6006,
+            "debugServer": 6006,    // <-- GD debug adapter
         },
-
-
-        {
-            "name": "Play in Editor XXX",
-            "type": "godot-mono",
-            "mode": "playInEditor",
-            "request": "launch"
-        },
-        {
-            "name": "Godot",
+        { // Godot (GDScript only) - Works!
+            // GD File must be open in Engine editor
+            // No preCompile
+            // Build in Editor
+            "name": "Godot (GDScript only)",
             "type": "godot",
             "request": "launch",
             "project": "${workspaceFolder}",
+            //"preLaunchTask": "build-Godot_v4",
             "port": 6006,
             "debugServer": 6006,
             "address": "127.0.0.1",
+            
             //"launch_game_instance": true,
             //"launch_scene": false
         },
-        {
-            "name": "Play XXX",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build-core",
-            "program": "C:/Proggen/Godot/Godot_v4.1.1-stable/Godot_v4.1.1-stable_mono_win64/Godot_v4.1.1-stable_mono_win64.exe",
-            //"program": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta4_mono_win64\\Godot_v4.2-beta4_mono_win64.exe",
-            "args": [
-                "--path",
-                "${workspaceRoot}",
-                //"--build-solution",
-                "--verbose"
-                //"-e"
-            ],
-            "cwd": "${workspaceFolder}",
-            "stopAtEntry": false,
-            "console": "internalConsole",
-            "debugServer": 6006,
-          },
-        {
-            "name": "Launch",
-            "type": "godot-mono",
-            "request": "launch",
-            "mode": "executable",
-            "preLaunchTask": "build-core",
-            //"executable": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta4_mono_win64\\Godot_v4.2-beta4_mono_win64.exe",
-            "executable": "C:/Proggen/Godot/Godot_v4.1.1-stable/Godot_v4.1.1-stable_mono_win64/Godot_v4.1.1-stable_mono_win64.exe",
-            
-            "executableArguments": [
-                "--path",
-                "${workspaceRoot}",
-            //    "--build-solution"
-            ],
-            "debugServer": 6006,
-            "internalConsoleOptions": "openOnSessionStart"
-        },
-        {
-            "name": "Launch (Select Scene)",
-            "type": "godot-mono",
-            "request": "launch",
-            "mode": "executable",
-            "preLaunchTask": "build",
-            "executable": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta4_mono_win64\\Godot_v4.2-beta4_mono_win64.exe",
-            "executableArguments": [
-                "--path",
-                "${workspaceRoot}",
-                "${command:SelectLaunchScene}"
-            ]
-        },
-        {
+        { // Attach - Not Working
             "name": "Attach",
-            "type": "godot-mono",
+            "type": "godot",
             "request": "attach",
             "address": "localhost",
             "port": 6008
