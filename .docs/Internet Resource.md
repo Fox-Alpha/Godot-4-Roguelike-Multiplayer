@@ -10,6 +10,13 @@
 - [Click-To-Move-Godot-4-Tutorial](https://github.com/finepointcgi/Click-To-Move-Godot-4-Tutorial/tree/main)
 - [godot-excel-reader](https://github.com/LaoDie1/godot-excel-reader)
 - [Godot Copilot](https://github.com/minosvasilias/godot-copilot)
+- ### Godot Test Testing framework
+  - [](https://github.com/chickensoft-games/GodotGame)
+  - [](https://github.com/chickensoft-games/GoDotTest)
+  - [](https://github.com/derkork/godot-test-driver)
+- [Godot 2D Essentials](https://github.com/godotessentials/2d-essentials/blob/main/README.md#godot-2d-essentials)
+- [GodotP2PNetwork](https://github.com/DawnGroveStudios/GodotP2PNetwork)
+- []()
 - []()
 - []()
 
@@ -19,6 +26,11 @@
 - [Action RPG in Godot 4 tutorial series](https://www.youtube.com/playlist?list=PLMQtM2GgbPEVuTgD4Ln17ombTg6EahSLr)
 - [Multi Biome Autotile Procedural Generation](https://www.youtube.com/watch?v=UfeKcogpS6w&list=TLPQMTIwNjIwMjMKQ-KH9uBSUw&index=10)
 - [Terrain Autotiling and Alternative Tiles ~ Godot 4 Tutorial for Beginners](https://www.youtube.com/watch?v=vV8uKN1VnN4)
+- [Using Godot 4's TileMaps and Custom Data Layers - Godot Fundamentals](https://www.youtube.com/watch?v=M1ri3Zli2g0&list=PLrnWJKR7bTuw7L0g70GzCM-cUr9XmtnAp&index=20)
+- [Procedural World Map Generator 0.0.1](https://www.youtube.com/watch?v=p8Dbv1BjxEU)
+- []()
+- []()
+- []()
 - []()
 
 
@@ -40,13 +52,16 @@
 - [Flexible Toon Shader](https://godotengine.org/asset-library/asset/1900)
 - [Extra Controls](https://godotengine.org/asset-library/asset/1922)
 - [BugReporter](https://godotengine.org/asset-library/asset/1966)
-- []()
+  - [Addon: GitHub](https://github.com/ASecondGuy/BugReporter)
 
 
 ## Godot Links
 - [Webseite](https://godotengine.org)
 - [Blogh](https://godotengine.org/blog/)
 - [Download Index of /godotengine/ \(TuxFamily)](https://downloads.tuxfamily.org/godotengine/)
+- [Godot Command line](https://docs.godotengine.org/en/latest/tutorials/editor/command_line_tutorial.html)
+- ### Docs
+  - [AStarGrid2D](https://docs.godotengine.org/en/stable/classes/class_astargrid2d.html#class-astargrid2d-method-get-point-path)
 - []()
 
 
@@ -62,6 +77,12 @@
 - [Command line tutorial \(Godot Engine 4.1 Stable)](https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html)
 - [ [WIP] Godot4 Visual Studio 2022 Guide](https://github.com/godotengine/godot-csharp-visualstudio/issues/48)
 - [VisualScript module for Godot](https://github.com/godotengine/godot-visual-script)
+- [\(Q&A)How to set a custom multiplayer in Godot 4.0](https://ask.godotengine.org/133282/how-to-set-a-custom-multiplayer-in-godot-4-0)
+- [Google: godot 4 node set multiplayer] (https://www.google.com/search?q=godot+4+node+set+multiplayer&client=opera&sca_esv=578828967&ei=uMRDZaz6FdiK9u8PhsmmiAw&ved=0ahUKEwisttiD1aWCAxVYhf0HHYakCcEQ4dUDCA8&uact=5&oq=godot+4+node+set+multiplayer&gs_lp=Egxnd3Mtd2l6LXNlcnAiHGdvZG90IDQgbm9kZSBzZXQgbXVsdGlwbGF5ZXIyBRAhGKABMgUQIRigATIFECEYoAFIs0RQ5QZYjz1wAXgAkAEAmAGUAaABghCqAQQxNC43uAEDyAEA-AEBwgIKEAAYRxjWBBiwA8ICBRAAGIAEwgIGEAAYFhgewgIJEAAYDRgTGIAEwgIIEAAYFhgeGBPCAgcQABgTGIAEwgIIECEYFhgeGB3CAgQQIRgVwgIHECEYoAEYCuIDBBgAIEGIBgGQBgg&sclient=gws-wiz-serp#ip=1)
+- [godotsteam](https://godotsteam.com/)
+- [Change Management and Version Control](https://www.youtube.com/playlist?list=PLXh_vnJ0hr1C0q13a-QdOcxnj3D8ivFzx)
+- [git-flow (AVH Edition)](https://github.com/petervanderdoes/gitflow-avh)
+- []()
 - []()
 - []()
 
