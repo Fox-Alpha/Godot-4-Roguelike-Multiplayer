@@ -20,3 +20,18 @@ shape = SubResource("RectangleShape2D_omyt8")
 [node name="Icon" type="Sprite2D" parent="CharacterBody2D"]
 position = Vector2(182, 101)
 texture = ExtResource("1_p2xut")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="LabelPosition" type="Label" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "Position
+"
