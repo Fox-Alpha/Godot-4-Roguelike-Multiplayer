@@ -2,7 +2,20 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "build-dotnet",
+            "type": "shell",
+            "command": "dotnet build ${workspaceFolder}/Godot4-DotNet-VSC-Config-Test.csproj -c Debug -v normal -p:GodotTargetPlatform=windows",
+            "group": {
+                "kind": "build",
+                "isDefault": true,
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-Godot_v4",
             "command": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta4_mono_win64\\Godot_v4.2-beta4_mono_win64.exe",
             "type": "process",
             "args": [
@@ -14,6 +27,32 @@
             ],
             "problemMatcher": "$msCompile",
             "echoCommand": true
-        }
+        },
+        {
+            "label": "build-core",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                // Ask dotnet build to generate full paths for file names.
+                "/property:GenerateFullPaths=true",
+                // Do not generate summary otherwise it leads to duplicate errors in Problems panel
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "group": "build",
+            //"presentation": {
+            //    "reveal": "silent"
+            //},
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile",
+        },
+
     ]
 }
