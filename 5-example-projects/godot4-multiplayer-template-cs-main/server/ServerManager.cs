@@ -90,6 +90,7 @@ public partial class ServerManager : Node
 		switch (command)
 		{
 			case NetMessage.UserCommand userCmd:
+				//ServerPlayer player = GetNode<ServerPlayer>(%EntityArray + $"/EntityArray/{userCmd.Id}") as ServerPlayer;
 				ServerPlayer player = GetNode($"/root/Main/ServerAuthority/EntityArray/{userCmd.Id}") as ServerPlayer;
 				player.PushCommand(userCmd);
 				break;
@@ -130,7 +131,7 @@ public partial class ServerManager : Node
 		//GD.Print("ServerManager::create() -> NodePath: " + GetPath());
 		//GetTree().SetMultiplayer(_multiplayer, GetPath());
 		//GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
-        
+
 		GD.Print("Server listening on ", _port);
 	}
 

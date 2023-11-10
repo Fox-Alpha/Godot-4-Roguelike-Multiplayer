@@ -125,6 +125,7 @@ size = Vector3(2, 1, 2)
 [node name="ServerAuthority" type="Node" parent="."]
 
 [node name="EntityArray" type="Node" parent="ServerAuthority"]
+unique_name_in_owner = true
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ServerAuthority"]
 spawn_path = NodePath("../EntityArray")
