@@ -7,7 +7,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if deltatime >= 1:
-		print(deltatime)
+		print("Hallo Welt^1 %f " % deltatime)
 		deltatime = 0.0
 
 	deltatime += delta
