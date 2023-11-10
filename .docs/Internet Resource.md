@@ -1,5 +1,5 @@
 ## GitHub Repository
-- [godot4-multiplayer-template \(CS)](https://github.com/grazianobolla/godot4-multiplayer-template)
+- [godot4-multiplayer-template \(CS)](https://github.com/grazianobolla/godot4-multiplayer-template) \(Forked)
 - [ricepot \(CS)](https://github.com/grazianobolla/ricepot)
 - UI [Multi-page menu system](https://github.com/thelastflapjack/godot_multi_page_ui)
   - [Multi-page menu system \(Reddit)](https://www.reddit.com/r/godot/comments/wrfbct/multipage_menu_system_each_page_is_given_a/)
@@ -10,16 +10,20 @@
 - [Click-To-Move-Godot-4-Tutorial](https://github.com/finepointcgi/Click-To-Move-Godot-4-Tutorial/tree/main)
 - [godot-excel-reader](https://github.com/LaoDie1/godot-excel-reader)
 - [Godot Copilot](https://github.com/minosvasilias/godot-copilot)
-- ### Godot Test Testing framework
-  - [](https://github.com/chickensoft-games/GodotGame)
-  - [](https://github.com/chickensoft-games/GoDotTest)
-  - [](https://github.com/derkork/godot-test-driver)
 - [Godot 2D Essentials](https://github.com/godotessentials/2d-essentials/blob/main/README.md#godot-2d-essentials)
 - [GodotP2PNetwork](https://github.com/DawnGroveStudios/GodotP2PNetwork)
+- [godot-open-rts](https://github.com/lampe-games/godot-open-rts)
+**Godot Test Testing framework**
+  - [GodotGame](https://github.com/chickensoft-games/GodotGame)
+  - [GoDotTest](https://github.com/chickensoft-games/GoDotTest)
+  - [godot-test-driver](https://github.com/derkork/godot-test-driver)
+- [Terrain For Godot 4](https://github.com/outobugi/GodotTerrain)
+- [Fox provides tooling while developing with Godot Engine.](https://github.com/uralys/fox)
+- [discord-sdk-godot](https://github.com/vaporvee/discord-sdk-godot)
+- [GDShell](https://github.com/Kubulambula/Godot-GDShell)
+- [Godot RTS Engine](https://github.com/spicylobstergames/shotcaller-godot)
+- [GD3: hiddenTemples RTS](https://github.com/keyWorlds/hiddenTemplesRTS)
 - []()
-- []()
-- []()
-
 
 ## Youtube Videos
 - [Godot 4 Crash Course for Beginners - GameDev 2D Top Down Tutorial](https://www.youtube.com/watch?v=Luf2Kr5s3BM)
@@ -28,9 +32,8 @@
 - [Terrain Autotiling and Alternative Tiles ~ Godot 4 Tutorial for Beginners](https://www.youtube.com/watch?v=vV8uKN1VnN4)
 - [Using Godot 4's TileMaps and Custom Data Layers - Godot Fundamentals](https://www.youtube.com/watch?v=M1ri3Zli2g0&list=PLrnWJKR7bTuw7L0g70GzCM-cUr9XmtnAp&index=20)
 - [Procedural World Map Generator 0.0.1](https://www.youtube.com/watch?v=p8Dbv1BjxEU)
-- []()
-- []()
-- []()
+- [Godot Multiplayer Tutorial - Interpolation | Godot Dedicated Server #12](https://www.youtube.com/watch?v=w2p0ugw3afs&list=PLZ-54sd-DMAKU8Neo5KsVmq8KtoDkfi4s&index=21)
+  - [Playlist](https://www.youtube.com/playlist?list=PLZ-54sd-DMAKU8Neo5KsVmq8KtoDkfi4s)
 - []()
 
 
@@ -53,15 +56,16 @@
 - [Extra Controls](https://godotengine.org/asset-library/asset/1922)
 - [BugReporter](https://godotengine.org/asset-library/asset/1966)
   - [Addon: GitHub](https://github.com/ASecondGuy/BugReporter)
-
+- []()
 
 ## Godot Links
 - [Webseite](https://godotengine.org)
 - [Blogh](https://godotengine.org/blog/)
 - [Download Index of /godotengine/ \(TuxFamily)](https://downloads.tuxfamily.org/godotengine/)
 - [Godot Command line](https://docs.godotengine.org/en/latest/tutorials/editor/command_line_tutorial.html)
-- ### Docs
+- **Docs**
   - [AStarGrid2D](https://docs.godotengine.org/en/stable/classes/class_astargrid2d.html#class-astargrid2d-method-get-point-path)
+  - [Cross-language scripting¶](https://docs.godotengine.org/en/latest/tutorials/scripting/cross_language_scripting.html)
 - []()
 
 
@@ -78,11 +82,8 @@
 - [ [WIP] Godot4 Visual Studio 2022 Guide](https://github.com/godotengine/godot-csharp-visualstudio/issues/48)
 - [VisualScript module for Godot](https://github.com/godotengine/godot-visual-script)
 - [\(Q&A)How to set a custom multiplayer in Godot 4.0](https://ask.godotengine.org/133282/how-to-set-a-custom-multiplayer-in-godot-4-0)
-- [Google: godot 4 node set multiplayer] (https://www.google.com/search?q=godot+4+node+set+multiplayer&client=opera&sca_esv=578828967&ei=uMRDZaz6FdiK9u8PhsmmiAw&ved=0ahUKEwisttiD1aWCAxVYhf0HHYakCcEQ4dUDCA8&uact=5&oq=godot+4+node+set+multiplayer&gs_lp=Egxnd3Mtd2l6LXNlcnAiHGdvZG90IDQgbm9kZSBzZXQgbXVsdGlwbGF5ZXIyBRAhGKABMgUQIRigATIFECEYoAFIs0RQ5QZYjz1wAXgAkAEAmAGUAaABghCqAQQxNC43uAEDyAEA-AEBwgIKEAAYRxjWBBiwA8ICBRAAGIAEwgIGEAAYFhgewgIJEAAYDRgTGIAEwgIIEAAYFhgeGBPCAgcQABgTGIAEwgIIECEYFhgeGB3CAgQQIRgVwgIHECEYoAEYCuIDBBgAIEGIBgGQBgg&sclient=gws-wiz-serp#ip=1)
+- [Google: godot 4 node set multiplayer](https://www.google.com/search?q=godot+4+node+set+multiplayer&client=opera&sca_esv=578828967&ei=uMRDZaz6FdiK9u8PhsmmiAw&ved=0ahUKEwisttiD1aWCAxVYhf0HHYakCcEQ4dUDCA8&uact=5&oq=godot+4+node+set+multiplayer&gs_lp=Egxnd3Mtd2l6LXNlcnAiHGdvZG90IDQgbm9kZSBzZXQgbXVsdGlwbGF5ZXIyBRAhGKABMgUQIRigATIFECEYoAFIs0RQ5QZYjz1wAXgAkAEAmAGUAaABghCqAQQxNC43uAEDyAEA-AEBwgIKEAAYRxjWBBiwA8ICBRAAGIAEwgIGEAAYFhgewgIJEAAYDRgTGIAEwgIIEAAYFhgeGBPCAgcQABgTGIAEwgIIECEYFhgeGB3CAgQQIRgVwgIHECEYoAEYCuIDBBgAIEGIBgGQBgg&sclient=gws-wiz-serp#ip=1)
 - [godotsteam](https://godotsteam.com/)
 - [Change Management and Version Control](https://www.youtube.com/playlist?list=PLXh_vnJ0hr1C0q13a-QdOcxnj3D8ivFzx)
 - [git-flow (AVH Edition)](https://github.com/petervanderdoes/gitflow-avh)
 - []()
-- []()
-- []()
-
