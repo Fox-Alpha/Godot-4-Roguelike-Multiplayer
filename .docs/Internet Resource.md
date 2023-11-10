@@ -52,7 +52,7 @@
 - [Flexible Toon Shader](https://godotengine.org/asset-library/asset/1900)
 - [Extra Controls](https://godotengine.org/asset-library/asset/1922)
 - [BugReporter](https://godotengine.org/asset-library/asset/1966)
-- []()
+  - [Addon: GitHub](https://github.com/ASecondGuy/BugReporter)
 
 
 ## Godot Links
