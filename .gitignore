@@ -65,5 +65,11 @@ packages/**
 !packages/offline
 !packages/offline/**
 .logs/
-/course-assets/
+**/course-assets/
 *.old
+**/.vscode/**
+!**/.vscode/*.json
+#!/5-example-projects/godot4-multiplayer-template-cs-main/.vscode/launch.json
+#!/5-example-projects/godot4-multiplayer-template-cs-main/.vscode/tasks.json
+*.vsix
+**/.idea/
