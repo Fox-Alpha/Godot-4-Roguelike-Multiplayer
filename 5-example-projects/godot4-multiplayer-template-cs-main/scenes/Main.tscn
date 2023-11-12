@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://8lvi1xkrty8v"]
 
 [ext_resource type="Script" path="res://scripts/MenuController.gd" id="1_n3q4e"]
-[ext_resource type="Script" path="res://debug/debug_label.gd" id="2_uv7ob"]
+[ext_resource type="Script" path="res://debug/debug_label.cs" id="2_3q3gn"]
 [ext_resource type="Script" path="res://debug/CubeRotation.gd" id="3_od4jj"]
 [ext_resource type="PackedScene" uid="uid://dp0u7dohrllcb" path="res://players/ClientPlayer.tscn" id="4_35anr"]
 [ext_resource type="Script" path="res://shared/CustomSpawner.cs" id="4_ve173"]
@@ -58,7 +58,7 @@ layout_mode = 1
 offset_right = 200.0
 offset_bottom = 23.0
 text = "character_info"
-script = ExtResource("2_uv7ob")
+script = ExtResource("2_3q3gn")
 
 [node name="Buttons" type="Control" parent="."]
 unique_name_in_owner = true
