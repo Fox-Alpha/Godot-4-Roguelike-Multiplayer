@@ -4,7 +4,15 @@
         {
             "label": "build-dotnet",
             "type": "shell",
-            "command": "dotnet build ${workspaceFolder}/Godot4-DotNet-VSC-Config-Test.csproj -c Debug -v normal -p:GodotTargetPlatform=windows",
+            //"command": "dotnet build \"${workspaceFolder}/multiplayer-base.csproj\" -c Debug -v normal -p:GodotTargetPlatform=windows",
+            "command": "dotnet",
+            "args": [
+                "build",
+                // Ask dotnet build to generate full paths for file names.
+                "/property:GenerateFullPaths=true",
+                // Do not generate summary otherwise it leads to duplicate errors in Problems panel
+                "/consoleloggerparameters:NoSummary"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true,
