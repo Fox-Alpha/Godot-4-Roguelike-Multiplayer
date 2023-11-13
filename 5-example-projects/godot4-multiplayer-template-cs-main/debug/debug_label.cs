@@ -1,3 +1,4 @@
+using System.Numerics;
 using Godot;
 using Godot.Collections;
 
@@ -27,7 +28,7 @@ public partial class debug_label : Label
                 if(item is Node3D)
                 {
                     Node3D n3d = (Node3D)item;
-                    this.Text += $"{item.Name}-{n3d.Position.Snapped(Vector3.One*0.1f)}\n";
+                    this.Text += $"{item.Name}-{n3d.Position.Snapped(Godot.Vector3.One*0.1f)}\n";
                 }
             }
         }    
