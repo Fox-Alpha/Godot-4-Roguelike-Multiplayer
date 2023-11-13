@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://8lvi1xkrty8v"]
 
-[ext_resource type="Script" path="res://scripts/MenuController.gd" id="1_n3q4e"]
+[ext_resource type="Script" path="res://scripts/MenuController.cs" id="1_yipri"]
 [ext_resource type="Script" path="res://debug/debug_label.cs" id="2_3q3gn"]
 [ext_resource type="Script" path="res://debug/CubeRotation.gd" id="3_od4jj"]
 [ext_resource type="PackedScene" uid="uid://dp0u7dohrllcb" path="res://players/ClientPlayer.tscn" id="4_35anr"]
@@ -27,7 +27,7 @@ albedo_color = Color(0.101961, 0.101961, 0.101961, 1)
 albedo_color = Color(0.0392157, 1, 0.219608, 1)
 
 [node name="Main" type="Node3D"]
-script = ExtResource("1_n3q4e")
+script = ExtResource("1_yipri")
 
 [node name="Environment" type="Node" parent="."]
 
