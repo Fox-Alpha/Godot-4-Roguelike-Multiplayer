@@ -18,7 +18,7 @@ public partial class MenuController : Node
 	}
 
 
-	private void _on_button_pressed(int host = 2)
+	private async void _on_button_pressed(int host = 2)
 	{
 		string title = "";
 
@@ -26,7 +26,7 @@ public partial class MenuController : Node
 		{
 			Node svr_scn_inst = _server_scene.Instantiate();
 			this.AddChild(svr_scn_inst);
-			ToSignal(GetTree().CreateTimer(0.5), "timeout ");
+			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 
 			title = "Dedicated Server";
 		}
@@ -34,7 +34,7 @@ public partial class MenuController : Node
 		{
 			//Node svr_scn_inst = _server_scene.Instantiate();
 			this.AddChild(_server_scene.Instantiate());
-			ToSignal(GetTree().CreateTimer(0.5), "timeout ");
+			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 
 			title = "Dedicated Server";
 		}
