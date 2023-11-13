@@ -29,7 +29,7 @@ public partial class CustomSpawner : MultiplayerSpawner
 		int localID = Multiplayer.GetUniqueId();
 
 		// Server character for simulation
-		if (localID == 1 && startmode == 2)
+		if (localID == 1) // && startmode == 2)
 		{
 			GD.Print("Spawned server character");
 			ServerPlayer player = _serverPlayerScene.Instantiate() as ServerPlayer;
