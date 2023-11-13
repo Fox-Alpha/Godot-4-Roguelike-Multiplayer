@@ -20,14 +20,14 @@ public partial class debug_label : Label
         {
             this.Text = string.Empty;
 
-            Array<Node> childs = GetNodeOrNull<Node3D>("%EntityArray")?.GetChildren();
+            Array<Node> childs = GetNodeOrNull<Node>("%EntityArray")?.GetChildren();
 
             foreach (var item in childs)
             {
                 if(item is Node3D)
                 {
                     Node3D n3d = (Node3D)item;
-                    this.Text += $"{item.Name} {n3d.Position.Snapped(Vector3.One*0.1f)}\n";
+                    this.Text += $"{item.Name}-{n3d.Position.Snapped(Vector3.One*0.1f)}\n";
                 }
             }
         }    
