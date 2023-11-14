@@ -18,44 +18,44 @@ public partial class MenuController : Node
 		startbuttons = GetNodeOrNull<Control>("%Buttons");
 	}
 
-    public override void _EnterTree()
-    {
-        base._EnterTree();
-    }
+	public override void _EnterTree()
+	{
+		base._EnterTree();
+	}
 
-    public override void _ExitTree()
-    {
-        base._ExitTree();
-    }
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+	}
 
-    public override void _Process(double delta)
-    {
-        base._Process(delta);
-    }
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
+	}
 
-    public override void _PhysicsProcess(double delta)
-    {
-        base._PhysicsProcess(delta);
-    }
+	public override void _PhysicsProcess(double delta)
+	{
+		base._PhysicsProcess(delta);
+	}
 
-    public override void _Input(InputEvent @event)
-    {
-        base._Input(@event);
-    }
+	public override void _Input(InputEvent @event)
+	{
+		base._Input(@event);
+	}
 
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        base._UnhandledInput(@event);
-    }
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		base._UnhandledInput(@event);
+	}
 
-    public override void _UnhandledKeyInput(InputEvent @event)
-    {
-        base._UnhandledKeyInput(@event);
-    }
+	public override void _UnhandledKeyInput(InputEvent @event)
+	{
+		base._UnhandledKeyInput(@event);
+	}
 
 	#endregion
 
-    private async void _on_button_pressed(int host = 2)
+	private async void _on_button_pressed(int host = 2)
 	{
 		string title = "";
 
