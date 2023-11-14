@@ -1,6 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 using MessagePack;
+using System.Data;
 
 // Keeps tracks of delays in the network and adjusts a clock to always be in sync with the server
 // also calculates latency
@@ -116,6 +117,10 @@ public partial class NetworkClock : Node
 
     private void OnTimerOut()
     {
+        if (_multiplayer.MultiplayerPeer.GetConnectionStatus() != MultiplayerPeer.ConnectionStatus.Connected)
+        {
+            return;
+        }
         var sync = new NetMessage.Sync
         {
             ClientTime = (int)Time.GetTicksMsec(),
