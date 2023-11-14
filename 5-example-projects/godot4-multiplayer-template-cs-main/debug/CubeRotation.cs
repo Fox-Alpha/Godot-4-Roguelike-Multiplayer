@@ -7,11 +7,12 @@ public partial class CubeRotation : MeshInstance3D
 	{
 		base._Process(delta);
 		if(!Multiplayer.HasMultiplayerPeer())
+		{
 			this.RotateX((float)delta * 1);
 			this.RotateY((float)delta * 1);
 			this.RotateZ((float)delta * 1);
 			//return;
-
+		}
 		if (this.Multiplayer.IsServer())
 		{
 			this.RotateY((float)delta * 2);
