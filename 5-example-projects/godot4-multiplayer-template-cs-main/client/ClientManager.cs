@@ -27,35 +27,11 @@ public partial class ClientManager : Node
 		Connect();
 
 		_entityArray = GetNode("/root/Main/ServerAuthority/EntityArray");
-		ExitButton = GetNodeOrNull<MenuButton>("MenuButton");
 
-		if (ExitButton != null)
-		{
-			GetNode<MenuButton>("MenuButton").GetPopup().IdPressed += ExitMenuPresses;
-		}
-
-
+		// ToDo: Check if connected
 		_netClock = GetNode<NetworkClock>("NetworkClock");
 		_netClock.Initialize(_multiplayer);
 		_netClock.LatencyCalculated += OnLatencyCalculated;
-	}
-
-	private void ExitMenuPresses(long id)
-	{
-		GD.Print($"Menu {ExitButton.GetPopup().GetItemText((int)id)} ({id}) is pressed");
-
-		switch (id)
-		{
-			case 0:		// Quit to Menu
-				// Todo: Add Buttons Back
-				GetParent().QueueFree();
-				break;
-			case 1:		// Quit App
-				GetTree().Quit();
-				break;
-			default:	// not valid
-				break;
-		}
 	}
 
 	public override void _Process(double delta)

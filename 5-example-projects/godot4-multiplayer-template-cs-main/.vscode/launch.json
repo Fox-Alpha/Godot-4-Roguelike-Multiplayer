@@ -31,7 +31,8 @@
             //Home
             // ToDo: Change Path to 4.1.3
             //"program": "P:/0. DevProgramme/Godot/Godot_v4.2-beta/Godot_v4.2-beta5_mono_win64/Godot_v4.2-beta5_mono_win64.exe",
-            "program": "C:/Proggen/Godot/Godot_v4.1-stable/Godot_v4.1.3-stable_mono_win64/Godot_v4.1.3-stable_mono_win64.exe",
+            //"program": "C:/Proggen/Godot/Godot_v4.1-stable/Godot_v4.1.3-stable_mono_win64/Godot_v4.1.3-stable_mono_win64.exe",
+            "program": "P:/0. DevProgramme/Godot/Godot_v4.1.x-stable/Godot_v4.1.3-stable_mono_win64/Godot_v4.1.3-stable_mono_win64.exe",
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole",

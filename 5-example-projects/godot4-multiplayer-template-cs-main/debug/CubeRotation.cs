@@ -6,6 +6,11 @@ public partial class CubeRotation : MeshInstance3D
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
+
+		if (Multiplayer.MultiplayerPeer == null)
+		{
+			return;
+		}
 		//if(!Multiplayer.HasMultiplayerPeer())
 		if (Multiplayer.MultiplayerPeer.GetConnectionStatus() != MultiplayerPeer.ConnectionStatus.Connected)
 		{

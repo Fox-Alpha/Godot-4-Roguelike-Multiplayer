@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://eykxehuqerja"]
+[gd_scene load_steps=4 format=3 uid="uid://eykxehuqerja"]
 
 [ext_resource type="Script" path="res://client/ClientManager.cs" id="1_y3i7q"]
 [ext_resource type="Script" path="res://client/NetworkClock.cs" id="2_c2fu1"]
+[ext_resource type="PackedScene" uid="uid://lfwn1xtcfbmv" path="res://scenes/menu_button.tscn" id="3_uq6gd"]
 
 [node name="Client" type="Node"]
 script = ExtResource("1_y3i7q")
@@ -37,6 +38,11 @@ grow_vertical = 0
 text = "buf 0 int 0
 clk 0 png 0"
 
+[node name="MenuButton" parent="Debug" instance=ExtResource("3_uq6gd")]
+layout_mode = 1
+offset_left = -120.0
+offset_top = -31.0
+
 [node name="NetworkClock" type="Node" parent="."]
 script = ExtResource("2_c2fu1")
 
@@ -46,24 +52,6 @@ autostart = true
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
 autostart = true
-
-[node name="MenuButton" type="MenuButton" parent="."]
-custom_minimum_size = Vector2(120, 25)
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = -8.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Exit"
-item_count = 2
-popup/item_0/text = "Quit to Menu"
-popup/item_0/id = 0
-popup/item_1/text = "Close App"
-popup/item_1/id = 1
 
 [connection signal="timeout" from="NetworkClock/Timer" to="NetworkClock" method="OnTimerOut"]
 [connection signal="timeout" from="Timer" to="." method="OnDebugTimerOut"]
