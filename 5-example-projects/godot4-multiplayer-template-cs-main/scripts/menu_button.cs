@@ -18,7 +18,10 @@ public partial class menu_button : MenuButton
 			case 0:		// Quit to Menu
 				// Todo: Add Buttons Back
                 Multiplayer.MultiplayerPeer.Close();
-                Multiplayer.MultiplayerPeer = null;
+				SceneMultiplayer mp = new();
+				
+				GetTree().SetMultiplayer(mp);
+                //Multiplayer.MultiplayerPeer = null;
                 GetTree().ReloadCurrentScene();
                 //var own = GetOwner<Node>();
 				//own.QueueFree();
