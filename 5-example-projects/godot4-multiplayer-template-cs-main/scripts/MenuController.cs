@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using Godot.Collections;
 
@@ -15,7 +16,14 @@ public partial class MenuController : Node
 		_server_scene = GD.Load<PackedScene>("res://scenes/Server.tscn");
 		_client_scene = GD.Load<PackedScene>("res://scenes/Client.tscn");
 
+		GetNodeOrNull<Button>("%ButtonQuitApp").Pressed += OnQuitButtonPressed;
+
 		startbuttons = GetNodeOrNull<Control>("%Buttons");
+	}
+
+	private void OnQuitButtonPressed()
+	{
+		GetTree().Quit();
 	}
 
 	public override void _EnterTree()
