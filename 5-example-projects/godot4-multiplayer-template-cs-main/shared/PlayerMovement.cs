@@ -1,6 +1,7 @@
 using Godot;
 using NetMessage;
 
+// Todo: Refactor for 2D
 public static class PlayerMovement
 {
     public static double FRAME_DELTA = (1.0 / Engine.PhysicsTicksPerSecond);

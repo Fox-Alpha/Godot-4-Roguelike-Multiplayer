@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+// Todo: Refactor for 2D
 public partial class MovementTemplate : CharacterBody3D
 {
     public const float Speed = 5.0f;
