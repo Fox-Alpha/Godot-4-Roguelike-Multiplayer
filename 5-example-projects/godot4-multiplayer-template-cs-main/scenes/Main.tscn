@@ -97,6 +97,7 @@ layout_mode = 2
 text = "Host Dedicated Server only"
 
 [node name="ButtonQuitApp" type="Button" parent="Buttons/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Quit"
 
