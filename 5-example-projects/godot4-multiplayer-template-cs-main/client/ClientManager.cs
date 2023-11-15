@@ -36,7 +36,7 @@ public partial class ClientManager : Node
 
 	public override void _Process(double delta)
 	{
-		var ConStatus = _multiplayer.MultiplayerPeer.GetConnectionStatus();
+		var ConStatus = GetTree().GetMultiplayer().MultiplayerPeer.GetConnectionStatus();
 		if (ConStatus != MultiplayerPeer.ConnectionStatus.Connected || ConStatus == MultiplayerPeer.ConnectionStatus.Disconnected)
 			return;
 
@@ -76,14 +76,25 @@ public partial class ClientManager : Node
 
 	private void Connect()
 	{
+		GD.Print("Try to connect to: ", _address, ":", _port);
+		ENetMultiplayerPeer peer = new();
+
+		var err = peer.CreateClient(_address, _port);
+		if (err != Error.Ok)
+		{
+			GD.PrintErr("Error: Fehler beim erstellen des Servers => ",err);
+			_multiplayer.MultiplayerPeer = null;
+			return;
+		}
+
 		_multiplayer.ConnectedToServer += OnConnectedToServer;
 		_multiplayer.PeerPacket += OnPacketReceived;
 		_multiplayer.ServerDisconnected += OnServerDisconnected;
 		_multiplayer.ConnectionFailed += OnConnectionFailed;
+		_multiplayer.PeerConnected += OnPeerConnected;
+		_multiplayer.PeerDisconnected += OnPeerDisconnected;
 
-		GD.Print("Try to connect to: ", _address, ":", _port);
-		ENetMultiplayerPeer peer = new();
-		peer.CreateClient(_address, _port);
+
 
 		// ToDo: timeoutMaximum : Time to fire ConnectionFailed Signal
 		//peer.setpeertimerout
@@ -100,7 +111,18 @@ public partial class ClientManager : Node
 
 	}
 
-	private void OnConnectionFailed()
+    private void OnPeerDisconnected(long id)
+    {
+        GD.Print($"OnPeerDisconnected({id})");
+    }
+
+
+    private void OnPeerConnected(long id)
+    {
+        GD.Print($"OnPeerConnected({id})");
+    }
+
+    private void OnConnectionFailed()
 	{
 		GD.Print("Connecting to: ", _address, ":", _port, " has failed");
 		GetNode<Timer>("Timer").Stop();
@@ -109,10 +131,13 @@ public partial class ClientManager : Node
 	private async void OnServerDisconnected()
 	{
 		// ToDo: Quit and Stop all running processes
-		_multiplayer = null;
+		//_multiplayer = null;
+		GetTree().GetMultiplayer().MultiplayerPeer.Close();
 		GetNode<Label>("Debug/Label").Modulate = Colors.Red;
 		GetNode<Label>("Debug/Label").Text = $"\nServer has closed the Connection !\nQuitting in 5 Seconds";
 		await ToSignal(GetTree().CreateTimer(5), "timeout");
+
+		// Change to Mainmenu, instead of quit
 		GetTree().Quit();
 	}
 
@@ -137,7 +162,7 @@ public partial class ClientManager : Node
 
 	private void OnDebugTimerOut()
 	{
-		var ConStatus = _multiplayer.MultiplayerPeer.GetConnectionStatus();
+		var ConStatus = GetTree().GetMultiplayer().MultiplayerPeer.GetConnectionStatus();
 
 		if (ConStatus == MultiplayerPeer.ConnectionStatus.Connecting)
 		{
@@ -151,7 +176,7 @@ public partial class ClientManager : Node
 			ConnectionTimeElapsed++;
 			return;
 		}
-		if (ConStatus != MultiplayerPeer.ConnectionStatus.Connected)
+		if (ConStatus == MultiplayerPeer.ConnectionStatus.Disconnected)
 			return;
 
 		var enetHost = (Multiplayer.MultiplayerPeer as ENetMultiplayerPeer).Host;

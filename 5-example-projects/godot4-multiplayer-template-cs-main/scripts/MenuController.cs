@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using Godot.Collections;
 
@@ -8,14 +9,24 @@ public partial class MenuController : Node
 	[Export] private PackedScene _client_scene;
 
 	private Control startbuttons;
+	private Node NetworkNode;
 
 	#region Engine Overrides
 	public override void _Ready()
 	{
+		GetTree().SetMultiplayer(MultiplayerApi.CreateDefaultInterface());
+
 		_server_scene = GD.Load<PackedScene>("res://scenes/Server.tscn");
 		_client_scene = GD.Load<PackedScene>("res://scenes/Client.tscn");
 
+		GetNodeOrNull<Button>("%ButtonQuitApp").Pressed += OnQuitButtonPressed;
+
 		startbuttons = GetNodeOrNull<Control>("%Buttons");
+	}
+
+	private void OnQuitButtonPressed()
+	{
+		GetTree().Quit();
 	}
 
 	public override void _EnterTree()
@@ -61,8 +72,8 @@ public partial class MenuController : Node
 
 		if (host == 1)
 		{
-			Node svr_scn_inst = _server_scene.Instantiate();
-			this.AddChild(svr_scn_inst);
+			NetworkNode = _server_scene.Instantiate();
+			this.AddChild(NetworkNode);
 			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 
 			title = "Dedicated Server";
@@ -70,7 +81,8 @@ public partial class MenuController : Node
 		else if (host == 2)
 		{
 			//Node svr_scn_inst = _server_scene.Instantiate();
-			this.AddChild(_server_scene.Instantiate());
+			NetworkNode = _server_scene.Instantiate();
+			this.AddChild(NetworkNode);
 			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 
 			title = "Dedicated Server";
@@ -78,8 +90,22 @@ public partial class MenuController : Node
 		else
 		{
 			GetNode<Label>("Control/Label").Text = "Client only Side";
-			this.AddChild(_client_scene.Instantiate());
+			NetworkNode = _client_scene.Instantiate();
+			this.AddChild(NetworkNode);
 			title = "Client";
+		}
+
+		if (NetworkNode.HasMethod("GetNetworkStatus"))
+		{
+			GD.Print("Checking Network creation ...");
+			double nwstate = (long)NetworkNode.Call("GetNetworkStatus");
+
+			if (nwstate != (long)Error.Ok)
+			{
+				GetNode<Label>("Control/Label").Text = "Fehler beim erstellen!";
+				return;
+			}
+			GD.Print("Network has created ...");
 		}
 
 		DisplayServer.WindowSetTitle(title);

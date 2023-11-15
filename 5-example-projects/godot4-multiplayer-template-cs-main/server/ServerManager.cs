@@ -118,21 +118,38 @@ public partial class ServerManager : Node
 
 	private void Create()
 	{
+		ENetMultiplayerPeer peer = new();
+		var err =peer.CreateServer(_port);
+
+
+		if (err != Error.Ok)
+		{
+			GD.PrintErr("Error: Fehler beim erstellen des Servers => ",err);
+			_multiplayer.MultiplayerPeer = null;
+			return;
+		}
+		_multiplayer.MultiplayerPeer = peer;
+
 		_multiplayer.PeerConnected += OnPeerConnected;
 		_multiplayer.PeerDisconnected += OnPeerDisconnected;
 		_multiplayer.PeerPacket += OnPacketReceived;
 
-		ENetMultiplayerPeer peer = new();
-		peer.CreateServer(_port);
 
-		_multiplayer.MultiplayerPeer = peer;
 		// ToDo: Make a dedicated node for Server peer
 		GetTree().SetMultiplayer(_multiplayer);
+		//GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
 		//GD.Print("ServerManager::create() -> NodePath: " + GetPath());
 		//GetTree().SetMultiplayer(_multiplayer, GetPath());
 		//GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
 
 		GD.Print("Server listening on ", _port);
+	}
+
+	public Error GetNetworkStatus()
+	{
+		var mp_peer = GetTree().GetMultiplayer().MultiplayerPeer;
+
+		return mp_peer != null ? Error.Ok : Error.ConnectionError;
 	}
 
 	private void DebugInfo()

@@ -7,7 +7,7 @@ public partial class CubeRotation : MeshInstance3D
 	{
 		base._Process(delta);
 
-		if (Multiplayer.MultiplayerPeer == null)
+		if (GetTree().GetMultiplayer().MultiplayerPeer == null)
 		{
 			return;
 		}

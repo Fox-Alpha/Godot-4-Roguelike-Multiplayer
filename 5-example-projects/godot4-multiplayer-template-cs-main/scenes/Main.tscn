@@ -96,6 +96,11 @@ text = "Host Server & Play"
 layout_mode = 2
 text = "Host Dedicated Server only"
 
+[node name="ButtonQuitApp" type="Button" parent="Buttons/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"
+
 [node name="World" type="Node" parent="."]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="World"]

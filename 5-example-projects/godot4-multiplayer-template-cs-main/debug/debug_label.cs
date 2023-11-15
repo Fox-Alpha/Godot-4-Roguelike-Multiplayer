@@ -32,5 +32,9 @@ public partial class debug_label : Label
                 }
             }
         }    
+        else
+        {
+            this.Text = "No peers connected.";
+        }
     }
 }

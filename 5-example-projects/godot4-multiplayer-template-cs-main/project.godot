@@ -24,6 +24,10 @@ window/size/viewport_height=500
 
 project/assembly_name="multiplayer-base"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 forward={

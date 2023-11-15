@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bog1us6frffkj"]
+[gd_scene load_steps=3 format=3 uid="uid://bog1us6frffkj"]
 
 [ext_resource type="Script" path="res://server/ServerManager.cs" id="1_4nn7d"]
+[ext_resource type="PackedScene" uid="uid://lfwn1xtcfbmv" path="res://scenes/menu_button.tscn" id="2_wo3rm"]
 
 [node name="Server" type="Node"]
 script = ExtResource("1_4nn7d")
@@ -35,20 +36,7 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "0"
 
-[node name="MenuButton" type="MenuButton" parent="."]
-custom_minimum_size = Vector2(120, 25)
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = -8.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Exit"
-item_count = 2
-popup/item_0/text = "Quit to Menu"
-popup/item_0/id = 0
-popup/item_1/text = "Close App"
-popup/item_1/id = 1
+[node name="MenuButton" parent="Debug" instance=ExtResource("2_wo3rm")]
+layout_mode = 1
+offset_left = -120.0
+offset_top = -31.0

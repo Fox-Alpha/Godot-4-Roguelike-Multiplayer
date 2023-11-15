@@ -22,6 +22,13 @@ public partial class CustomSpawner : MultiplayerSpawner
 
 		this.SetMultiplayerAuthority(uid);
 	}
+	/* TODO: 
+		Maybe seperate Client and Server Spawener func 
+		For Host & Play Mode
+
+		So the MultiplayerPeer can assigned for seperate Nodes
+		in Server- / ClientManager::Create()
+	*/
 
 	private Node CustomSpawnFunction(Variant data)
 	{
