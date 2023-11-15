@@ -49,12 +49,14 @@ namespace NetMessage
         [Key(3)] public int Stamp; // Last processed stamp
 
         [IgnoreMember]
+        // Todo: Refactor for 2D
         public readonly Vector3 Position
         {
             get { return new Vector3(PosArray[0], PosArray[1], PosArray[2]); }
         }
 
         [IgnoreMember]
+        // Todo: Refactor for 2D
         public readonly Vector3 Velocity
         {
             get { return new Vector3(VelArray[0], VelArray[1], VelArray[2]); }

@@ -23,6 +23,7 @@ public partial class debug_label : Label
 
             Array<Node> childs = GetNodeOrNull<Node>("%EntityArray")?.GetChildren();
 
+            // Todo: Refactor for 2D
             foreach (var item in childs)
             {
                 if(item is Node3D)
