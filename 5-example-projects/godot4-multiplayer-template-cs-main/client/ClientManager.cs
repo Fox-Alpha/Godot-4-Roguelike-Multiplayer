@@ -91,6 +91,8 @@ public partial class ClientManager : Node
 		_multiplayer.PeerPacket += OnPacketReceived;
 		_multiplayer.ServerDisconnected += OnServerDisconnected;
 		_multiplayer.ConnectionFailed += OnConnectionFailed;
+		_multiplayer.PeerConnected += OnPeerConnected;
+		_multiplayer.PeerDisconnected += OnPeerDisconnected;
 
 
 
@@ -109,7 +111,18 @@ public partial class ClientManager : Node
 
 	}
 
-	private void OnConnectionFailed()
+    private void OnPeerDisconnected(long id)
+    {
+        GD.Print($"OnPeerDisconnected({id})");
+    }
+
+
+    private void OnPeerConnected(long id)
+    {
+        GD.Print($"OnPeerConnected({id})");
+    }
+
+    private void OnConnectionFailed()
 	{
 		GD.Print("Connecting to: ", _address, ":", _port, " has failed");
 		GetNode<Timer>("Timer").Stop();
