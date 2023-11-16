@@ -132,8 +132,8 @@ size = Vector3(2, 1, 2)
 [node name="EntityArray" type="Node" parent="ServerAuthority"]
 unique_name_in_owner = true
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ServerAuthority"]
-spawn_path = NodePath("../EntityArray")
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../ServerAuthority/EntityArray")
 script = ExtResource("4_ve173")
 _playerScene = ExtResource("4_35anr")
 _serverPlayerScene = ExtResource("5_lgfx3")
