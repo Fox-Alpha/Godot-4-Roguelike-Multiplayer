@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using Godot.Collections;
+using multiplayerbase.server;
 
 [GlobalClass]
 public partial class MenuController : Node
@@ -72,11 +73,26 @@ public partial class MenuController : Node
 
 		if (host == 1)
 		{
+			// 1. Start local Play Server
 			NetworkNode = _server_scene.Instantiate();
+			if (NetworkNode.HasMethod("SetHostMode"))
+			{
+				NetworkNode.Call("SetHostMode");
+			}
+			
 			this.AddChild(NetworkNode);
 			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 
-			title = "Dedicated Server";
+			// 2. Start local Client
+			NetworkNode = _client_scene.Instantiate();
+			if (NetworkNode.HasMethod("SetHostMode"))
+			{
+				NetworkNode.Call("SetHostMode");
+			}
+
+			this.AddChild(NetworkNode);
+
+			title = "Host & Play Server";
 		}
 		else if (host == 2)
 		{
@@ -110,6 +126,12 @@ public partial class MenuController : Node
 
 		DisplayServer.WindowSetTitle(title);
 		//$ServerAuthority/MultiplayerSpawner.startmode = host
+		var spawner = GetNodeOrNull<CustomSpawner>("MultiplayerSpawner");
+		if (spawner != null)
+		{
+			spawner.startmode = host;
+		}
+		
 		startbuttons.QueueFree();
 	}
 }
