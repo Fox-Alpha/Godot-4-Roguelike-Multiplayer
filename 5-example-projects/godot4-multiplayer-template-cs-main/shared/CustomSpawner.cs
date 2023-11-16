@@ -7,7 +7,7 @@ public partial class CustomSpawner : MultiplayerSpawner
 	[Export] private PackedScene _serverPlayerScene;
 	[Export] private PackedScene _dummyScene;
 
-	[Export] private int startmode = -1;
+	[Export] public int startmode { get; set; } = -1;
 
 	private static ClientPlayer localPlayer;
 
@@ -36,7 +36,8 @@ public partial class CustomSpawner : MultiplayerSpawner
 		int localID = Multiplayer.GetUniqueId();
 
 		// Server character for simulation
-		if (localID == 1) // && startmode == 2)
+		// Only when ServerMode == dedicated
+		if (localID == 1 && startmode == 2)
 		{
 			GD.Print("Spawned server character");
 			ServerPlayer player = _serverPlayerScene.Instantiate() as ServerPlayer;
