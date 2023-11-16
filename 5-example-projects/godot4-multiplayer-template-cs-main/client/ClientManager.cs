@@ -18,6 +18,8 @@ public partial class ClientManager : Node
 
 	private MenuButton ExitButton;
 	private int ConnectionTimeElapsed = 0;
+	private int HostMode { get; set; } = -1;
+
 
 	// Debug only
 	private double _sentPerSecond = 0, _recPerSecond = 0, _packetsPerSecond = 0, _sentPacketsPerSecond = 0;
@@ -94,8 +96,6 @@ public partial class ClientManager : Node
 		_multiplayer.PeerConnected += OnPeerConnected;
 		_multiplayer.PeerDisconnected += OnPeerDisconnected;
 
-
-
 		// ToDo: timeoutMaximum : Time to fire ConnectionFailed Signal
 		//peer.setpeertimerout
 
@@ -103,12 +103,11 @@ public partial class ClientManager : Node
 		//_multiplayer.MultiplayerPeer;
 
 		GetTree().SetMultiplayer(_multiplayer);
+		
 		// ToDo: Make a dedicated node for Client peer
 		//GD.Print("ClientManager::connect() -> NodePath: " + GetPath());
 		//GetTree().SetMultiplayer(_multiplayer, GetPath());
 		//GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
-
-
 	}
 
     private void OnPeerDisconnected(long id)

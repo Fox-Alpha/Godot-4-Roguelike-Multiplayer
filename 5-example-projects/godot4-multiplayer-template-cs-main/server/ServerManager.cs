@@ -16,9 +16,16 @@ public partial class ServerManager : Node
 	private const int NET_TICKRATE = 30; //hz
 	private double _netTickCounter = 0;
 
+	private int HostMode { get; set; }= -1;
+
 	public override void _Ready()
 	{
 		Create();
+	}
+
+	public void SetHostMode(int mode = -1)
+	{
+		HostMode = mode;
 	}
 
 	public override void _Process(double delta)
@@ -106,7 +113,8 @@ public partial class ServerManager : Node
 	private void OnPeerConnected(long id)
 	{
 		//Node playerInstance =
-		GetNode<MultiplayerSpawner>("/root/Main/ServerAuthority/MultiplayerSpawner").Spawn(id);
+		var gn = GetNode<MultiplayerSpawner>("/root/Main/MultiplayerSpawner");
+		gn.Spawn(id);
 		GD.Print("Peer ", id, " connected");
 	}
 
@@ -119,30 +127,48 @@ public partial class ServerManager : Node
 	private void Create()
 	{
 		ENetMultiplayerPeer peer = new();
-		var err =peer.CreateServer(_port);
-
-
-		if (err != Error.Ok)
-		{
-			GD.PrintErr("Error: Fehler beim erstellen des Servers => ",err);
-			_multiplayer.MultiplayerPeer = null;
-			return;
-		}
-		_multiplayer.MultiplayerPeer = peer;
+        Error err;
 
 		_multiplayer.PeerConnected += OnPeerConnected;
 		_multiplayer.PeerDisconnected += OnPeerDisconnected;
 		_multiplayer.PeerPacket += OnPacketReceived;
 
+        if (HostMode != 1)
+        {
+            err = peer.CreateServer(_port, maxClients: 16);
 
-		// ToDo: Make a dedicated node for Server peer
-		GetTree().SetMultiplayer(_multiplayer);
+			_multiplayer.MultiplayerPeer = peer;
+
+			GetTree().SetMultiplayer(_multiplayer, GetPath());
+			GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
+			GetTree().SetMultiplayer(_multiplayer, "/root/main/MultiplayerSpawner");
+
+
+			GD.Print("Lokal Single Server started");
+        }
+        else
+        {
+            err = peer.CreateServer(_port, maxClients: HostMode);
+
+			_multiplayer.MultiplayerPeer = peer;
+
+			// ToDo: Make a dedicated node for Server peer
+			GetTree().SetMultiplayer(_multiplayer);
+
+			GD.Print("Multiplayer Dedicated  Server listening on ", _port);
+		}
+
+        if (err != Error.Ok)
+		{
+			GD.PrintErr("Error: Fehler beim erstellen des Servers => ",err);
+			_multiplayer.MultiplayerPeer = null;
+			return;
+		}
+		
 		//GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
 		//GD.Print("ServerManager::create() -> NodePath: " + GetPath());
 		//GetTree().SetMultiplayer(_multiplayer, GetPath());
 		//GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
-
-		GD.Print("Server listening on ", _port);
 	}
 
 	public Error GetNetworkStatus()
