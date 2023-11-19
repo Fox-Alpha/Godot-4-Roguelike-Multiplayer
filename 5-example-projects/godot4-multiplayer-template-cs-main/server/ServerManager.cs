@@ -113,9 +113,10 @@ public partial class ServerManager : Node
 	private void OnPeerConnected(long id)
 	{
 		//Node playerInstance =
-		var gn = GetNode<MultiplayerSpawner>("/root/Main/MultiplayerSpawner");
-		gn.Spawn(id);
-		GD.Print("Peer ", id, " connected");
+		CustomSpawner cs = GetNode<CustomSpawner>("/root/Main/MultiplayerSpawner");
+		Node newPlayerNode = cs.Spawn(id);
+		
+		GD.Print("ServerManager::OnPeerConnected(): ", id, $" / LocalId: {Multiplayer.GetUniqueId()} ");
 	}
 
 	private void OnPeerDisconnected(long id)
@@ -129,34 +130,47 @@ public partial class ServerManager : Node
 		ENetMultiplayerPeer peer = new();
         Error err;
 
+		GD.Print("Before: CreateServer()");
+		var mpspawner = GetTree().CurrentScene.GetNode("MultiplayerSpawner");
+		GD.Print($"({mpspawner.Multiplayer.GetUniqueId()} + {mpspawner.GetMultiplayerAuthority()})");
+
 		_multiplayer.PeerConnected += OnPeerConnected;
 		_multiplayer.PeerDisconnected += OnPeerDisconnected;
 		_multiplayer.PeerPacket += OnPacketReceived;
 
-        if (HostMode != 1)
+        if (HostMode == 1)	// Single || Host & Play
         {
-            err = peer.CreateServer(_port, maxClients: 16);
+            err = peer.CreateServer(_port, maxClients: 1);
 
 			_multiplayer.MultiplayerPeer = peer;
 
 			GetTree().SetMultiplayer(_multiplayer, GetPath());
-			GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
+			this.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
+			//GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
 			GetTree().SetMultiplayer(_multiplayer, "/root/main/MultiplayerSpawner");
 
 
-			GD.Print("Lokal Single Server started");
+			//var uid = GetNode<CustomSpawner>(GetPath("/root/Main/MultiplayerSpawner")).Multiplayer.GetUniqueId();
+			//GetTree().CurrentScene.GetNode("Main/MultiplayerSpawner");
+			
+
+			GD.Print($"Lokal Single Server started ");
         }
         else
         {
-            err = peer.CreateServer(_port, maxClients: HostMode);
+            err = peer.CreateServer(_port, 4); //maxClients: HostMode);
 
 			_multiplayer.MultiplayerPeer = peer;
 
 			// ToDo: Make a dedicated node for Server peer
 			GetTree().SetMultiplayer(_multiplayer);
 
-			GD.Print("Multiplayer Dedicated  Server listening on ", _port);
+			GD.Print("Multiplayer Dedicated Server listening on ", _port);
 		}
+		GD.Print("After: CreateServer()");
+		//mpspawner = GetTree().CurrentScene.GetNode("Main/MultiplayerSpawner");
+		GD.Print($"({mpspawner.Multiplayer.GetUniqueId()} + {mpspawner.GetMultiplayerAuthority()})");
+		GD.Print($"ServerManager::Create(): LocalId: {Multiplayer.GetUniqueId()}  / NodeAuth: {GetMultiplayerAuthority()}");
 
         if (err != Error.Ok)
 		{

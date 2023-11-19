@@ -2,6 +2,7 @@ using Godot;
 using System;
 using MessagePack;
 using System.Text.RegularExpressions;
+using multiplayerbase.server;
 
 // Code executed on the client side only, handles network events
 public partial class ClientManager : Node
@@ -71,20 +72,21 @@ public partial class ClientManager : Node
 		_snapshotInterpolator.BufferTime = Mathf.Clamp(latencyAverage + _lerpBufferWindow, 0, _maxLerp);
 	}
 
-	private void OnConnectedToServer()
-	{
-		GetNode<Label>("Debug/Label").Text += $"\n{Multiplayer.GetUniqueId()}";
-	}
-
 	private void Connect()
 	{
 		GD.Print("Try to connect to: ", _address, ":", _port);
 		ENetMultiplayerPeer peer = new();
 
+		GD.Print("Before: CreateClient()");
+		var mp_clnt_spawner = GetTree().CurrentScene.GetNode("ClientMultiplayerSpawner");
+		GD.Print($"ClientManager::Connect(): LocalId({Multiplayer.GetUniqueId()} + ClntSpawnerAuth:{mp_clnt_spawner.GetMultiplayerAuthority()} / NodeAuth: {GetMultiplayerAuthority()})");
+		var mp_svr_spawner = GetTree().CurrentScene.GetNode("MultiplayerSpawner");
+		GD.Print($"ClientManager::Connect(): LocalId({Multiplayer.GetUniqueId()} + SvrSpawnerAuth:{mp_svr_spawner.GetMultiplayerAuthority()} / NodeAuth: {GetMultiplayerAuthority()})");
+
 		var err = peer.CreateClient(_address, _port);
 		if (err != Error.Ok)
 		{
-			GD.PrintErr("Error: Fehler beim erstellen des Servers => ",err);
+			GD.PrintErr("Error: Fehler beim erstellen des Clients => ",err);
 			_multiplayer.MultiplayerPeer = null;
 			return;
 		}
@@ -103,27 +105,51 @@ public partial class ClientManager : Node
 		//_multiplayer.MultiplayerPeer;
 
 		GetTree().SetMultiplayer(_multiplayer);
+		//this.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
+		var clnt = GetTree().CurrentScene.GetNode<CustomSpawner>("ClientMultiplayerSpawner");
+		//clnt.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
+		var svr = GetTree().CurrentScene.GetNodeOrNull<ServerManager>("Server");
+		//svr.SetMultiplayerAuthority(1);
+		var ent_array = GetTree().CurrentScene.GetNodeOrNull<Node>("ServerAuthority/EntityArray");
 		
 		// ToDo: Make a dedicated node for Client peer
 		//GD.Print("ClientManager::connect() -> NodePath: " + GetPath());
 		//GetTree().SetMultiplayer(_multiplayer, GetPath());
 		//GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
+
+		GD.Print("After: CreateClient()");
+		//mp_clnt_spawner = GetTree().CurrentScene.GetNode("Main/MultiplayerSpawner");
+		GD.Print($"ClientManager::Connect(): LocalId({Multiplayer.GetUniqueId()} + ClntSpawnerAuth:{mp_clnt_spawner.GetMultiplayerAuthority()} / NodeAuth: {GetMultiplayerAuthority()})");
+		GD.Print($"ClientManager::Connect(): LocalId({Multiplayer.GetUniqueId()} + SvrSpawnerAuth:{mp_svr_spawner.GetMultiplayerAuthority()} / NodeAuth: {GetMultiplayerAuthority()} / EntityArrayAuth: {ent_array.GetMultiplayerAuthority()})");
 	}
+
+	private void OnConnectedToServer()
+	{
+		GD.Print($"ClientManager::OnConnectedToServer(): LocalId: {Multiplayer.GetUniqueId()} / NodeAuth: {GetMultiplayerAuthority()}");
+		GetNode<Label>("Debug/Label").Text += $"\n{Multiplayer.GetUniqueId()}";
+
+		//GD.Print("Before Changing Node Authority ?");
+
+		//this.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
+
+		//GD.Print("After Changing Node Authority ?: ", $"{Multiplayer.GetUniqueId()}");
+	}
+
 
     private void OnPeerDisconnected(long id)
     {
-        GD.Print($"OnPeerDisconnected({id})");
+		GD.Print($"ClientManager::OnPeerDisconnected(): {id} / LocalId: {Multiplayer.GetUniqueId()} ");
     }
 
 
     private void OnPeerConnected(long id)
     {
-        GD.Print($"OnPeerConnected({id})");
+        GD.Print($"ClientManager::OnPeerConnected(): {id} / LocalId: {Multiplayer.GetUniqueId()} ");
     }
 
     private void OnConnectionFailed()
 	{
-		GD.Print("Connecting to: ", _address, ":", _port, " has failed");
+		GD.Print($"ClientManager::OnConnectionFailed(): Connecting to: {_address}:{_port}has failed");
 		GetNode<Timer>("Timer").Stop();
 	}
 
@@ -133,7 +159,9 @@ public partial class ClientManager : Node
 		//_multiplayer = null;
 		GetTree().GetMultiplayer().MultiplayerPeer.Close();
 		GetNode<Label>("Debug/Label").Modulate = Colors.Red;
-		GetNode<Label>("Debug/Label").Text = $"\nServer has closed the Connection !\nQuitting in 5 Seconds";
+
+		GD.Print($"ClientManager::OnServerDisconnected(): Server has closed the Connection");
+
 		await ToSignal(GetTree().CreateTimer(5), "timeout");
 
 		// Change to Mainmenu, instead of quit

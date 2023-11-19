@@ -17,11 +17,13 @@ public partial class CustomSpawner : MultiplayerSpawner
 	{
 		Callable customSpawnFunctionCallable = new (this, nameof(CustomSpawnFunction));
 		this.SpawnFunction = customSpawnFunctionCallable;
+		//this.SpawnFunction
 
 		var uid = Multiplayer.GetUniqueId();
 
 		this.SetMultiplayerAuthority(uid);
 	}
+	
 	/* TODO: 
 		Maybe seperate Client and Server Spawener func 
 		For Host & Play Mode
@@ -30,14 +32,17 @@ public partial class CustomSpawner : MultiplayerSpawner
 		in Server- / ClientManager::Create()
 	*/
 
-	private Node CustomSpawnFunction(Variant data)
+	public Node CustomSpawnFunction(double data)
 	{
 		int spawnedPlayerID = (int)data;
 		int localID = Multiplayer.GetUniqueId();
 
+		
+		GD.Print($"MultiplayerSpawner::CustomSpawnFunction(): Local UniqueId: ({Multiplayer.GetUniqueId()} / Authority: {GetMultiplayerAuthority()})");
+
 		// Server character for simulation
 		// Only when ServerMode == dedicated
-		if (localID == 1 && startmode == 2)
+		if (localID == 1) // && startmode == 2)
 		{
 			GD.Print("Spawned server character");
 			ServerPlayer player = _serverPlayerScene.Instantiate() as ServerPlayer;
