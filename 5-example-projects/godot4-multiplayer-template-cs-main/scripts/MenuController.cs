@@ -71,13 +71,13 @@ public partial class MenuController : Node
 	{
 		string title = "";
 
-		if (host == 1)
+		if (host == 1)	// Host & Play == Single)
 		{
 			// 1. Start local Play Server
 			NetworkNode = _server_scene.Instantiate();
 			if (NetworkNode.HasMethod("SetHostMode"))
 			{
-				NetworkNode.Call("SetHostMode");
+				NetworkNode.Call("SetHostMode", host);
 			}
 			
 			this.AddChild(NetworkNode);
@@ -85,28 +85,29 @@ public partial class MenuController : Node
 
 			// 2. Start local Client
 			NetworkNode = _client_scene.Instantiate();
-			if (NetworkNode.HasMethod("SetHostMode"))
-			{
-				NetworkNode.Call("SetHostMode");
-			}
 
 			this.AddChild(NetworkNode);
 
 			title = "Host & Play Server";
 		}
-		else if (host == 2)
+		else if (host == 2)	//Dedicated
 		{
 			//Node svr_scn_inst = _server_scene.Instantiate();
 			NetworkNode = _server_scene.Instantiate();
+			if (NetworkNode.HasMethod("SetHostMode"))
+			{
+				NetworkNode.Call("SetHostMode", host);
+			}
 			this.AddChild(NetworkNode);
 			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 
 			title = "Dedicated Server";
 		}
-		else
+		else	// Client
 		{
 			GetNode<Label>("Control/Label").Text = "Client only Side";
 			NetworkNode = _client_scene.Instantiate();
+			
 			this.AddChild(NetworkNode);
 			title = "Client";
 		}
@@ -125,6 +126,7 @@ public partial class MenuController : Node
 		}
 
 		DisplayServer.WindowSetTitle(title);
+
 		//$ServerAuthority/MultiplayerSpawner.startmode = host
 		var spawner = GetNodeOrNull<CustomSpawner>("MultiplayerSpawner");
 		if (spawner != null)
