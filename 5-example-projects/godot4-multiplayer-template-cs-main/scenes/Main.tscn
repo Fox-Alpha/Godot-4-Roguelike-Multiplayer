@@ -137,22 +137,26 @@ size = Vector3(2, 1, 2)
 
 [node name="ServerAuthority" type="Node" parent="."]
 
+[node name="ServerMultiplayerSpawner" type="MultiplayerSpawner" parent="ServerAuthority"]
+spawn_path = NodePath("../EntityArray")
+script = ExtResource("4_ve173")
+_playerScene = ExtResource("4_35anr")
+_serverPlayerScene = ExtResource("5_lgfx3")
+_dummyScene = ExtResource("6_82wv5")
+
 [node name="EntityArray" type="Node" parent="ServerAuthority"]
 unique_name_in_owner = true
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("../ServerAuthority/EntityArray")
+[node name="ClientAuthority" type="Node" parent="."]
+
+[node name="ClientMultiplayerSpawner" type="MultiplayerSpawner" parent="ClientAuthority"]
+spawn_path = NodePath("../EntityArray")
 script = ExtResource("4_ve173")
 _playerScene = ExtResource("4_35anr")
 _serverPlayerScene = ExtResource("5_lgfx3")
 _dummyScene = ExtResource("6_82wv5")
 
-[node name="ClientMultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("../ServerAuthority/EntityArray")
-script = ExtResource("4_ve173")
-_playerScene = ExtResource("4_35anr")
-_serverPlayerScene = ExtResource("5_lgfx3")
-_dummyScene = ExtResource("6_82wv5")
+[node name="EntityArray" type="Node" parent="ClientAuthority"]
 
 [connection signal="pressed" from="Buttons/VBoxContainer/Button" to="." method="_on_button_pressed" binds= [0]]
 [connection signal="pressed" from="Buttons/VBoxContainer/Button2" to="." method="_on_button_pressed" binds= [1]]
