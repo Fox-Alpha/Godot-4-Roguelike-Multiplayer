@@ -29,7 +29,8 @@ public partial class ClientManager : Node
 	{
 		Connect();
 
-		_entityArray = GetNode("/root/Main/ServerAuthority/EntityArray");
+		//_entityArray = GetNode("/root/Main/ClientAuthority/EntityArray");
+		_entityArray = GetTree().CurrentScene.GetNode("ClientAuthority/EntityArray");
 
 		// ToDo: Check if connected
 		_netClock = GetNode<NetworkClock>("NetworkClock");
@@ -39,7 +40,8 @@ public partial class ClientManager : Node
 
 	public override void _Process(double delta)
 	{
-		var ConStatus = GetTree().GetMultiplayer().MultiplayerPeer.GetConnectionStatus();
+		//var ConStatus = GetTree().GetMultiplayer().MultiplayerPeer.GetConnectionStatus();
+		var ConStatus = this.Multiplayer.MultiplayerPeer.GetConnectionStatus();
 		if (ConStatus != MultiplayerPeer.ConnectionStatus.Connected || ConStatus == MultiplayerPeer.ConnectionStatus.Disconnected)
 			return;
 
@@ -61,6 +63,7 @@ public partial class ClientManager : Node
 
 				if (state.Id == mpuid)
 				{
+					// ToDo ????
 					CustomSpawner.LocalPlayer.ReceiveState(state);
 				}
 			}
@@ -78,10 +81,11 @@ public partial class ClientManager : Node
 		ENetMultiplayerPeer peer = new();
 
 		GD.Print("Before: CreateClient()");
-		var mp_clnt_spawner = GetTree().CurrentScene.GetNode("ClientMultiplayerSpawner");
-		GD.Print($"ClientManager::Connect(): LocalId({Multiplayer.GetUniqueId()} + ClntSpawnerAuth:{mp_clnt_spawner.GetMultiplayerAuthority()} / NodeAuth: {GetMultiplayerAuthority()})");
-		var mp_svr_spawner = GetTree().CurrentScene.GetNode("MultiplayerSpawner");
-		GD.Print($"ClientManager::Connect(): LocalId({Multiplayer.GetUniqueId()} + SvrSpawnerAuth:{mp_svr_spawner.GetMultiplayerAuthority()} / NodeAuth: {GetMultiplayerAuthority()})");
+		//var cs = GetTree().CurrentScene;
+		//var mp_clnt_spawner = GetTree().CurrentScene.GetNode("ClientAuthority/ClientMultiplayerSpawner");
+		//GD.Print($"ClientManager::Connect(): LocalId({Multiplayer.GetUniqueId()} + ClntSpawnerAuth:{mp_clnt_spawner.GetMultiplayerAuthority()} / NodeAuth: {GetMultiplayerAuthority()})");
+		//var mp_svr_spawner = GetTree().CurrentScene.GetNode("ServerAuthority/ServerMultiplayerSpawner");
+		//GD.Print($"ClientManager::Connect(): LocalId({Multiplayer.GetUniqueId()} + SvrSpawnerAuth:{mp_svr_spawner.GetMultiplayerAuthority()} / NodeAuth: {GetMultiplayerAuthority()})");
 
 		var err = peer.CreateClient(_address, _port);
 		if (err != Error.Ok)
@@ -104,13 +108,18 @@ public partial class ClientManager : Node
 		_multiplayer.MultiplayerPeer = peer;
 		//_multiplayer.MultiplayerPeer;
 
-		GetTree().SetMultiplayer(_multiplayer);
+		GetTree().SetMultiplayer(_multiplayer, "/root/main/ClientAuthority");
+		//Multiplayer.MultiplayerPeer = _multiplayer
+		
+
 		//this.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
-		var clnt = GetTree().CurrentScene.GetNode<CustomSpawner>("ClientMultiplayerSpawner");
+
+		//var clnt = GetTree().CurrentScene.GetNode<CustomSpawner>("ClientAuthority/ClientMultiplayerSpawner");
 		//clnt.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
-		var svr = GetTree().CurrentScene.GetNodeOrNull<ServerManager>("Server");
+		//var svr = GetTree().CurrentScene.GetNodeOrNull<ServerManager>("Server");
 		//svr.SetMultiplayerAuthority(1);
-		var ent_array = GetTree().CurrentScene.GetNodeOrNull<Node>("ServerAuthority/EntityArray");
+
+		//var ent_array = GetTree().CurrentScene.GetNodeOrNull<Node>("ClientAuthority/EntityArray");
 		
 		// ToDo: Make a dedicated node for Client peer
 		//GD.Print("ClientManager::connect() -> NodePath: " + GetPath());
@@ -119,8 +128,8 @@ public partial class ClientManager : Node
 
 		GD.Print("After: CreateClient()");
 		//mp_clnt_spawner = GetTree().CurrentScene.GetNode("Main/MultiplayerSpawner");
-		GD.Print($"ClientManager::Connect(): LocalId({Multiplayer.GetUniqueId()} + ClntSpawnerAuth:{mp_clnt_spawner.GetMultiplayerAuthority()} / NodeAuth: {GetMultiplayerAuthority()})");
-		GD.Print($"ClientManager::Connect(): LocalId({Multiplayer.GetUniqueId()} + SvrSpawnerAuth:{mp_svr_spawner.GetMultiplayerAuthority()} / NodeAuth: {GetMultiplayerAuthority()} / EntityArrayAuth: {ent_array.GetMultiplayerAuthority()})");
+		//GD.Print($"ClientManager::Connect(): LocalId({Multiplayer.GetUniqueId()} + ClntSpawnerAuth:{mp_clnt_spawner.GetMultiplayerAuthority()} / NodeAuth: {GetMultiplayerAuthority()})");
+		//GD.Print($"ClientManager::Connect(): LocalId({Multiplayer.GetUniqueId()} + SvrSpawnerAuth:{mp_svr_spawner.GetMultiplayerAuthority()} / NodeAuth: {GetMultiplayerAuthority()} / ClientEntityArrayAuth: {ent_array.GetMultiplayerAuthority()})");
 	}
 
 	private void OnConnectedToServer()
@@ -189,6 +198,8 @@ public partial class ClientManager : Node
 
 	private void OnDebugTimerOut()
 	{
+		return;
+		/*
 		var ConStatus = GetTree().GetMultiplayer().MultiplayerPeer.GetConnectionStatus();
 
 		if (ConStatus == MultiplayerPeer.ConnectionStatus.Connecting)
@@ -211,5 +222,6 @@ public partial class ClientManager : Node
 		_recPerSecond = enetHost.PopStatistic(ENetConnection.HostStatistic.ReceivedData);
 		_packetsPerSecond = enetHost.PopStatistic(ENetConnection.HostStatistic.ReceivedPackets);
 		_sentPacketsPerSecond = enetHost.PopStatistic(ENetConnection.HostStatistic.SentPackets);
+		*/
 	}
 }

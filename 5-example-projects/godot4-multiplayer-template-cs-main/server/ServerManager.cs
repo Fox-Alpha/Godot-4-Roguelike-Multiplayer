@@ -113,7 +113,7 @@ public partial class ServerManager : Node
 	private void OnPeerConnected(long id)
 	{
 		//Node playerInstance =
-		CustomSpawner cs = GetNode<CustomSpawner>("/root/Main/MultiplayerSpawner");
+		CustomSpawner cs = GetNode<CustomSpawner>("/root/Main/ServerAuthority/ServerMultiplayerSpawner");
 		Node newPlayerNode = cs.Spawn(id);
 		
 		GD.Print("ServerManager::OnPeerConnected(): ", id, $" / LocalId: {Multiplayer.GetUniqueId()} ");
@@ -131,8 +131,8 @@ public partial class ServerManager : Node
         Error err;
 
 		GD.Print("Before: CreateServer()");
-		var mpspawner = GetTree().CurrentScene.GetNode("MultiplayerSpawner");
-		GD.Print($"({mpspawner.Multiplayer.GetUniqueId()} + {mpspawner.GetMultiplayerAuthority()})");
+		//var mpspawner = GetTree().CurrentScene.GetNode("ServerAuthority/ServerMultiplayerSpawner");
+		//GD.Print($"({mpspawner.Multiplayer.GetUniqueId()} + {mpspawner.GetMultiplayerAuthority()})");
 
 		_multiplayer.PeerConnected += OnPeerConnected;
 		_multiplayer.PeerDisconnected += OnPeerDisconnected;
@@ -144,15 +144,7 @@ public partial class ServerManager : Node
 
 			_multiplayer.MultiplayerPeer = peer;
 
-			GetTree().SetMultiplayer(_multiplayer, GetPath());
-			this.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
-			//GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
-			GetTree().SetMultiplayer(_multiplayer, "/root/main/MultiplayerSpawner");
-
-
-			//var uid = GetNode<CustomSpawner>(GetPath("/root/Main/MultiplayerSpawner")).Multiplayer.GetUniqueId();
-			//GetTree().CurrentScene.GetNode("Main/MultiplayerSpawner");
-			
+			GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
 
 			GD.Print($"Lokal Single Server started ");
         }
@@ -169,8 +161,8 @@ public partial class ServerManager : Node
 		}
 		GD.Print("After: CreateServer()");
 		//mpspawner = GetTree().CurrentScene.GetNode("Main/MultiplayerSpawner");
-		GD.Print($"({mpspawner.Multiplayer.GetUniqueId()} + {mpspawner.GetMultiplayerAuthority()})");
-		GD.Print($"ServerManager::Create(): LocalId: {Multiplayer.GetUniqueId()}  / NodeAuth: {GetMultiplayerAuthority()}");
+		//GD.Print($"({mpspawner.Multiplayer.GetUniqueId()} + {mpspawner.GetMultiplayerAuthority()})");
+		//GD.Print($"ServerManager::Create(): LocalId: {Multiplayer.GetUniqueId()}  / NodeAuth: {GetMultiplayerAuthority()}");
 
         if (err != Error.Ok)
 		{
