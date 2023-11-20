@@ -12,6 +12,12 @@ public partial class ClientPlayer : CharacterBody3D
     private List<NetMessage.UserInput> _userInputs = new();
     private int _seqStamp = 0;
 
+    public override void _Ready()
+    {
+        base._Ready();
+        GD.Print("ClientPlayer::_Ready() => Client Scene");
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         var userInput = GenerateUserInput();
