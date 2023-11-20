@@ -19,9 +19,9 @@ public partial class CustomSpawner : MultiplayerSpawner
 		this.SpawnFunction = customSpawnFunctionCallable;
 		//this.SpawnFunction
 
-		var uid = Multiplayer.GetUniqueId();
+		//var uid = Multiplayer.GetUniqueId();
 
-		this.SetMultiplayerAuthority(uid);
+		//this.SetMultiplayerAuthority(uid);
 	}
 	
 	/* TODO: 
