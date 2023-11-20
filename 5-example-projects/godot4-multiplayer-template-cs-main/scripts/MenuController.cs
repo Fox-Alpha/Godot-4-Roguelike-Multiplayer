@@ -80,13 +80,21 @@ public partial class MenuController : Node
 				NetworkNode.Call("SetHostMode", host);
 			}
 			
-			this.AddChild(NetworkNode);
+			//this.AddChild(NetworkNode);
+			var SvrAuth = GetTree().CurrentScene.GetNode<Node>("ServerAuthority");
+			SvrAuth.AddChild(NetworkNode);
+			var spawner = SvrAuth.GetNodeOrNull<CustomSpawner>("ServerMultiplayerSpawner");
+			if (spawner != null)
+			{
+				spawner.startmode = host;
+			}
 			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 
 			// 2. Start local Client
 			NetworkNode = _client_scene.Instantiate();
 
-			this.AddChild(NetworkNode);
+			//this.AddChild(NetworkNode);
+			GetTree().CurrentScene.GetNode<Node>("ClientAuthority").AddChild(NetworkNode);
 
 			title = "Host & Play Server";
 		}
@@ -98,7 +106,15 @@ public partial class MenuController : Node
 			{
 				NetworkNode.Call("SetHostMode", host);
 			}
-			this.AddChild(NetworkNode);
+			//this.AddChild(NetworkNode);
+			//GetTree().CurrentScene.GetNode<Node>("ServerAuthority").AddChild(NetworkNode);
+			var SvrAuth = GetTree().CurrentScene.GetNode<Node>("ServerAuthority");
+			SvrAuth.AddChild(NetworkNode);
+			var spawner = SvrAuth.GetNodeOrNull<CustomSpawner>("ServerMultiplayerSpawner");
+			if (spawner != null)
+			{
+				spawner.startmode = host;
+			}
 			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 
 			title = "Dedicated Server";
@@ -107,8 +123,10 @@ public partial class MenuController : Node
 		{
 			GetNode<Label>("Control/Label").Text = "Client only Side";
 			NetworkNode = _client_scene.Instantiate();
-			
-			this.AddChild(NetworkNode);
+
+			var ClntAuth = GetTree().CurrentScene.GetNode<Node>("ClientAuthority");
+			ClntAuth.AddChild(NetworkNode);
+
 			title = "Client";
 		}
 
@@ -126,13 +144,6 @@ public partial class MenuController : Node
 		}
 
 		DisplayServer.WindowSetTitle(title);
-
-		//$ServerAuthority/MultiplayerSpawner.startmode = host
-		var spawner = GetNodeOrNull<CustomSpawner>("MultiplayerSpawner");
-		if (spawner != null)
-		{
-			spawner.startmode = host;
-		}
 		
 		startbuttons.QueueFree();
 	}
