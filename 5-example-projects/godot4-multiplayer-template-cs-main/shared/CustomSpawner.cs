@@ -1,4 +1,5 @@
 using Godot;
+using Godot.NativeInterop;
 using System;
 
 public partial class CustomSpawner : MultiplayerSpawner
@@ -15,13 +16,15 @@ public partial class CustomSpawner : MultiplayerSpawner
 
 	public override void _Ready()
 	{
-		Callable customSpawnFunctionCallable = new (this, nameof(CustomSpawnFunction));
+		Callable customSpawnFunctionCallable = new Callable(this,CustomSpawner.MethodName.CustomSpawnFunction);
 		this.SpawnFunction = customSpawnFunctionCallable;
+		//this.setspa
+
 		//this.SpawnFunction
 
 		//var uid = Multiplayer.GetUniqueId();
 
-		//this.SetMultiplayerAuthority(uid);
+		this.SetMultiplayerAuthority(1);
 	}
 	
 	/* TODO: 
@@ -32,13 +35,14 @@ public partial class CustomSpawner : MultiplayerSpawner
 		in Server- / ClientManager::Create()
 	*/
 
-	public Node CustomSpawnFunction(double data)
+	public Node CustomSpawnFunction(Variant data)
 	{
-		int spawnedPlayerID = (int)data;
+		int spawnedPlayerID = data.AsInt32();
+		
 		int localID = Multiplayer.GetUniqueId();
 
 		
-		GD.Print($"MultiplayerSpawner::CustomSpawnFunction(): Local UniqueId: ({Multiplayer.GetUniqueId()} / Authority: {GetMultiplayerAuthority()})");
+		GD.Print($">> MultiplayerSpawner::CustomSpawnFunction(): Local UniqueId: ({Multiplayer.GetUniqueId()} / Authority: {GetMultiplayerAuthority()})");
 
 		// Server character for simulation
 		// Only when ServerMode == dedicated

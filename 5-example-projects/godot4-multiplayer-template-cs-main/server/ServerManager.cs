@@ -98,7 +98,7 @@ public partial class ServerManager : Node
 		{
 			case NetMessage.UserCommand userCmd:
 				//ServerPlayer player = GetNode<ServerPlayer>(%EntityArray + $"/EntityArray/{userCmd.Id}") as ServerPlayer;
-				ServerPlayer player = GetNode($"/root/Main/ServerAuthority/EntityArray/{userCmd.Id}") as ServerPlayer;
+				ServerPlayer player = GetTree().CurrentScene.GetNodeOrNull($"ServerAuthority/EntityArray/{userCmd.Id}") as ServerPlayer;
 				player.PushCommand(userCmd);
 				break;
 
@@ -113,7 +113,7 @@ public partial class ServerManager : Node
 	private void OnPeerConnected(long id)
 	{
 		//Node playerInstance =
-		CustomSpawner cs = GetNode<CustomSpawner>("/root/Main/ServerAuthority/ServerMultiplayerSpawner");
+		CustomSpawner cs = GetTree().CurrentScene.GetNodeOrNull<CustomSpawner>("ServerAuthority/ServerMultiplayerSpawner");
 		Node newPlayerNode = cs.Spawn(id);
 		
 		GD.Print("ServerManager::OnPeerConnected(): ", id, $" / LocalId: {Multiplayer.GetUniqueId()} ");
@@ -121,7 +121,11 @@ public partial class ServerManager : Node
 
 	private void OnPeerDisconnected(long id)
 	{
-		GetNode($"/root/Main/ServerAuthority/EntityArray/{id}").QueueFree();
+		var ea = GetTree().CurrentScene.GetNodeOrNull<Node>($"ServerAuthority/EntityArray/{id}");
+
+		if(ea != null)
+			ea.QueueFree();
+
 		GD.Print("Peer ", id, " disconnected");
 	}
 
@@ -144,7 +148,7 @@ public partial class ServerManager : Node
 
 			_multiplayer.MultiplayerPeer = peer;
 
-			GetTree().SetMultiplayer(_multiplayer, "/root/main/ServerAuthority");
+			GetTree().SetMultiplayer(_multiplayer, "/main/ServerAuthority");
 
 			GD.Print($"Lokal Single Server started ");
         }
@@ -179,7 +183,8 @@ public partial class ServerManager : Node
 
 	public Error GetNetworkStatus()
 	{
-		var mp_peer = GetTree().GetMultiplayer().MultiplayerPeer;
+		//var mp_peer = GetTree().GetMultiplayer().MultiplayerPeer;
+		var mp_peer = Multiplayer.MultiplayerPeer;
 
 		return mp_peer != null ? Error.Ok : Error.ConnectionError;
 	}

@@ -108,9 +108,18 @@ public partial class ClientManager : Node
 		_multiplayer.MultiplayerPeer = peer;
 		//_multiplayer.MultiplayerPeer;
 
-		GetTree().SetMultiplayer(_multiplayer, "/root/main/ClientAuthority");
-		//Multiplayer.MultiplayerPeer = _multiplayer
-		
+		GD.Print($"ClientManager::Connect(): mp_Id {Multiplayer.GetUniqueId()} / ");
+
+		GetTree().SetMultiplayer(_multiplayer, "/ClientAuthority");
+
+		Callable customSpawnFunctionCallable = new Callable(this,CustomSpawner.MethodName.CustomSpawnFunction);
+		var clnt = GetTree().CurrentScene.GetNode<CustomSpawner>("ClientAuthority/ClientMultiplayerSpawner");
+		var client = GetTree().CurrentScene.GetNode("ClientAuthority");
+		clnt.SpawnFunction = customSpawnFunctionCallable;
+		client.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
+
+		GD.Print($"ClientManager::Connect(): mp_Id {Multiplayer.GetUniqueId()} / ");
+		//Multiplayer.MultiplayerPeer = _multiplayer		
 
 		//this.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
 
@@ -147,13 +156,13 @@ public partial class ClientManager : Node
 
     private void OnPeerDisconnected(long id)
     {
-		GD.Print($"ClientManager::OnPeerDisconnected(): {id} / LocalId: {Multiplayer.GetUniqueId()} ");
+		GD.Print($">> ClientManager::OnPeerDisconnected(): {id} / LocalId: {Multiplayer.GetUniqueId()} ");
     }
 
 
     private void OnPeerConnected(long id)
     {
-        GD.Print($"ClientManager::OnPeerConnected(): {id} / LocalId: {Multiplayer.GetUniqueId()} ");
+        GD.Print($">> ClientManager::OnPeerConnected(): {id} / LocalId: {Multiplayer.GetUniqueId()} ");
     }
 
     private void OnConnectionFailed()
@@ -169,7 +178,7 @@ public partial class ClientManager : Node
 		GetTree().GetMultiplayer().MultiplayerPeer.Close();
 		GetNode<Label>("Debug/Label").Modulate = Colors.Red;
 
-		GD.Print($"ClientManager::OnServerDisconnected(): Server has closed the Connection");
+		GD.Print($">> ClientManager::OnServerDisconnected(): Server has closed the Connection");
 
 		await ToSignal(GetTree().CreateTimer(5), "timeout");
 
