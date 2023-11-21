@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using Godot.Collections;
+using multiplayerbase.server;
 
 [GlobalClass]
 public partial class MenuController : Node
@@ -70,28 +71,62 @@ public partial class MenuController : Node
 	{
 		string title = "";
 
-		if (host == 1)
+		if (host == 1)	// Host & Play == Single)
 		{
+			// 1. Start local Play Server
 			NetworkNode = _server_scene.Instantiate();
-			this.AddChild(NetworkNode);
+			if (NetworkNode.HasMethod("SetHostMode"))
+			{
+				NetworkNode.Call("SetHostMode", host);
+			}
+			
+			//this.AddChild(NetworkNode);
+			var SvrAuth = GetTree().CurrentScene.GetNode<Node>("ServerAuthority");
+			SvrAuth.AddChild(NetworkNode);
+			var spawner = SvrAuth.GetNodeOrNull<CustomSpawner>("ServerMultiplayerSpawner");
+			if (spawner != null)
+			{
+				spawner.startmode = host;
+			}
 			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 
-			title = "Dedicated Server";
+			// 2. Start local Client
+			NetworkNode = _client_scene.Instantiate();
+
+			//this.AddChild(NetworkNode);
+			GetTree().CurrentScene.GetNode<Node>("ClientAuthority").AddChild(NetworkNode);
+
+			title = "Host & Play Server";
 		}
-		else if (host == 2)
+		else if (host == 2)	//Dedicated
 		{
 			//Node svr_scn_inst = _server_scene.Instantiate();
 			NetworkNode = _server_scene.Instantiate();
-			this.AddChild(NetworkNode);
+			if (NetworkNode.HasMethod("SetHostMode"))
+			{
+				NetworkNode.Call("SetHostMode", host);
+			}
+			//this.AddChild(NetworkNode);
+			//GetTree().CurrentScene.GetNode<Node>("ServerAuthority").AddChild(NetworkNode);
+			var SvrAuth = GetTree().CurrentScene.GetNode<Node>("ServerAuthority");
+			SvrAuth.AddChild(NetworkNode);
+			var spawner = SvrAuth.GetNodeOrNull<CustomSpawner>("ServerMultiplayerSpawner");
+			if (spawner != null)
+			{
+				spawner.startmode = host;
+			}
 			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 
 			title = "Dedicated Server";
 		}
-		else
+		else	// Client
 		{
 			GetNode<Label>("Control/Label").Text = "Client only Side";
 			NetworkNode = _client_scene.Instantiate();
-			this.AddChild(NetworkNode);
+
+			var ClntAuth = GetTree().CurrentScene.GetNode<Node>("ClientAuthority");
+			ClntAuth.AddChild(NetworkNode);
+
 			title = "Client";
 		}
 
@@ -109,7 +144,7 @@ public partial class MenuController : Node
 		}
 
 		DisplayServer.WindowSetTitle(title);
-		//$ServerAuthority/MultiplayerSpawner.startmode = host
+		
 		startbuttons.QueueFree();
 	}
 }

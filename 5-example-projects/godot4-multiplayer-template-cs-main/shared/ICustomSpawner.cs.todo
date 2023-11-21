@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class CustomSpawner : MultiplayerSpawner
+public interface ICustomSpawner : MultiplayerSpawner
 {
 	[Export] private PackedScene _playerScene;
 	[Export] private PackedScene _serverPlayerScene;
@@ -19,11 +19,10 @@ public partial class CustomSpawner : MultiplayerSpawner
 		this.SpawnFunction = customSpawnFunctionCallable;
 		//this.SpawnFunction
 
-		//var uid = Multiplayer.GetUniqueId();
+		var uid = Multiplayer.GetUniqueId();
 
-		//this.SetMultiplayerAuthority(uid);
+		this.SetMultiplayerAuthority(uid);
 	}
-	
 	/* TODO: 
 		Maybe seperate Client and Server Spawener func 
 		For Host & Play Mode

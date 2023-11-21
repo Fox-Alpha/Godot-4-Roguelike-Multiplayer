@@ -1,31 +1,33 @@
 # Projekt ToDo's
-## 27.10.2023 - Allgemeine Projekt Plannung
-- [x] Einrichtung Github Repository
-- [ ] [WIP]Festlegen der gesamt Projekt Verzeichnisstrukturen
-- [x] Initiales anlegen von Dateien im Repository
-- [ ] Anlegen des Godot Hauptprojektes
-- [ ] Anlegen eines ersten Prototypen mit einfacher Struktur
+## 25.11.2023 - Weitere Projekt Plannung
+- [ ] Main : Bugfixing
+- [ ] Main : Generalisierung der Main- und Gameszene
+  - [ ] Menü und ingame als eigene Szene erstellen
+- [ ] Feature : Objekt und Map Synchronisierung
+- [ ] Feature : Host & Play Modus erstellen
+- [ ] Feature : 2D Unterstützung
+- [ ] Feature : Singleplayer Modus
+- [ ] 
 
-## Prototypen
-- [WIP] Projekt mit Multiplayer Struktur Host/Client
-  - [ ] Mode - Host'n Play server
-  - [ ] Mode - Host Only (Dedicated)
-  - [ ] Conn - LAN / Gamebrowser
-  - [ ] Conn - Direct IP Input
-  - [ ] Core - UPNP
-- Projekt für die Procedurale Generierung mit Tilemaps
 
-## Mockup's
+## Feature : Host & Play
+- [ ] Herausfinden welche Scripte betroffen sind
+- [ ] Erstellen des Servers in eigenen Node mit Authority
+- [ ] Erstellen des lokalen Clients nach dem der Server bereit ist
+- [ ] Beim bereinigen prüfen ob Serbert & Client vorhanden sind
+- [ ] 
 
-### User interface
-- [ ] UI - Hauptmenü
-- [ ] UI - Settings
-- [ ] UI - Ingame Pause Menü
-- [ ] UI - Multiplayer Start
-  - [ ] UI - Host start Server, Client Connect
-- [ ] UI - Ingame UI / HUD
+## Feature : 2D Unterstützung
+- [ ] 2D Player Szenen erstellen
+- [ ] 2D Main Szene erstellen
+- [ ] 
 
-## Addon's
 
-Specify which addons will be used
-- [ ] Tryout
+## Feature : Singleplayer Modus
+- [ ] Für lokalen Single Player nur eine Verbindung zulassen
+- [ ] 
+
+
+
+## Feature : Objekt und Map Synchronisierung
+- [ ] 

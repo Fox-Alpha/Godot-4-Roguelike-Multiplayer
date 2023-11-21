@@ -1,7 +1,9 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
-public partial class CustomSpawner : MultiplayerSpawner
+[DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
+public partial class CustomServerSpawner : MultiplayerSpawner, ICustomSpawner
 {
 	[Export] private PackedScene _playerScene;
 	[Export] private PackedScene _serverPlayerScene;
@@ -19,11 +21,10 @@ public partial class CustomSpawner : MultiplayerSpawner
 		this.SpawnFunction = customSpawnFunctionCallable;
 		//this.SpawnFunction
 
-		//var uid = Multiplayer.GetUniqueId();
+		var uid = Multiplayer.GetUniqueId();
 
-		//this.SetMultiplayerAuthority(uid);
+		this.SetMultiplayerAuthority(uid);
 	}
-	
 	/* TODO: 
 		Maybe seperate Client and Server Spawener func 
 		For Host & Play Mode
@@ -71,4 +72,10 @@ public partial class CustomSpawner : MultiplayerSpawner
 			return player;
 		}
 	}
+
+    private string GetDebuggerDisplay()
+    {
+        return ToString();
+    }
+
 }
