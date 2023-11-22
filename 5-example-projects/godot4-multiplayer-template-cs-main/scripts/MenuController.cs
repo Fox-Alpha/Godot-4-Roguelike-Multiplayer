@@ -79,7 +79,7 @@ public partial class MenuController : Node
 			{
 				NetworkNode.Call("SetHostMode", host);
 			}
-			
+
 			//this.AddChild(NetworkNode);
 			var SvrAuth = GetTree().CurrentScene.GetNode<Node>("ServerAuthority");
 			SvrAuth.AddChild(NetworkNode);
@@ -144,7 +144,7 @@ public partial class MenuController : Node
 		}
 
 		DisplayServer.WindowSetTitle(title);
-		
+
 		startbuttons.QueueFree();
 	}
 }

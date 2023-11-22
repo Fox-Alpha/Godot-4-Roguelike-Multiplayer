@@ -18,7 +18,12 @@
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole",
-            "justMyCode": true,            
+            "justMyCode": false,  
+            "symbolOptions": {
+                "searchPaths": [],
+                "searchMicrosoftSymbolServer": false,
+                "searchNuGetOrgSymbolServer": false
+            }          
         },
         {// [H] Godot DotNet (C# only) - Works !
             // Debug CSharp but not GDScript

@@ -77,7 +77,9 @@ public partial class ClientManager : Node
 
 	private void Connect()
 	{
-		GD.Print("Try to connect to: ", _address, ":", _port);
+		var time = Time.GetDatetimeStringFromSystem(false, true);
+		//get_datetime_string_from_system 
+		GD.Print($"{time}Try to connect to: ", _address, ":", _port);
 		ENetMultiplayerPeer peer = new();
 
 		GD.Print("Before: CreateClient()");
@@ -108,9 +110,38 @@ public partial class ClientManager : Node
 		_multiplayer.MultiplayerPeer = peer;
 		//_multiplayer.MultiplayerPeer;
 
-		GetTree().SetMultiplayer(_multiplayer, "/root/main/ClientAuthority");
-		//Multiplayer.MultiplayerPeer = _multiplayer
+		GD.Print($"ClientManager::Connect(): thisNodeAuth: {this.GetMultiplayerAuthority()} / mp_Id {Multiplayer.GetUniqueId()} / ");
+
+		GetTree().SetMultiplayer(_multiplayer); //, "/root/Main/ClientAuthority");
+
+
+		var clnt = GetTree().CurrentScene.GetNode<MultiplayerSpawner>("ClientAuthority/ClientMultiplayerSpawner");
+		var client = GetTree().CurrentScene.GetNode("ClientAuthority");
+
+		GD.Print($"Spawner MP Auth: {clnt.GetMultiplayerAuthority()} / ");
+		//client.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
+		client.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
+		clnt.SetMultiplayerAuthority(1);
+
+		//Callable customSpawnFunctionCallable = new Callable(clnt,CustomSpawner.MethodName.CustomSpawnFunction);
+		time = Time.GetDatetimeStringFromSystem(false, true);
+		GD.Print(time, 
+			": MultiplayerSpawner::_Ready(): Callable clnt.SpawnFunction => :",
+			$"\n\tMultiplayerAuthority of MultiplayerSpawner: {clnt.GetMultiplayerAuthority()} / ",
+			$"\n\tMethodName: {clnt.SpawnFunction.Method} / ",
+			$"\n\tTarget: {clnt.SpawnFunction.Target} / ",
+			$"\n\tGetType(): {clnt.SpawnFunction.Target.GetType()} / ",
+			$"\n\tGetClass(): {clnt.SpawnFunction.Target.GetClass()}",
+			$"\n\tGetScript(): {clnt.SpawnFunction.Target.GetScript()} / "
+		);
+
+
+		//clnt.SpawnFunction = customSpawnFunctionCallable;
 		
+		
+
+		GD.Print($"ClientManager::Connect(): thisNodeAuth: {this.GetMultiplayerAuthority()} / mp_Id {Multiplayer.GetUniqueId()} / ");
+		//Multiplayer.MultiplayerPeer = _multiplayer		
 
 		//this.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
 
@@ -134,7 +165,7 @@ public partial class ClientManager : Node
 
 	private void OnConnectedToServer()
 	{
-		GD.Print($"ClientManager::OnConnectedToServer(): LocalId: {Multiplayer.GetUniqueId()} / NodeAuth: {GetMultiplayerAuthority()}");
+		GD.Print($"ClientManager::OnConnectedToServer(Node:{this.Name}): LocalId: {Multiplayer.GetUniqueId()} / NodeAuth: {GetMultiplayerAuthority()}");
 		GetNode<Label>("Debug/Label").Text += $"\n{Multiplayer.GetUniqueId()}";
 
 		//GD.Print("Before Changing Node Authority ?");
@@ -147,18 +178,18 @@ public partial class ClientManager : Node
 
     private void OnPeerDisconnected(long id)
     {
-		GD.Print($"ClientManager::OnPeerDisconnected(): {id} / LocalId: {Multiplayer.GetUniqueId()} ");
+		GD.Print($">> ClientManager::OnPeerDisconnected(): {id} / LocalId: {Multiplayer.GetUniqueId()} ");
     }
 
 
     private void OnPeerConnected(long id)
     {
-        GD.Print($"ClientManager::OnPeerConnected(): {id} / LocalId: {Multiplayer.GetUniqueId()} ");
+        GD.Print($">> ClientManager::OnPeerConnected(Node:{this.Name}): {id} / LocalId: {Multiplayer.GetUniqueId()} / NodeAuth: {GetMultiplayerAuthority()} ");
     }
 
     private void OnConnectionFailed()
 	{
-		GD.Print($"ClientManager::OnConnectionFailed(): Connecting to: {_address}:{_port}has failed");
+		GD.Print($"ClientManager::OnConnectionFailed(): Connecting to: {_address}:{_port} has failed");
 		GetNode<Timer>("Timer").Stop();
 	}
 
@@ -169,7 +200,7 @@ public partial class ClientManager : Node
 		GetTree().GetMultiplayer().MultiplayerPeer.Close();
 		GetNode<Label>("Debug/Label").Modulate = Colors.Red;
 
-		GD.Print($"ClientManager::OnServerDisconnected(): Server has closed the Connection");
+		GD.Print($">> ClientManager::OnServerDisconnected(): Server has closed the Connection");
 
 		await ToSignal(GetTree().CreateTimer(5), "timeout");
 

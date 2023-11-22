@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class CustomPlayerSpawner : MultiplayerSpawner
+public partial class CustomClientSpawner : MultiplayerSpawner
 {
 	[Export] private PackedScene _playerScene;
 	[Export] private PackedScene _serverPlayerScene;
@@ -21,7 +21,19 @@ public partial class CustomPlayerSpawner : MultiplayerSpawner
 
 		var uid = Multiplayer.GetUniqueId();
 
-		this.SetMultiplayerAuthority(uid);
+		//this.SetMultiplayerAuthority(uid);
+
+		var time = Time.GetDatetimeStringFromSystem(false, true);
+		this.SpawnFunction = customSpawnFunctionCallable;
+		GD.Print(time, " : ",
+			"MultiplayerSpawner::_Ready(): Callable this.SpawnFunction => :",
+			$"{this.GetParent().Name} / ",
+			$"{this.SpawnFunction.Method} / ",
+			$"{this.SpawnFunction.Target} / ",
+			$"{this.SpawnFunction.Target.GetType()} / ",
+			$"{this.SpawnFunction.Target.GetClass()}",
+			$"{this.SpawnFunction.Target.GetScript()} / "
+		);
 	}
 	/* TODO: 
 		Maybe seperate Client and Server Spawener func 
@@ -37,18 +49,7 @@ public partial class CustomPlayerSpawner : MultiplayerSpawner
 		int localID = Multiplayer.GetUniqueId();
 
 		
-		GD.Print($"MultiplayerSpawner::CustomSpawnFunction(): Local UniqueId: ({Multiplayer.GetUniqueId()} / Authority: {GetMultiplayerAuthority()})");
-
-		// Server character for simulation
-		// Only when ServerMode == dedicated
-		if (localID == 1) // && startmode == 2)
-		{
-			GD.Print("Spawned server character");
-			ServerPlayer player = _serverPlayerScene.Instantiate() as ServerPlayer;
-			player.Name = spawnedPlayerID.ToString();
-			player.MultiplayerID = spawnedPlayerID;
-			return player;
-		}
+		GD.Print($"MultiplayerSpawner<CustomPlayerSpawner>::CustomSpawnFunction(): Local UniqueId: ({Multiplayer.GetUniqueId()} / Authority: {GetMultiplayerAuthority()})");
 
 		// Client player
 		if (localID == spawnedPlayerID)

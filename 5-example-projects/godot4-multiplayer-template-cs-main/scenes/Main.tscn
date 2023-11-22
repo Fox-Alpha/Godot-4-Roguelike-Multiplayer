@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://8lvi1xkrty8v"]
+[gd_scene load_steps=15 format=3 uid="uid://8lvi1xkrty8v"]
 
 [ext_resource type="Script" path="res://scripts/MenuController.cs" id="1_yipri"]
 [ext_resource type="Script" path="res://debug/debug_label.cs" id="2_3q3gn"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://shared/CustomSpawner.cs" id="4_ve173"]
 [ext_resource type="PackedScene" uid="uid://1fbyoad8h8gr" path="res://players/ServerPlayer.tscn" id="5_lgfx3"]
 [ext_resource type="PackedScene" uid="uid://dgltayb5g40lt" path="res://players/DummyPlayer.tscn" id="6_82wv5"]
+[ext_resource type="Script" path="res://shared/CustomClientSpawner.cs" id="8_ddxld"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hftyp"]
 sky_top_color = Color(0.262745, 0.521569, 0.878431, 1)
@@ -150,8 +151,8 @@ unique_name_in_owner = true
 [node name="ClientAuthority" type="Node" parent="."]
 
 [node name="ClientMultiplayerSpawner" type="MultiplayerSpawner" parent="ClientAuthority"]
-spawn_path = NodePath("../EntityArray")
-script = ExtResource("4_ve173")
+spawn_path = NodePath("../../ServerAuthority/EntityArray")
+script = ExtResource("8_ddxld")
 _playerScene = ExtResource("4_35anr")
 _serverPlayerScene = ExtResource("5_lgfx3")
 _dummyScene = ExtResource("6_82wv5")
