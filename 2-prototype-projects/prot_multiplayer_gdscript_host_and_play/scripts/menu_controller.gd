@@ -1,9 +1,9 @@
 extends Node2D
 
-#var _server_scene = preload("res://scenes/Server.tscn")
+var _server_scene = preload("res://scenes/server/server.tscn")
 #var _client_scene = preload("res://scenes/Client.tscn")
 
-@onready var startbuttons: Control = %Buttons
+#@onready var startbuttons: Control = %Buttons
 #@onready var buttons := $ButtonsGroup
 
 func _on_menu_button_pressed(extra_arg_0: int) -> void:
@@ -12,6 +12,7 @@ func _on_menu_button_pressed(extra_arg_0: int) -> void:
 	match extra_arg_0:
 		0:
 			$CanvasLayerUI/Control/Label.text = "Standalone Side"
+			self.add_child(_server_scene.instantiate())
 			#self.add_child(_client_scene.instantiate())
 			title = "Single Player"
 		1:
@@ -20,7 +21,7 @@ func _on_menu_button_pressed(extra_arg_0: int) -> void:
 			title = "Client"
 		2:
 			$CanvasLayerUI/Control/Label.text = "Server Side"
-			#self.add_child(_server_scene.instantiate())
+			self.add_child(_server_scene.instantiate())
 			title = "Dedicated Server"
 		_:
 			print("This should never happen !")
