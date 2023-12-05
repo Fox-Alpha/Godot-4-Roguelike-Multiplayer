@@ -38,6 +38,8 @@ func _CreateLocalServer() -> bool:
 
 func OnPeerConnected(id : int) -> void :
 	print("Peer ", id, " connected")
+	var _spawner : Node = get_tree().current_scene.get_node_or_null("/root/Main/MultiplayerSpawner").spawn(id)
+
 	pass
 
 
