@@ -1,7 +1,7 @@
 extends Node2D
 
 var _server_scene = preload("res://scenes/server/server.tscn")
-#var _client_scene = preload("res://scenes/Client.tscn")
+var _client_scene = preload("res://scenes/client/client.tscn")
 
 #@onready var startbuttons: Control = %Buttons
 #@onready var buttons := $ButtonsGroup
@@ -17,7 +17,7 @@ func _on_menu_button_pressed(extra_arg_0: int) -> void:
 			title = "Single Player"
 		1:
 			$CanvasLayerUI/Control/Label.text = "Client Side"
-			#self.add_child(_client_scene.instantiate())
+			self.add_child(_client_scene.instantiate())
 			title = "Client"
 		2:
 			$CanvasLayerUI/Control/Label.text = "Server Side"
@@ -31,3 +31,5 @@ func _on_menu_button_pressed(extra_arg_0: int) -> void:
 	DisplayServer.window_set_title(title)
 
 
+func _on_button_quit_app_pressed():
+	get_tree().quit()
