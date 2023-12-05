@@ -1,4 +1,4 @@
-extends Node
+class_name Server_Manager extends Node
 
 @export var _port : int = 9999
 
