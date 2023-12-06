@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://0g3wmkgcnt6t"]
+[gd_scene load_steps=3 format=3 uid="uid://0g3wmkgcnt6t"]
 
 [ext_resource type="Script" path="res://scripts/network/server_manager.gd" id="1_17oke"]
+[ext_resource type="Script" path="res://scenes/custom_spawner.gd" id="2_fyeo6"]
 
 [node name="ServerManager" type="Node"]
 script = ExtResource("1_17oke")
+
+[node name="EntityArray" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../EntityArray")
+script = ExtResource("2_fyeo6")
