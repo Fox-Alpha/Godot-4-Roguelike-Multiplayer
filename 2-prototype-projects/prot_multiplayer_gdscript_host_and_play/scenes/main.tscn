@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6lgaaijpjci8"]
+[gd_scene load_steps=2 format=3 uid="uid://b6lgaaijpjci8"]
 
 [ext_resource type="Script" path="res://scripts/menu_controller.gd" id="1_n3q4e"]
-[ext_resource type="Script" path="res://scenes/custom_spawner.gd" id="2_dkqqk"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_n3q4e")
@@ -22,8 +21,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "character_info"
 
-[node name="ButtonsGroup" type="Control" parent="CanvasLayerUI"]
-unique_name_in_owner = true
+[node name="ButtonGroup" type="Control" parent="CanvasLayerUI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +29,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayerUI/ButtonsGroup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayerUI/ButtonGroup"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -46,38 +44,32 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 
-[node name="ButtonSinglePlayer" type="Button" parent="CanvasLayerUI/ButtonsGroup/VBoxContainer"]
+[node name="ButtonSinglePlayer" type="Button" parent="CanvasLayerUI/ButtonGroup/VBoxContainer"]
+layout_mode = 2
+text = "Single Player"
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayerUI/ButtonGroup/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonJoinServer" type="Button" parent="CanvasLayerUI/ButtonGroup/VBoxContainer"]
 layout_mode = 2
 text = "Join Server"
 
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayerUI/ButtonsGroup/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="CanvasLayerUI/ButtonGroup/VBoxContainer"]
 layout_mode = 2
 
-[node name="ButtonJoinServer" type="Button" parent="CanvasLayerUI/ButtonsGroup/VBoxContainer"]
-layout_mode = 2
-text = "Join Server"
-
-[node name="HSeparator3" type="HSeparator" parent="CanvasLayerUI/ButtonsGroup/VBoxContainer"]
-layout_mode = 2
-
-[node name="ButtonDediServer" type="Button" parent="CanvasLayerUI/ButtonsGroup/VBoxContainer"]
+[node name="ButtonDediServer" type="Button" parent="CanvasLayerUI/ButtonGroup/VBoxContainer"]
 layout_mode = 2
 text = "Host Dedicated Server"
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayerUI/ButtonsGroup/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="CanvasLayerUI/ButtonGroup/VBoxContainer"]
 layout_mode = 2
 
-[node name="ButtonQuitApp" type="Button" parent="CanvasLayerUI/ButtonsGroup/VBoxContainer"]
+[node name="ButtonQuitApp" type="Button" parent="CanvasLayerUI/ButtonGroup/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
-[node name="EntityArray" type="Node" parent="."]
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("../EntityArray")
-script = ExtResource("2_dkqqk")
-
-[connection signal="pressed" from="CanvasLayerUI/ButtonsGroup/VBoxContainer/ButtonSinglePlayer" to="." method="_on_menu_button_pressed" binds= [0]]
-[connection signal="pressed" from="CanvasLayerUI/ButtonsGroup/VBoxContainer/ButtonJoinServer" to="." method="_on_menu_button_pressed" binds= [1]]
-[connection signal="pressed" from="CanvasLayerUI/ButtonsGroup/VBoxContainer/ButtonDediServer" to="." method="_on_menu_button_pressed" binds= [0]]
-[connection signal="pressed" from="CanvasLayerUI/ButtonsGroup/VBoxContainer/ButtonQuitApp" to="." method="_on_button_quit_app_pressed"]
+[connection signal="pressed" from="CanvasLayerUI/ButtonGroup/VBoxContainer/ButtonSinglePlayer" to="." method="_on_menu_button_pressed" binds= [0]]
+[connection signal="pressed" from="CanvasLayerUI/ButtonGroup/VBoxContainer/ButtonJoinServer" to="." method="_on_menu_button_pressed" binds= [1]]
+[connection signal="pressed" from="CanvasLayerUI/ButtonGroup/VBoxContainer/ButtonDediServer" to="." method="_on_menu_button_pressed" binds= [0]]
+[connection signal="pressed" from="CanvasLayerUI/ButtonGroup/VBoxContainer/ButtonQuitApp" to="." method="_on_button_quit_app_pressed"]
