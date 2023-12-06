@@ -39,7 +39,8 @@ func _Connect() -> void:
 	peer.create_client(_adress, _port)
 	_multiplayer.multiplayer_peer = peer;
 
-	get_tree().set_multiplayer(_multiplayer)
+	var path = get_path()
+	get_tree().set_multiplayer(_multiplayer, path)
 
 func OnConnectedToServer() -> void:
 	print("Client connected to Server:", _adress, ":", _port)

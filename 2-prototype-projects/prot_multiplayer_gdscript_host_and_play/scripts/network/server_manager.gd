@@ -28,8 +28,8 @@ func _CreateLocalServer() -> bool:
 	var error = peer.create_server(_port);
 
 	_multiplayer.multiplayer_peer = peer
-
-	get_tree().set_multiplayer(_multiplayer)
+	var path = get_path()
+	get_tree().set_multiplayer(_multiplayer, path)
 	print("Server listening on ", _port)
 
 
@@ -38,7 +38,7 @@ func _CreateLocalServer() -> bool:
 
 func OnPeerConnected(id : int) -> void :
 	print("Peer ", id, " connected")
-	var _spawner : Node = get_tree().current_scene.get_node_or_null("/root/Main/MultiplayerSpawner").spawn(id)
+	var _spawner : Node = get_node_or_null("MultiplayerSpawner").spawn(id)
 
 	pass
 
