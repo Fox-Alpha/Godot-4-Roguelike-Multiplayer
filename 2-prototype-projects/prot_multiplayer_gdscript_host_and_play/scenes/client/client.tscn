@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmvf312y2rkw7"]
+[gd_scene load_steps=3 format=3 uid="uid://cmvf312y2rkw7"]
 
 [ext_resource type="Script" path="res://scripts/network/client_manager.gd" id="1_5fmbp"]
+[ext_resource type="Script" path="res://scenes/custom_spawner.gd" id="2_ns4pj"]
 
 [node name="ClientManager" type="Node"]
 script = ExtResource("1_5fmbp")
+
+[node name="EntityArray" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../EntityArray")
+script = ExtResource("2_ns4pj")
