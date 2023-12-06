@@ -4,7 +4,7 @@ var _server_scene = preload("res://scenes/server/server.tscn")
 var _client_scene = preload("res://scenes/client/client.tscn")
 
 #@onready var startbuttons: Control = %Buttons
-#@onready var buttons := $ButtonsGroup
+@onready var buttons := $CanvasLayerUI/ButtonGroup
 
 func _on_menu_button_pressed(extra_arg_0: int) -> void:
 	var title : String = "";
@@ -13,7 +13,7 @@ func _on_menu_button_pressed(extra_arg_0: int) -> void:
 		0:
 			$CanvasLayerUI/Control/Label.text = "Standalone Side"
 			self.add_child(_server_scene.instantiate())
-			#self.add_child(_client_scene.instantiate())
+			self.add_child(_client_scene.instantiate())
 			title = "Single Player"
 		1:
 			$CanvasLayerUI/Control/Label.text = "Client Side"
@@ -27,7 +27,7 @@ func _on_menu_button_pressed(extra_arg_0: int) -> void:
 			print("This should never happen !")
 
 	##Todo: Own Scene for readding
-	#startbuttons.queue_free()
+	buttons.hide()
 	DisplayServer.window_set_title(title)
 
 
