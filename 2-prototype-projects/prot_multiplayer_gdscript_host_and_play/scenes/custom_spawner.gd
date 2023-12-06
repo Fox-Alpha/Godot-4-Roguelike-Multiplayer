@@ -1,5 +1,6 @@
 extends MultiplayerSpawner
 
+const PLAYER = preload("res://objects/entities/player/player.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,6 +18,6 @@ func _process(_delta):
 
 func _OnCustomSpawn(data) -> Node:
 	print("OnCustomSpawn() : ", multiplayer.get_unique_id(), " : ", data)
-	var TestNode : Node = Node.new()
-	TestNode.name = "ClientNode_" + str(data)
-	return TestNode
+	var player : CharacterBody2D = PLAYER.instantiate()
+	player.name = str(data)
+	return player
