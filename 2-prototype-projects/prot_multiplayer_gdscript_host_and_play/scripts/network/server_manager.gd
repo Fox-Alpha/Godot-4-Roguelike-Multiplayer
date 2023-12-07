@@ -11,7 +11,7 @@ func _ready() -> void:
 		printerr("Error durring Server creation !")
 	else:
 		print("Server Ready for connection !")
-	pass # Replace with function body.
+		GlobalSignals.servercreated.emit()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,7 +25,16 @@ func _CreateLocalServer() -> bool:
 	_multiplayer.peer_disconnected.connect(OnPeerDisconnected)
 
 	var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new();
-	var error = peer.create_server(_port);
+	var numplayer = GlobalData.NETWORKSERVERMAXPEERS if GlobalData.GlobalNetworkMode != GlobalData.NetworkMode.SINGLEPLAYERMODE else 1
+
+	var error = peer.create_server(
+		GlobalData.NETWORKPORT, numplayer)
+
+
+	if error != OK:
+		print("Error during Server creation %d " % error_string(error))
+		GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.NOTSTARTED)
+		return false
 
 	_multiplayer.multiplayer_peer = peer
 	var path = get_path()
