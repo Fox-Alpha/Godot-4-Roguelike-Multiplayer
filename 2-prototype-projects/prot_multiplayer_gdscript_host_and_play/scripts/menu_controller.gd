@@ -13,24 +13,24 @@ func _on_menu_button_pressed(extra_arg_0: int) -> void:
 		0:
 			$CanvasLayerUI/Control/Label.text = "Standalone Side"
 			GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.SINGLEPLAYERMODE)
-			self.add_child(_server_scene.instantiate())
-			self.add_child(_client_scene.instantiate())
+			add_child(_server_scene.instantiate())
+			add_child(_client_scene.instantiate())
 			title = "Single Player"
 		1:
 			$CanvasLayerUI/Control/Label.text = "Client Side"
 			GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.CLIENTONLYMODE)
-			self.add_child(_client_scene.instantiate())
+			add_child(_client_scene.instantiate())
 			title = "Client"
 		2:
 			$CanvasLayerUI/Control/Label.text = "Server Side"
 			GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.SERVERONLYMODE)
-			self.add_child(_server_scene.instantiate())
+			add_child(_server_scene.instantiate())
 			title = "Dedicated Server"
 		3:
 			$CanvasLayerUI/Control/Label.text = "Server & Play"
 			GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.SERVERCLIENTMODE)
-			self.add_child(_server_scene.instantiate())
-			self.add_child(_client_scene.instantiate())
+			add_child(_server_scene.instantiate())
+			add_child(_client_scene.instantiate())
 			title = "Host and Play Mode"
 		_:
 			print("This should never happen !")
@@ -41,4 +41,5 @@ func _on_menu_button_pressed(extra_arg_0: int) -> void:
 
 
 func _on_button_quit_app_pressed():
+	#TODO: check for active network
 	get_tree().quit()
