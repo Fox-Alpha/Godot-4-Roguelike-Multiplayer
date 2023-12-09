@@ -12,6 +12,7 @@ func _ready() -> void:
 	else:
 		print("Server Ready for connection !")
 		GlobalSignals.servercreated.emit()
+		push_warning("This Session starts the server")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,7 +42,6 @@ func _CreateLocalServer() -> bool:
 	get_tree().set_multiplayer(_multiplayer, path)
 	print("Server listening on ", _port)
 
-
 	return error == OK
 
 
@@ -49,10 +49,7 @@ func OnPeerConnected(id : int) -> void :
 	print("Peer ", id, " connected")
 	var _spawner : Node = get_node_or_null("MultiplayerSpawner").spawn(id)
 
-	pass
-
 
 func OnPeerDisconnected(id : int) -> void :
 	print("Peer ", id, " disconnected")
 	pass
-
