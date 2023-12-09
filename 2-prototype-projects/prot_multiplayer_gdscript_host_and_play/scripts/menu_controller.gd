@@ -13,8 +13,11 @@ func _on_menu_button_pressed(extra_arg_0: int) -> void:
 		0:
 			$CanvasLayerUI/Control/Label.text = "Standalone Side"
 			GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.SINGLEPLAYERMODE)
+
 			add_child(_server_scene.instantiate())
+			await get_tree().create_timer(0.1).timeout
 			add_child(_client_scene.instantiate())
+
 			title = "Single Player"
 		1:
 			$CanvasLayerUI/Control/Label.text = "Client Side"
@@ -30,6 +33,7 @@ func _on_menu_button_pressed(extra_arg_0: int) -> void:
 			$CanvasLayerUI/Control/Label.text = "Server & Play"
 			GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.SERVERCLIENTMODE)
 			add_child(_server_scene.instantiate())
+			await get_tree().create_timer(0.1).timeout
 			add_child(_client_scene.instantiate())
 			title = "Host and Play Mode"
 		_:
