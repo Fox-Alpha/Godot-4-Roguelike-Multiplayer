@@ -6,7 +6,7 @@
 [node name="ServerManager" type="Node"]
 script = ExtResource("1_17oke")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("../EntityArray")
 script = ExtResource("2_fyeo6")
 
