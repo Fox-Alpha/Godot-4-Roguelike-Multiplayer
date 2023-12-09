@@ -6,8 +6,8 @@
 [node name="ClientManager" type="Node"]
 script = ExtResource("1_5fmbp")
 
-[node name="EntityArray" type="Node" parent="."]
-
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("../EntityArray")
 script = ExtResource("2_ns4pj")
+
+[node name="EntityArray" type="Node" parent="."]
