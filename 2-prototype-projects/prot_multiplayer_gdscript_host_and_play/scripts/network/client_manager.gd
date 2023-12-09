@@ -22,6 +22,7 @@ func _ready() -> void:
 	else:
 		print("Client Ready !")
 		GlobalSignals.clientcreated.emit()
+		push_warning("This Session starts a Client")
 
 
 
@@ -41,6 +42,8 @@ func _Connect() -> bool:
 	_multiplayer.connected_to_server.connect(OnConnectedToServer)
 	_multiplayer.connection_failed.connect(OnConnectionFailed)
 	_multiplayer.server_disconnected.connect(OnServerDisconnect)
+	#_multiplayer.server_disconnected.connect(OnPeerConnected)
+	#_multiplayer.server_disconnected.connect(OnPeerDisconnected)
 
 	var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 
