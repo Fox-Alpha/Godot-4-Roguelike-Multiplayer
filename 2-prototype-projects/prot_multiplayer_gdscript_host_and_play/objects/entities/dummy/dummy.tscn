@@ -21,6 +21,7 @@ properties/3/replication_mode = 1
 size = Vector2(120, 120)
 
 [node name="Dummy" type="CharacterBody2D"]
+collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_arv7b")
 

@@ -6,8 +6,6 @@ const ACCELERATION: float = 15.0
 
 var player_name: Label
 
-#@export var velocity : Vector2 = Vector2.ZERO
-#@export var position : Vector2 = Vector2.ZERO
 func _ready() -> void:
 	player_name = $PlayerName
 	player_name.text = name
@@ -17,9 +15,6 @@ func _unhandled_key_input(_event: InputEvent) -> void:
 		return
 
 	direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-
-	print("Player Direction: ", direction)
-	pass
 
 
 func _process(_delta: float) -> void:
