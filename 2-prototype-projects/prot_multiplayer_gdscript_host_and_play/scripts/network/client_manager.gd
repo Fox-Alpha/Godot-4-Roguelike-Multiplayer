@@ -7,6 +7,7 @@ class_name Client_Manager extends Node
 
 #private SceneMultiplayer _multiplayer = new();
 @onready var _multiplayer : SceneMultiplayer = SceneMultiplayer.new()
+@onready var buttons := $/root/Main/CanvasLayerUI/ButtonGroup
 #private Node _entityArray;
 #var _entityArray : Node
 
@@ -70,13 +71,16 @@ func OnServerDisconnect() -> void:
 	_multiplayer = null;
 	print("Server disconnected:", _adress, ":", _port)
 
-	#GetNode<Label>("Debug/Label").Modulate = Colors.Red;
-	#GetNode<Label>("Debug/Label").Text = $"\nServer has closed the Connection !\nQuitting in 5 Seconds";
-	#await ToSignal(GetTree().CreateTimer(5), "timeout");
-	#GetTree().Quit();
 	GlobalSignals.DebugLabelText.emit("\nServer has closed the Connection !\nQuitting in 5 Seconds", Color.RED)
-	pass
+	await get_tree().create_timer(5).timeout
+	GlobalSignals.DebugLabelText.emit("")
+	var isClient = self
 
+	if is_instance_valid(isClient):
+		isClient.multiplayer.multiplayer_peer.close()
+		isClient.queue_free()
+
+	buttons.show()
 
 func OnConnectionFailed() -> void:
 	push_error("ClientManager::OnConnectionFailed(): Connecting to: {0}:{1} has failed".format([_adress,_port]))
