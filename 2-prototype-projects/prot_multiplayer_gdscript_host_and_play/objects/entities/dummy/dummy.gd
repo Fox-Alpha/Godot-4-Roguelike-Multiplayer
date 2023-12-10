@@ -6,11 +6,16 @@ const ACCELERATION: float = 15.0
 
 var player_name: Label
 
+var conStatus : MultiplayerPeer.ConnectionStatus
+
 func _ready() -> void:
 	player_name = $PlayerName
 	player_name.text = name
 
 func _unhandled_key_input(_event: InputEvent) -> void:
+	if conStatus != MultiplayerPeer.CONNECTION_CONNECTED:
+		return
+
 	if !is_multiplayer_authority():
 		return
 
@@ -19,6 +24,10 @@ func _unhandled_key_input(_event: InputEvent) -> void:
 
 func _process(_delta: float) -> void:
 	#if !multiplayer.is_server():
+	conStatus = multiplayer.multiplayer_peer.get_connection_status();
+	if conStatus != MultiplayerPeer.CONNECTION_CONNECTED:
+		return
+
 	if is_multiplayer_authority():
 		velocity.x = move_toward(velocity.x, SPEED * direction.x, ACCELERATION)
 		velocity.y = move_toward(velocity.y, SPEED * direction.y, ACCELERATION)
