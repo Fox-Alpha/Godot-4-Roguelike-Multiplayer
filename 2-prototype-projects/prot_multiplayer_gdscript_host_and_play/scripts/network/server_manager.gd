@@ -3,6 +3,8 @@ class_name Server_Manager extends Node
 @export var _port : int = 9999
 
 @onready var _multiplayer : SceneMultiplayer = SceneMultiplayer.new()
+@onready var entity_array: Node2D = $EntityArray
+
 var entityArray : Array[Node]
 
 # Called when the node enters the scene tree for the first time.
@@ -47,9 +49,17 @@ func _CreateLocalServer() -> bool:
 
 func OnPeerConnected(id : int) -> void :
 	print("Peer ", id, " connected")
-	var _spawner : Node = get_node_or_null("MultiplayerSpawner").spawn(id)
-
+	var _spawner : Node = get_node_or_null("PlayerSpawner").spawn(id)
 
 func OnPeerDisconnected(id : int) -> void :
 	print("Peer ", id, " disconnected")
+
+	var client := get_node_or_null("./EntityArray/%s" % str(id))
+	if is_instance_valid(client):
+		var peers =  multiplayer.get_peers()
+		if id in peers:
+			multiplayer.multiplayer_peer.disconnect_peer(id)
+		print(client.name)
+		client.queue_free()
 	pass
+
