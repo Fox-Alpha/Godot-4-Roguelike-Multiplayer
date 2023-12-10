@@ -44,7 +44,7 @@ func _Connect() -> bool:
 	_multiplayer.connection_failed.connect(OnConnectionFailed)
 	_multiplayer.server_disconnected.connect(OnServerDisconnect)
 	#_multiplayer.server_disconnected.connect(OnPeerConnected)
-	#_multiplayer.server_disconnected.connect(OnPeerDisconnected)
+	_multiplayer.peer_disconnected.connect(OnPeerDisconnected)
 
 	var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 
@@ -86,3 +86,8 @@ func OnConnectionFailed() -> void:
 	push_error("ClientManager::OnConnectionFailed(): Connecting to: {0}:{1} has failed".format([_adress,_port]))
 	print("ClientManager::OnConnectionFailed(): Connecting to: {0}:{1} has failed".format([_adress,_port]))
 	pass
+
+
+func OnPeerDisconnected(id):
+	print("Client: Client %d disconnected" % id)
+	printt(multiplayer.get_peers())
