@@ -25,7 +25,7 @@ func _unhandled_key_input(_event: InputEvent) -> void:
 func _process(_delta: float) -> void:
 	#if !multiplayer.is_server():
 	conStatus = multiplayer.multiplayer_peer.get_connection_status();
-	if conStatus != MultiplayerPeer.CONNECTION_CONNECTED:
+	if conStatus == MultiplayerPeer.CONNECTION_DISCONNECTED:
 		return
 
 	if is_multiplayer_authority():
