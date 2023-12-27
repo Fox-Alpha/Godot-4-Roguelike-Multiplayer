@@ -25,14 +25,23 @@ func OnExitMenuPresses(id:int):
 		0:
 			if is_instance_valid(isServer):
 				var peers = isServer.multiplayer.get_peers()
+				print("Back to Menu", peers)
 				for peer in peers:
+					var cliententitys : Node2D = isServer.entity_array
+					if is_instance_valid(cliententitys):
+						for node in cliententitys.get_children():
+							node.queue_free()
+							await node.tree_exited
 					isServer.multiplayer.multiplayer_peer.disconnect_peer(peer)
-
+#
 				isServer.multiplayer.multiplayer_peer.close()
 				isServer.queue_free()
+
 			if is_instance_valid(isClient):
-				isClient.multiplayer.multiplayer_peer.close()
+				#isClient.multiplayer.multiplayer_peer.close()
+				#isClient.multiplayer.disconnect_peer(multiplayer.multiplayer_peer.TARGET_PEER_SERVER)
 				isClient.queue_free()
+				await isClient.NOTIFICATION_EXIT_TREE
 
 			buttons.show()
 		1:
