@@ -17,29 +17,7 @@ public partial class CustomSpawner : MultiplayerSpawner
 	public override void _Ready()
 	{
 		Callable customSpawnFunctionCallable = new Callable(this,CustomSpawner.MethodName.CustomSpawnFunction);
-
-		/*
-		GD.Print(
-			"MultiplayerSpawner::_Ready(): Callable CustomSpawnFunction => :",
-			$"{customSpawnFunctionCallable.Method} / ",
-			$"{customSpawnFunctionCallable.Target} / ",
-			$"{customSpawnFunctionCallable.Target.GetType()} / ",
-			$"{customSpawnFunctionCallable.Target.GetClass()}",
-			$"{customSpawnFunctionCallable.Target.GetScript()} / "
-		);
-		*/
-		var time = Time.GetDatetimeStringFromSystem(false, true);
 		this.SpawnFunction = customSpawnFunctionCallable;
-		GD.Print(time, " : ",
-			"MultiplayerSpawner::_Ready(): Callable this.SpawnFunction => :",
-			$"{this.GetParent().Name} / ",
-			$"{this.SpawnFunction.Method} / ",
-			$"{this.SpawnFunction.Target} / ",
-			$"{this.SpawnFunction.Target.GetType()} / ",
-			$"{this.SpawnFunction.Target.GetClass()}",
-			$"{this.SpawnFunction.Target.GetScript()} / "
-		);
-		
 		//this.setspa
 
 		//this.SpawnFunction

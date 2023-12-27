@@ -110,37 +110,17 @@ public partial class ClientManager : Node
 		_multiplayer.MultiplayerPeer = peer;
 		//_multiplayer.MultiplayerPeer;
 
-		GD.Print($"ClientManager::Connect(): thisNodeAuth: {this.GetMultiplayerAuthority()} / mp_Id {Multiplayer.GetUniqueId()} / ");
+		GD.Print($"ClientManager::Connect(): mp_Id {Multiplayer.GetUniqueId()} / ");
 
-		GetTree().SetMultiplayer(_multiplayer); //, "/root/Main/ClientAuthority");
+		GetTree().SetMultiplayer(_multiplayer, "/ClientAuthority");
 
-
-		var clnt = GetTree().CurrentScene.GetNode<MultiplayerSpawner>("ClientAuthority/ClientMultiplayerSpawner");
+		Callable customSpawnFunctionCallable = new Callable(this,CustomSpawner.MethodName.CustomSpawnFunction);
+		var clnt = GetTree().CurrentScene.GetNode<CustomSpawner>("ClientAuthority/ClientMultiplayerSpawner");
 		var client = GetTree().CurrentScene.GetNode("ClientAuthority");
-
-		GD.Print($"Spawner MP Auth: {clnt.GetMultiplayerAuthority()} / ");
-		//client.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
+		clnt.SpawnFunction = customSpawnFunctionCallable;
 		client.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
-		clnt.SetMultiplayerAuthority(1);
 
-		//Callable customSpawnFunctionCallable = new Callable(clnt,CustomSpawner.MethodName.CustomSpawnFunction);
-		time = Time.GetDatetimeStringFromSystem(false, true);
-		GD.Print(time, 
-			": MultiplayerSpawner::_Ready(): Callable clnt.SpawnFunction => :",
-			$"\n\tMultiplayerAuthority of MultiplayerSpawner: {clnt.GetMultiplayerAuthority()} / ",
-			$"\n\tMethodName: {clnt.SpawnFunction.Method} / ",
-			$"\n\tTarget: {clnt.SpawnFunction.Target} / ",
-			$"\n\tGetType(): {clnt.SpawnFunction.Target.GetType()} / ",
-			$"\n\tGetClass(): {clnt.SpawnFunction.Target.GetClass()}",
-			$"\n\tGetScript(): {clnt.SpawnFunction.Target.GetScript()} / "
-		);
-
-
-		//clnt.SpawnFunction = customSpawnFunctionCallable;
-		
-		
-
-		GD.Print($"ClientManager::Connect(): thisNodeAuth: {this.GetMultiplayerAuthority()} / mp_Id {Multiplayer.GetUniqueId()} / ");
+		GD.Print($"ClientManager::Connect(): mp_Id {Multiplayer.GetUniqueId()} / ");
 		//Multiplayer.MultiplayerPeer = _multiplayer		
 
 		//this.SetMultiplayerAuthority(Multiplayer.GetUniqueId());
@@ -184,7 +164,7 @@ public partial class ClientManager : Node
 
     private void OnPeerConnected(long id)
     {
-        GD.Print($">> ClientManager::OnPeerConnected(Node:{this.Name}): {id} / LocalId: {Multiplayer.GetUniqueId()} / NodeAuth: {GetMultiplayerAuthority()} ");
+        GD.Print($">> ClientManager::OnPeerConnected(): {id} / LocalId: {Multiplayer.GetUniqueId()} ");
     }
 
     private void OnConnectionFailed()
