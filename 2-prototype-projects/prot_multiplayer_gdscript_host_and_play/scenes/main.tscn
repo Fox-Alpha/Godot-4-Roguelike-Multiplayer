@@ -117,6 +117,8 @@ grow_vertical = 0
 [node name="Map" type="Node" parent="."]
 
 [node name="MapSpawner" type="MultiplayerSpawner" parent="Map"]
+spawn_path = NodePath("..")
+spawn_limit = 1
 
 [connection signal="visibility_changed" from="CanvasLayerUI/ButtonGroup" to="." method="_on_button_group_visibility_changed"]
 [connection signal="pressed" from="CanvasLayerUI/ButtonGroup/VBoxContainer/ButtonSinglePlayer" to="." method="_on_menu_button_pressed" binds= [0]]
