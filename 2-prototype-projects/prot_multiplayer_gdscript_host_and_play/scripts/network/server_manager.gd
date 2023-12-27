@@ -35,7 +35,7 @@ func _CreateLocalServer() -> bool:
 
 
 	if error != OK:
-		print("Error during Server creation %d " % error_string(error))
+		print("Error during Server creation %s " % error_string(error))
 		GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.NOTSTARTED)
 		return false
 
@@ -59,6 +59,7 @@ func OnPeerDisconnected(id : int) -> void :
 		var peers =  multiplayer.get_peers()
 		if id in peers:
 			multiplayer.multiplayer_peer.disconnect_peer(id)
+
 		print(client.name)
 		client.queue_free()
 	pass
