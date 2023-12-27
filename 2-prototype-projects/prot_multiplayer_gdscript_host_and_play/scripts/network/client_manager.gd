@@ -51,7 +51,7 @@ func _Connect() -> bool:
 	var error = peer.create_client(_adress, GlobalData.NETWORKPORT)
 	if error != OK:
 		print("Error during Server creation %d " % error_string(error))
-		GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.NOTSTARTED)
+		GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.NETWORKERROR)
 	else:
 		_multiplayer.multiplayer_peer = peer;
 

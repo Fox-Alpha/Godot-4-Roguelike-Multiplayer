@@ -36,13 +36,13 @@ func _CreateLocalServer() -> bool:
 
 	if error != OK:
 		print("Error during Server creation %s " % error_string(error))
-		GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.NOTSTARTED)
+		GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.NETWORKERROR)
 		return false
 
 	_multiplayer.multiplayer_peer = peer
 	var path = get_path()
 	get_tree().set_multiplayer(_multiplayer, path)
-	print("Server listening on ", _port)
+	print("Server listening on ", GlobalData.NETWORKPORT)
 
 	return error == OK
 
