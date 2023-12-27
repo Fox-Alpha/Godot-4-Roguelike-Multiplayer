@@ -1,10 +1,16 @@
 extends Node2D
 
+const MAINTITLE = "MAINTITLE"
+
 var _server_scene = preload("res://scenes/server/server.tscn")
 var _client_scene = preload("res://scenes/client/client.tscn")
 
 #@onready var startbuttons: Control = %Buttons
 @onready var buttons := $CanvasLayerUI/ButtonGroup
+
+func _ready() -> void:
+	DisplayServer.window_set_title(MAINTITLE)
+
 
 func _on_menu_button_pressed(extra_arg_0: int) -> void:
 	var title : String = "";
@@ -47,3 +53,9 @@ func _on_menu_button_pressed(extra_arg_0: int) -> void:
 func _on_button_quit_app_pressed():
 	#TODO: check for active network
 	get_tree().quit()
+
+
+func _on_button_group_visibility_changed() -> void:
+	if visible:
+		DisplayServer.window_set_title(MAINTITLE)
+	pass # Replace with function body.
