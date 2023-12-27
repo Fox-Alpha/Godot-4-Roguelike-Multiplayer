@@ -1,7 +1,5 @@
 class_name Server_Manager extends Node
 
-@export var _port : int = 9999
-
 @onready var _multiplayer : SceneMultiplayer = SceneMultiplayer.new()
 @onready var entity_array: Node2D = $EntityArray
 
