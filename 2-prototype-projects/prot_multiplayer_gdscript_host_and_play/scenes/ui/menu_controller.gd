@@ -50,6 +50,7 @@ func _on_button_quit_app_pressed():
 
 func _on_button_group_visibility_changed() -> void:
 	if visible:
-		#DisplayServer.window_set_title(MAINTITLE)
 		GlobalSignals.MainTitleChanged.emit(MAINTITLE)
-	pass # Replace with function body.
+
+	var igm := get_tree().current_scene.get_node_or_null("CanvasLayerUI/IngameMenu")
+	igm.visible = !visible
