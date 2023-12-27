@@ -18,18 +18,27 @@ enum NetworkModeError {
 
 const NETWORKPORT : int = 21277
 const NETWORKSERVERMAXPEERS : int = 4
+var _GlobalNetworkMode :  NetworkMode :
+	set(value):
+		_GlobalNetworkMode = value
+	get:
+		return _GlobalNetworkMode
 
-@onready var GlobalNetworkMode : NetworkMode = NetworkMode.NOTSTARTED
 
 ##UI
 var UIDebugLabel :Node
 
 
 func _ready() -> void:
+	_GlobalNetworkMode = NetworkMode.NOTSTARTED
 	UIDebugLabel = get_tree().current_scene.get_node("CanvasLayerUI/Debug/Label")
 	GlobalSignals.networkmodechanged.connect(OnNetworkModeChange)
 
 
 func OnNetworkModeChange(mode : NetworkMode) -> void:
 	print("Signal > GlobalData: NetworkModeChanges %s" % str(mode))
-	GlobalNetworkMode = mode
+	_GlobalNetworkMode = mode
+
+
+func GetGlobalNetworkMode() -> NetworkMode:
+	return _GlobalNetworkMode
