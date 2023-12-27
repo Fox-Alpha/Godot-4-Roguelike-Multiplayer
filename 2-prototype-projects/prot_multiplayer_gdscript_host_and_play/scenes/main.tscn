@@ -22,8 +22,6 @@ offset_bottom = 35.0
 theme_override_font_sizes/font_size = 20
 text = "character_info"
 
-[node name="ButtonGroup" parent="CanvasLayerUI" instance=ExtResource("1_siji7")]
-
 [node name="Debug" type="Control" parent="CanvasLayerUI"]
 custom_minimum_size = Vector2(150, 30)
 layout_mode = 3
@@ -47,6 +45,8 @@ theme_override_font_sizes/font_size = 20
 text = "DebugLabel"
 horizontal_alignment = 1
 script = ExtResource("2_74s4n")
+
+[node name="ButtonGroup" parent="CanvasLayerUI" instance=ExtResource("1_siji7")]
 
 [node name="IngameMenu" parent="CanvasLayerUI" instance=ExtResource("3_ptge3")]
 anchors_preset = 7
