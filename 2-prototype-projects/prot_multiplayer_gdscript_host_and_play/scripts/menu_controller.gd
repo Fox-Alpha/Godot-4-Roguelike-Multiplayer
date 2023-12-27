@@ -9,7 +9,7 @@ var _client_scene = preload("res://scenes/client/client.tscn")
 @onready var buttons := $CanvasLayerUI/ButtonGroup
 
 func _ready() -> void:
-	DisplayServer.window_set_title(MAINTITLE)
+	GlobalSignals.MainTitleChanged.emit(MAINTITLE)
 
 
 func _on_menu_button_pressed(extra_arg_0: int) -> void:
@@ -43,11 +43,11 @@ func _on_menu_button_pressed(extra_arg_0: int) -> void:
 			add_child(_client_scene.instantiate())
 			title = "Host and Play Mode"
 		_:
-			print("This should never happen !")
+			GodotLogger.error("MainMenuButton::_on_menu_button_pressed (%s) -> This should never happen !" % [extra_arg_0])
 
-	##Todo: Own Scene for readding
+	#TODO: Own Scene for readding
 	buttons.hide()
-	DisplayServer.window_set_title(title)
+	GlobalSignals.MainTitleChanged.emit(title)
 
 
 func _on_button_quit_app_pressed():
@@ -57,5 +57,6 @@ func _on_button_quit_app_pressed():
 
 func _on_button_group_visibility_changed() -> void:
 	if visible:
-		DisplayServer.window_set_title(MAINTITLE)
+		#DisplayServer.window_set_title(MAINTITLE)
+		GlobalSignals.MainTitleChanged.emit(MAINTITLE)
 	pass # Replace with function body.

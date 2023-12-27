@@ -15,8 +15,7 @@ func _ready() -> void:
 
 
 func OnExitMenuPresses(id:int):
-	#GD.Print($"Menu {GetPopup().GetItemText((int)id)} ({id}) is pressed");
-	print("Menu %s (%s) is pressed" % [get_popup().get_item_text(id), str(id)])
+	GlobalData.MAINLOG.info("MenuButton %s (%s) is pressed" % [get_popup().get_item_text(id), str(id)])
 
 	var isClient = get_tree().current_scene.get_node_or_null("ClientManager")
 	var isServer = get_tree().current_scene.get_node_or_null("ServerManager")
