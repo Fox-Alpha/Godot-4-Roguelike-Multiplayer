@@ -1,11 +1,19 @@
 extends Node
 
 enum NetworkMode {
+	NETWORKERROR = -1,		# Error durring creation
+	NOTSTARTED = 0,			# Main Menu
+	SINGLEPLAYERMODE,		# Local Singleplayer Mode
 	CLIENTONLYMODE,			# Client Only
 	SERVERONLYMODE,			# Dedicated Server
-	SINGLEPLAYERMODE,	# Local Singleplayer Mode
-	SERVERCLIENTMODE,	# Dedicated Server Mode
-	NOTSTARTED = -1
+	SERVERCLIENTMODE,		# Host and Play Mode
+}
+
+enum NetworkModeError {
+	NOTSTARTED = 0,		# Main Menu
+	CANTCREATECLIENT = ERR_CANT_CREATE,
+	CANTCREATESERVER = ERR_CANT_CREATE,
+	CANTCONNECT = ERR_CANT_CONNECT
 }
 
 const NETWORKPORT : int = 21277
