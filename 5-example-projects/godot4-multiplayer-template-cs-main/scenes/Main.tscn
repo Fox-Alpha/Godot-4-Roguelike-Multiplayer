@@ -1,12 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://8lvi1xkrty8v"]
+[gd_scene load_steps=15 format=3 uid="uid://8lvi1xkrty8v"]
 
-[ext_resource type="Script" path="res://scripts/MenuController.gd" id="1_n3q4e"]
-[ext_resource type="Script" path="res://debug/debug_label.gd" id="2_uv7ob"]
-[ext_resource type="Script" path="res://debug/CubeRotation.gd" id="3_od4jj"]
+[ext_resource type="Script" path="res://scripts/MenuController.cs" id="1_yipri"]
+[ext_resource type="Script" path="res://debug/debug_label.cs" id="2_3q3gn"]
+[ext_resource type="Script" path="res://debug/CubeRotation.cs" id="3_wkdpa"]
 [ext_resource type="PackedScene" uid="uid://dp0u7dohrllcb" path="res://players/ClientPlayer.tscn" id="4_35anr"]
 [ext_resource type="Script" path="res://shared/CustomSpawner.cs" id="4_ve173"]
 [ext_resource type="PackedScene" uid="uid://1fbyoad8h8gr" path="res://players/ServerPlayer.tscn" id="5_lgfx3"]
 [ext_resource type="PackedScene" uid="uid://dgltayb5g40lt" path="res://players/DummyPlayer.tscn" id="6_82wv5"]
+[ext_resource type="Script" path="res://shared/CustomClientSpawner.cs" id="8_ddxld"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hftyp"]
 sky_top_color = Color(0.262745, 0.521569, 0.878431, 1)
@@ -27,7 +28,7 @@ albedo_color = Color(0.101961, 0.101961, 0.101961, 1)
 albedo_color = Color(0.0392157, 1, 0.219608, 1)
 
 [node name="Main" type="Node3D"]
-script = ExtResource("1_n3q4e")
+script = ExtResource("1_yipri")
 
 [node name="Environment" type="Node" parent="."]
 
@@ -58,7 +59,7 @@ layout_mode = 1
 offset_right = 200.0
 offset_bottom = 23.0
 text = "character_info"
-script = ExtResource("2_uv7ob")
+script = ExtResource("2_3q3gn")
 
 [node name="Buttons" type="Control" parent="."]
 unique_name_in_owner = true
@@ -88,6 +89,10 @@ theme_override_constants/separation = 8
 layout_mode = 2
 text = "Join Server"
 
+[node name="HSeparator2" type="HSeparator" parent="Buttons/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
 [node name="Button2" type="Button" parent="Buttons/VBoxContainer"]
 layout_mode = 2
 text = "Host Server & Play"
@@ -95,6 +100,15 @@ text = "Host Server & Play"
 [node name="Button3" type="Button" parent="Buttons/VBoxContainer"]
 layout_mode = 2
 text = "Host Dedicated Server only"
+
+[node name="HSeparator" type="HSeparator" parent="Buttons/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="ButtonQuitApp" type="Button" parent="Buttons/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"
 
 [node name="World" type="Node" parent="."]
 
@@ -108,7 +122,7 @@ material = SubResource("StandardMaterial3D_i6375")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0)
 mesh = SubResource("BoxMesh_5p16j")
 skeleton = NodePath("../..")
-script = ExtResource("3_od4jj")
+script = ExtResource("3_wkdpa")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
@@ -124,15 +138,26 @@ size = Vector3(2, 1, 2)
 
 [node name="ServerAuthority" type="Node" parent="."]
 
-[node name="EntityArray" type="Node" parent="ServerAuthority"]
-unique_name_in_owner = true
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ServerAuthority"]
+[node name="ServerMultiplayerSpawner" type="MultiplayerSpawner" parent="ServerAuthority"]
 spawn_path = NodePath("../EntityArray")
 script = ExtResource("4_ve173")
 _playerScene = ExtResource("4_35anr")
 _serverPlayerScene = ExtResource("5_lgfx3")
 _dummyScene = ExtResource("6_82wv5")
+
+[node name="EntityArray" type="Node" parent="ServerAuthority"]
+unique_name_in_owner = true
+
+[node name="ClientAuthority" type="Node" parent="."]
+
+[node name="ClientMultiplayerSpawner" type="MultiplayerSpawner" parent="ClientAuthority"]
+spawn_path = NodePath("../../ServerAuthority/EntityArray")
+script = ExtResource("8_ddxld")
+_playerScene = ExtResource("4_35anr")
+_serverPlayerScene = ExtResource("5_lgfx3")
+_dummyScene = ExtResource("6_82wv5")
+
+[node name="EntityArray" type="Node" parent="ClientAuthority"]
 
 [connection signal="pressed" from="Buttons/VBoxContainer/Button" to="." method="_on_button_pressed" binds= [0]]
 [connection signal="pressed" from="Buttons/VBoxContainer/Button2" to="." method="_on_button_pressed" binds= [1]]

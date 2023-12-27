@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bog1us6frffkj"]
+[gd_scene load_steps=3 format=3 uid="uid://bog1us6frffkj"]
 
 [ext_resource type="Script" path="res://server/ServerManager.cs" id="1_4nn7d"]
+[ext_resource type="PackedScene" uid="uid://lfwn1xtcfbmv" path="res://scenes/menu_button.tscn" id="2_wo3rm"]
 
 [node name="Server" type="Node"]
 script = ExtResource("1_4nn7d")
@@ -34,3 +35,8 @@ offset_top = -26.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "0"
+
+[node name="MenuButton" parent="Debug" instance=ExtResource("2_wo3rm")]
+layout_mode = 1
+offset_left = -120.0
+offset_top = -31.0

@@ -39,6 +39,7 @@ public partial class ServerPlayer : CharacterBody3D
         }
     }
 
+    // Todo: Refactor for 2D
     private void Move(NetMessage.UserInput userInput)
     {
         Stamp = userInput.Stamp;
@@ -53,6 +54,7 @@ public partial class ServerPlayer : CharacterBody3D
     }
 
 
+    // Todo: Refactor for 2D
     public NetMessage.UserState GetCurrentState()
     {
         return new NetMessage.UserState

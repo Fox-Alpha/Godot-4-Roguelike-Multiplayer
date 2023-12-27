@@ -4,46 +4,23 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        { // [W] Godot DotNet (C# only) - Works !
+        { // Godot DotNet (C# only) - Works !
             // Debug CSharp but not GDScript
             // Launch instance w/o GD Editor
             // DotNet CLR to build
-            "name": "[W] Godot DotNet (C# only)",
+            "name": "Godot DotNet (C# only)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-dotnet",
             //Work
-            //"program": "C:/Proggen/Godot/Godot_v4.2-beta/Godot_v4.2-beta5_mono_win64/Godot_v4.2-beta5_mono_win64.exe",
-            "program": "C:/Proggen/Godot/Godot_v4.1-stable/Godot_v4.1.3-stable_mono_win64/Godot_v4.1.3-stable_mono_win64.exe",
-            "cwd": "${workspaceFolder}",
-            "stopAtEntry": false,
-            "console": "internalConsole",
-            "justMyCode": false,  
-            "symbolOptions": {
-                "searchPaths": [],
-                "searchMicrosoftSymbolServer": false,
-                "searchNuGetOrgSymbolServer": false
-            }          
-        },
-        {// [H] Godot DotNet (C# only) - Works !
-            // Debug CSharp but not GDScript
-            // Launch instance w/o GD Editor
-            // DotNet CLR to build
-            "name": "[H] Godot DotNet (C# only)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build-dotnet",
-            //Home
-            // ToDo: Change Path to 4.1.3
-            //"program": "P:/0. DevProgramme/Godot/Godot_v4.2-beta/Godot_v4.2-beta5_mono_win64/Godot_v4.2-beta5_mono_win64.exe",
-            //"program": "C:/Proggen/Godot/Godot_v4.1-stable/Godot_v4.1.3-stable_mono_win64/Godot_v4.1.3-stable_mono_win64.exe",
-            "program": "P:/0. DevProgramme/Godot/Godot_v4.1.x-stable/Godot_v4.1.3-stable_mono_win64/Godot_v4.1.3-stable_mono_win64.exe",
+            "program": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta5_mono_win64\\Godot_v4.2-beta5_mono_win64.exe",
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole",
             "justMyCode": true,            
         },
-        { // [W] Godot DotNet (GD only) - Works!
+        
+        { // Godot DotNet (GD only) - Works!
             // Debug GDScript but not C#
             // Launch instance in GD Editor
             // DotNet CLR to build
@@ -54,9 +31,8 @@
             "preLaunchTask": "build-core",
             // Work
             //"program": "C:/Proggen/Godot/Godot_v4.1.1-stable/Godot_v4.1.1-stable_mono_win64/Godot_v4.1.1-stable_mono_win64.exe",
-            //"program": "C:/Proggen/Godot/Godot_v4.2-beta/Godot_v4.2-beta4_mono_win64/Godot_v4.2-beta4_mono_win64.exe",
-            //"program": "C:/Proggen/Godot/Godot_v4.2-beta/Godot_v4.2-beta5_mono_win64/Godot_v4.2-beta5_mono_win64.exe",
-            "program": "C:/Proggen/Godot/Godot_v4.1-stable/Godot_v4.1.3-stable_mono_win64/Godot_v4.1.3-stable_mono_win64.exe",
+            //"program": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta4_mono_win64\\Godot_v4.2-beta4_mono_win64.exe",
+            "program": "C:\\Proggen\\Godot\\Godot_v4.2-beta\\Godot_v4.2-beta5_mono_win64\\Godot_v4.2-beta5_mono_win64.exe",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
