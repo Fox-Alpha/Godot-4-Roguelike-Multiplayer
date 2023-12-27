@@ -18,6 +18,8 @@ enum NetworkModeError {
 
 const NETWORKPORT : int = 21277
 const NETWORKSERVERMAXPEERS : int = 4
+
+# MAINLOG.info("%sNetworkModeChanges %s" % [_MSGPREFIX, str(mode)])
 const _MSGPREFIX = "Signal > GlobalData: "
 
 var MAINLOG : Log

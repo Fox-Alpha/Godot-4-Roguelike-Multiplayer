@@ -13,6 +13,8 @@ signal networkmodechanged(mode)
 ## UI Label Signals
 signal DebugLabelText(msg:String, color:Color)
 
+# MAINLOG.info("%sNetworkModeChanges %s" % [_MSGPREFIX, str(mode)])
+const _MSGPREFIX = "Signal > GlobalSignals: "
 
 func _ready() -> void:
 	servercreated.connect(OnServerCreated)
@@ -24,12 +26,12 @@ func _ready() -> void:
 
 
 func OnServerCreated() -> void:
-	print("Signal: Server Created")
+	GlobalData.MAINLOG.info("%sServer Created" % [_MSGPREFIX])
 	pass
 
 
 func OnClientCreated() -> void:
-	print("Signal: Client Created")
+	GlobalData.MAINLOG.info("%Client Created" % [_MSGPREFIX])
 	pass
 
 
@@ -38,7 +40,7 @@ func OnClientConnected() -> void:
 
 
 func OnNetworkModeChanged(mode : GlobalData.NetworkMode) -> void:
-	print("Signal > GlobalSignals: NetworkModeChanges %s" % str(mode))
+	GlobalData.MAINLOG.info("%sNetworkModeChanges %s" % [_MSGPREFIX, str(mode)])
 
 
 func OnDebugLabelText(msg: String, color:Color = Color.WHITE):
