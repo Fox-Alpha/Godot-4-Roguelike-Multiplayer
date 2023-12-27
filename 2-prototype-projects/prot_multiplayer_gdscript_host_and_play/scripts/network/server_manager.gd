@@ -28,7 +28,7 @@ func _CreateLocalServer() -> bool:
 	_multiplayer.peer_disconnected.connect(OnPeerDisconnected)
 
 	var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new();
-	var numplayer = GlobalData.NETWORKSERVERMAXPEERS if GlobalData.GlobalNetworkMode != GlobalData.NetworkMode.SINGLEPLAYERMODE else 1
+	var numplayer = GlobalData.NETWORKSERVERMAXPEERS if GlobalData.GetGlobalNetworkMode() != GlobalData.NetworkMode.SINGLEPLAYERMODE else 1
 
 	var error = peer.create_server(
 		GlobalData.NETWORKPORT, numplayer)
