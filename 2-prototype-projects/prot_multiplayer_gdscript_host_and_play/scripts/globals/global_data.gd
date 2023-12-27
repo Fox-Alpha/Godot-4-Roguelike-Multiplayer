@@ -18,6 +18,10 @@ enum NetworkModeError {
 
 const NETWORKPORT : int = 21277
 const NETWORKSERVERMAXPEERS : int = 4
+const _MSGPREFIX = "Signal > GlobalData: "
+
+var MAINLOG : Log
+
 var _GlobalNetworkMode :  NetworkMode :
 	set(value):
 		_GlobalNetworkMode = value
@@ -30,13 +34,16 @@ var UIDebugLabel :Node
 
 
 func _ready() -> void:
+	GodotLogger._prefix = "GLOBAL"
+	MAINLOG = GodotLogger.with("GlobalLogger")
+
 	_GlobalNetworkMode = NetworkMode.NOTSTARTED
 	UIDebugLabel = get_tree().current_scene.get_node("CanvasLayerUI/Debug/Label")
 	GlobalSignals.networkmodechanged.connect(OnNetworkModeChange)
 
 
 func OnNetworkModeChange(mode : NetworkMode) -> void:
-	print("Signal > GlobalData: NetworkModeChanges %s" % str(mode))
+	MAINLOG.info("%sNetworkModeChanges %s" % [_MSGPREFIX, str(mode)])
 	_GlobalNetworkMode = mode
 
 
