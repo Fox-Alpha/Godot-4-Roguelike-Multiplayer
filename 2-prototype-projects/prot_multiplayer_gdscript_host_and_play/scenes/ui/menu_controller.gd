@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var MAINTITLE = ProjectSettings.get_setting("application/config/name")
 
@@ -6,7 +6,7 @@ var _server_scene = preload("res://scenes/server/server.tscn")
 var _client_scene = preload("res://scenes/client/client.tscn")
 
 #@onready var startbuttons: Control = %Buttons
-@onready var buttons := $CanvasLayerUI/ButtonGroup
+#@onready var buttons := preload("res://scenes/ui/button_group.tscn") #$CanvasLayerUI/ButtonGroup
 
 
 func _ready() -> void:
@@ -18,29 +18,29 @@ func _on_menu_button_pressed(extra_arg_0: int) -> void:
 		0:
 			GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.SINGLEPLAYERMODE)
 
-			add_child(_server_scene.instantiate())
+			get_tree().current_scene.add_child(_server_scene.instantiate())
 			await get_tree().create_timer(0.1).timeout
-			add_child(_client_scene.instantiate())
+			get_tree().current_scene.add_child(_client_scene.instantiate())
 
 		1:
 			GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.CLIENTONLYMODE)
-			add_child(_client_scene.instantiate())
+			get_tree().current_scene.add_child(_client_scene.instantiate())
 
 		2:
 			GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.SERVERONLYMODE)
-			add_child(_server_scene.instantiate())
+			get_tree().current_scene.add_child(_server_scene.instantiate())
 
 		3:
 			GlobalSignals.networkmodechanged.emit(GlobalData.NetworkMode.SERVERCLIENTMODE)
-			add_child(_server_scene.instantiate())
+			get_tree().current_scene.add_child(_server_scene.instantiate())
 			await get_tree().create_timer(0.1).timeout
-			add_child(_client_scene.instantiate())
+			get_tree().current_scene.add_child(_client_scene.instantiate())
 
 		_:
 			GodotLogger.error("MainMenuButton::_on_menu_button_pressed (%s) -> This should never happen !" % [extra_arg_0])
 
 	#TODO: Own Scene for readding
-	buttons.hide()
+	self.hide()
 
 
 func _on_button_quit_app_pressed():

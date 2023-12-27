@@ -1,6 +1,6 @@
 extends MenuButton
 
-@onready var buttons := $/root/Main/CanvasLayerUI/ButtonGroup
+@onready var buttons := get_tree().current_scene.get_node_or_null("CanvasLayerUI/ButtonGroup")  # $/root/Main/CanvasLayerUI/ButtonGroup
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

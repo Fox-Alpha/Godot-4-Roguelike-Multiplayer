@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://ry16vi23n3rr"]
+
+[ext_resource type="Script" path="res://scenes/ui/menu_controller.gd" id="1_1nv2p"]
+
+[node name="ButtonGroup" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1nv2p")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -125.0
+offset_right = 110.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="ButtonSinglePlayer" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Single Player"
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonJoinServer" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Join Server"
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonDediServer" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Host Dedicated Server"
+
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonHostAndPlay" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Host and Play"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonQuitApp" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="visibility_changed" from="." to="." method="_on_button_group_visibility_changed"]
+[connection signal="pressed" from="VBoxContainer/ButtonSinglePlayer" to="." method="_on_menu_button_pressed" binds= [0]]
+[connection signal="pressed" from="VBoxContainer/ButtonJoinServer" to="." method="_on_menu_button_pressed" binds= [1]]
+[connection signal="pressed" from="VBoxContainer/ButtonDediServer" to="." method="_on_menu_button_pressed" binds= [2]]
+[connection signal="pressed" from="VBoxContainer/ButtonHostAndPlay" to="." method="_on_menu_button_pressed" binds= [3]]
+[connection signal="pressed" from="VBoxContainer/ButtonQuitApp" to="." method="_on_button_quit_app_pressed"]
