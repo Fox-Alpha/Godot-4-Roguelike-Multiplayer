@@ -15,16 +15,20 @@ func _ready() -> void:
 
 
 func OnExitMenuPresses(id:int):
-	GlobalData.MAINLOG.info("MenuButton %s (%s) is pressed" % [get_popup().get_item_text(id), str(id)])
+	GlobalData.MAINLOG.info("MenuButton: %s (%s) is pressed" % [get_popup().get_item_text(id), str(id)])
+	if GlobalData.GetGlobalNetworkMode() == GlobalData.NetworkMode.NOTSTARTED:
+		GlobalData.MAINLOG.info("MenuButton: we are in MainMenu !")
+		return
 
 	var isClient = get_tree().current_scene.get_node_or_null("ClientManager")
 	var isServer = get_tree().current_scene.get_node_or_null("ServerManager")
+
 
 	match id:
 		0:
 			if is_instance_valid(isServer):
 				var peers = isServer.multiplayer.get_peers()
-				print("Back to Menu", peers)
+
 				for peer in peers:
 					var cliententitys : Node2D = isServer.entity_array
 					if is_instance_valid(cliententitys):
@@ -37,8 +41,6 @@ func OnExitMenuPresses(id:int):
 				isServer.queue_free()
 
 			if is_instance_valid(isClient):
-				#isClient.multiplayer.multiplayer_peer.close()
-				#isClient.multiplayer.disconnect_peer(multiplayer.multiplayer_peer.TARGET_PEER_SERVER)
 				isClient.queue_free()
 				await isClient.NOTIFICATION_EXIT_TREE
 
@@ -47,3 +49,4 @@ func OnExitMenuPresses(id:int):
 			get_tree().quit()
 		_:
 			pass
+
