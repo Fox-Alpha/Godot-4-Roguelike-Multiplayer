@@ -23,6 +23,11 @@ config/icon="res://icon.svg"
 
 GlobalData="*res://scripts/globals/global_data.gd"
 GlobalSignals="*res://scripts/globals/global_signals.gd"
+GodotLogger="*res://addons/logger/logger.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/logger/plugin.cfg")
 
 [file_customization]
 
