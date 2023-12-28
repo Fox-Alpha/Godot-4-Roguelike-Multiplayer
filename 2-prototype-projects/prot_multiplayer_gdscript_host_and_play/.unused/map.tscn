@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1wnnyfeo0c8q"]
+
+[ext_resource type="Script" path="res://map.gd" id="1_2oh4y"]
+
+[node name="Map" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2oh4y")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.392157, 0.372549, 0.352941, 1)

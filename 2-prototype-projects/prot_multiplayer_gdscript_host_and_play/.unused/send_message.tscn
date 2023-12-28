@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh6fv7mm72hyf"]
+
+[ext_resource type="Script" path="res://ui/send_message.gd" id="1_7ljp4"]
+
+[node name="SendMessage" type="PanelContainer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -248.0
+offset_right = -162.0
+offset_bottom = -207.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_7ljp4")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Info" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Say : "
+
+[node name="TypedMessage" type="LineEdit" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+max_length = 35

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MetaUpgrade" load_steps=2 format=3 uid="uid://2wdaybhmg2e6"]
+
+[ext_resource type="Script" path="res://resources/meta_upgrades/meta_upgrade.gd" id="1_yswim"]
+
+[resource]
+script = ExtResource("1_yswim")
+id = "pickuparea_grow"
+max_quantity = 5
+experience_cost = 75
+next_experience_cost = 75
+title = "Experience Magnet"
+description = "Extends the are where Experience will be picked up by 15%"
+increase_xp_multiplicator = 0.1
+xp_multiplicator = 1.0

@@ -1,0 +1,88 @@
+[gd_scene load_steps=4 format=3 uid="uid://5w7ik85j8b35"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_bh08c"]
+[ext_resource type="Texture2D" uid="uid://bgv65sge8jan3" path="res://icon.svg" id="1_pp0a8"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_m0hyt"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("ReferenceRect/PlayerName:text")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("ReferenceRect/TeamColor:color")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:teamname")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:teamcolor")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_bh08c")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_interval = 0.154
+delta_interval = 0.385
+replication_config = SubResource("SceneReplicationConfig_m0hyt")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+custom_minimum_size = Vector2(128, 160)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Authority" type="ColorRect" parent="ReferenceRect"]
+unique_name_in_owner = true
+self_modulate = Color(0, 1, 0, 0.501961)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ReferenceRect"]
+position = Vector2(64, 64)
+texture = ExtResource("1_pp0a8")
+offset = Vector2(0, 3)
+metadata/_edit_lock_ = true
+
+[node name="TeamColor" type="ColorRect" parent="ReferenceRect"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_lock_ = true
+
+[node name="PlayerName" type="Label" parent="ReferenceRect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -26.0
+offset_right = 64.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(0, 26)
+size_flags_vertical = 0
+text = "Player"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
