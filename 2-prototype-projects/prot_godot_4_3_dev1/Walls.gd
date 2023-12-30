@@ -8,7 +8,7 @@ enum WallDirection{
 }
 
 @export_category("Walls Setup")
-#@export var walls : Array = [StaticBody2D]
+@export var walls : Array[PackedScene]
 @export var wallscene : PackedScene = preload("res://wall.tscn")
 
 #@export var wall_north : StaticBody2D
@@ -24,6 +24,9 @@ func _ready():
 	#for dir in WallDirection.keys():
 		#setwall(WallDirection[dir])
 	setwall(WallDirection.NORTH)
+	setwall(WallDirection.EAST)
+	setwall(WallDirection.SOUTH)
+	setwall(WallDirection.WEST)
 	pass # Replace with function body.
 
 
@@ -33,34 +36,38 @@ func _process(delta):
 
 
 func setwall(dir : WallDirection):
-	var w := wallscene.instantiate()
+	var w : StaticBody2D = walls[dir].instantiate()
 	w.name = WallDirection.keys()[dir]
 	match dir:
 		WallDirection.NORTH:
-			w.find_child("Sprite2D").texture.width = vpsize.x
-			w.find_child("Sprite2D").texture.height = 16
-			w.global_position.y = 0
-			w.global_position.x = vpsize.x / 2
-		WallDirection.SOUTH:
-			w.find_child("Sprite2D").texture.width = vpsize.x
-			w.find_child("Sprite2D").texture.height = 16
-			w.global_position.y = vpsize.y
-			w.global_position.x = vpsize.x / 2
-		WallDirection.WEST:
-			w.find_child("Sprite2D").texture.width = 16
-			w.find_child("Sprite2D").texture.height = vpsize.y
-			w.global_position.y = vpsize.y / 2
+			#w.find_child("Texture").size = Vector2i(vpsize.x, 16)
+			w.find_child("Texture").size.x = vpsize.x
 			w.global_position.x = 0
+			w.global_position.y = 0
+			w.global_rotation = 0
 		WallDirection.EAST:
-			w.find_child("Sprite2D").texture.width = 16
-			w.find_child("Sprite2D").texture.height = vpsize.y
-			w.global_position.y = vpsize.y / 2
+			w.find_child("Texture").size.x = vpsize.y
 			w.global_position.x = vpsize.x
+			w.global_position.y = 0
+			w.rotation_degrees = 90
+		WallDirection.SOUTH:
+			#w.global_rotation = 180
+			w.rotation_degrees = 180
+			w.find_child("Texture").size.x = vpsize.x
+			w.global_position = vpsize
+			#w.global_position.y = vpsize.y-40
+		WallDirection.WEST:
+			#w.global_rotation = -90
+			#w.rotate(deg2rad(-90))
+			w.rotation_degrees = -90
+			w.rotate
+			w.find_child("Texture").size.x = vpsize.y
+			w.global_position.x = 0
+			w.global_position.y = vpsize.y
 
+	printt("Wall %s GlobalPosition: %s" % [w.name, w.global_position])
 	printt("Wall %s Width: %s" % [w.name, w.find_child("Sprite2D").texture.width])
 	printt("Wall %s Height: %s" % [w.name, w.find_child("Sprite2D").texture.height])
-	printt("Wall %s GlobalPosition: %s" % [w.name, w.global_position])
-	
-	
+
 	add_child(w)
 	pass
