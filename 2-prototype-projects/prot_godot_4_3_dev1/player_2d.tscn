@@ -15,6 +15,7 @@ platform_wall_layers = 3
 script = ExtResource("1_s72op")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_4qg7i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

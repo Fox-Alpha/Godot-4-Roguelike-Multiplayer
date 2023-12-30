@@ -14,7 +14,11 @@ func _ready():
 	#var vp : Viewport = get_viewport()
 	#var cam : Camera2D = vp.get_camera_2d()
 	#var scp : Vector2 = cam.get_screen_center_position()
-	global_position = get_tree().current_scene.get_viewport().get_camera_2d().get_screen_center_position()
+	#global_position = get_tree().current_scene.get_viewport().get_camera_2d().get_screen_center_position()
+	var screencenter = get_tree().current_scene.get_viewport().get_visible_rect().get_center()
+	print("Screen Center: %s" % screencenter)
+	global_position = screencenter
+	print("Player Position: %s" % global_position)
 	pass
 
 
