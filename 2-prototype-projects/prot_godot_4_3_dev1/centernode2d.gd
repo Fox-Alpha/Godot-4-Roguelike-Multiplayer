@@ -1,9 +1,17 @@
-extends Node2D
+extends Node
 
-
+@export var NodesToCenter : Array[Node]
+@onready var screencenter = get_tree().current_scene.get_viewport().get_visible_rect().get_center()
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var screencenter = get_tree().current_scene.get_viewport().get_visible_rect().get_center()
-	print("Screen Center: %s" % screencenter)
-	global_position = screencenter
-	print("Player Position: %s" % global_position)
+	var ChildsToCenter = get_children()
+	
+	for c in ChildsToCenter:
+		(c as Node2D) .global_position = screencenter
+		print("Screen Center: %s" % screencenter)
+		print("Node %s Position: %s" % [c.name, c.global_position])
+
+	for c in NodesToCenter:
+		(c as Node2D) .global_position = screencenter
+		print("Screen Center: %s" % screencenter)
+		print("Node %s Position: %s" % [c.name, c.global_position])
