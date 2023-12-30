@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bua6sjds2wsuc"]
+
+[ext_resource type="PackedScene" uid="uid://lr4rftp7irym" path="res://player_2d.tscn" id="1_qk5qg"]
+[ext_resource type="PackedScene" uid="uid://jxpy0gxflxqp" path="res://wall.tscn" id="2_2gr21"]
+[ext_resource type="Script" path="res://Walls.gd" id="2_wqtgl"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player2D" parent="." instance=ExtResource("1_qk5qg")]
+visible = false
+
+[node name="Walls" type="Node" parent="."]
+script = ExtResource("2_wqtgl")
+
+[node name="Wall" parent="Walls" instance=ExtResource("2_2gr21")]
+position = Vector2(576, 0)
