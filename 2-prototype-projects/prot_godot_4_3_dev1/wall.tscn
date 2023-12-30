@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://jxpy0gxflxqp"]
+[gd_scene load_steps=7 format=3 uid="uid://jxpy0gxflxqp"]
 
 [ext_resource type="Script" path="res://wall.gd" id="1_ad0vv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_165ue"]
 bounce = 0.1
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8mpm6"]
 
 [sub_resource type="Gradient" id="Gradient_u63ma"]
 offsets = PackedFloat32Array(0, 0.311688, 1)
@@ -11,8 +13,6 @@ colors = PackedColorArray(0, 0, 0, 1, 0.0492648, 0.184505, 0.132086, 1, 1, 1, 1,
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_evds3"]
 gradient = SubResource("Gradient_u63ma")
-width = 16
-height = 16
 fill_from = Vector2(1, 0)
 fill_to = Vector2(0, 0)
 
@@ -26,7 +26,15 @@ physics_material_override = SubResource("PhysicsMaterial_165ue")
 script = ExtResource("1_ad0vv")
 metadata/_edit_group_ = true
 
+[node name="Texture" type="TextureRect" parent="."]
+anchors_preset = -1
+offset_right = 32.0
+offset_bottom = 16.0
+texture = SubResource("PlaceholderTexture2D_8mpm6")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
 texture = SubResource("GradientTexture2D_evds3")
 
 [node name="WorldBoundary" type="CollisionShape2D" parent="."]
