@@ -9,30 +9,21 @@ enum WallDirection{
 
 @export_category("Walls Setup")
 @export var walls : Array[PackedScene]
-@export var wallscene : PackedScene = preload("res://wall.tscn")
-
-#@export var wall_north : StaticBody2D
-#@export var wall_east : StaticBody2D
-#@export var wall_south : StaticBody2D
-#@export var wall_west : StaticBody2D
 
 @onready var vpsize : Vector2 = get_tree().current_scene.get_viewport().get_visible_rect().size
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	printt("VP Size: ", vpsize)
-	#for dir in WallDirection.keys():
-		#setwall(WallDirection[dir])
 	setwall(WallDirection.NORTH)
 	setwall(WallDirection.EAST)
 	setwall(WallDirection.SOUTH)
 	setwall(WallDirection.WEST)
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+#func _process(delta):
+	#pass
 
 
 func setwall(dir : WallDirection):
@@ -40,7 +31,6 @@ func setwall(dir : WallDirection):
 	w.name = WallDirection.keys()[dir]
 	match dir:
 		WallDirection.NORTH:
-			#w.find_child("Texture").size = Vector2i(vpsize.x, 16)
 			w.find_child("Texture").size.x = vpsize.x
 			w.global_position.x = 0
 			w.global_position.y = 0
@@ -51,14 +41,10 @@ func setwall(dir : WallDirection):
 			w.global_position.y = 0
 			w.rotation_degrees = 90
 		WallDirection.SOUTH:
-			#w.global_rotation = 180
 			w.rotation_degrees = 180
 			w.find_child("Texture").size.x = vpsize.x
 			w.global_position = vpsize
-			#w.global_position.y = vpsize.y-40
 		WallDirection.WEST:
-			#w.global_rotation = -90
-			#w.rotate(deg2rad(-90))
 			w.rotation_degrees = -90
 			w.rotate
 			w.find_child("Texture").size.x = vpsize.y
