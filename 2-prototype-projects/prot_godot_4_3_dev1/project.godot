@@ -15,3 +15,14 @@ config/tags=PackedStringArray("gd_dev", "godot4.3")
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://icon.svg"
+
+[layer_names]
+
+2d_physics/layer_1="Plyer"
+2d_navigation/layer_1="Ground"
+2d_physics/layer_2="WallBoundary"
+2d_navigation/layer_2="Wall"
+2d_physics/layer_3="Terrain"
+2d_navigation/layer_3="Water"
+2d_physics/layer_4="Water"
+2d_physics/layer_5="Enviroment"
