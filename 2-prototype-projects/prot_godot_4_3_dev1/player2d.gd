@@ -3,6 +3,9 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+@onready var FoW = $"../FogOfWar"
+
+
 #func _ready():
 	#pass
 
@@ -12,6 +15,8 @@ func _physics_process(_delta):
 	if direction:
 		velocity.x = direction.x * SPEED # * delta
 		velocity.y = direction.y * SPEED # * delta
+		var ppos = %TileMap.to_local(%Player2D.global_position)
+		FoW.update_fog(ppos/32)
 	else:
 		velocity = Vector2.ZERO
 		
