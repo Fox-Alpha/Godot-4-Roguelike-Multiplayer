@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bua6sjds2wsuc"]
 
-[ext_resource type="Script" path="res://Camera2D.gd" id="1_7vgyp"]
+[ext_resource type="Script" path="res://centernode2d.gd" id="1_7vgyp"]
 [ext_resource type="PackedScene" uid="uid://lr4rftp7irym" path="res://player_2d.tscn" id="1_qk5qg"]
 [ext_resource type="Texture2D" uid="uid://6yk3kt1wptxy" path="res://crosshair094.png" id="2_0tjfq"]
 [ext_resource type="PackedScene" uid="uid://jxpy0gxflxqp" path="res://wall.tscn" id="2_2gr21"]
@@ -9,7 +9,6 @@
 [node name="Main" type="Node2D"]
 
 [node name="Player2D" parent="." instance=ExtResource("1_qk5qg")]
-visible = false
 
 [node name="Crosshair094" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
