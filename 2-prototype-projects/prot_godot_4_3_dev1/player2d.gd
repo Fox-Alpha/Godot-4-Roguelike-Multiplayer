@@ -3,12 +3,8 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
-func _ready():
-	var screencenter = get_tree().current_scene.get_viewport().get_visible_rect().get_center()
-	print("Screen Center: %s" % screencenter)
-	global_position = screencenter
-	print("Player Position: %s" % global_position)
-	pass
+#func _ready():
+	#pass
 
 
 func _physics_process(_delta):

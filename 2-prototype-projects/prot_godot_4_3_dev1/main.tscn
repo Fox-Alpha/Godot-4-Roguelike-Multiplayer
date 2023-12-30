@@ -8,12 +8,15 @@
 
 [node name="Main" type="Node2D"]
 
-[node name="Player2D" parent="." instance=ExtResource("1_qk5qg")]
-
-[node name="Crosshair094" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_0tjfq")
+[node name="CenterNodes" type="Node" parent="." node_paths=PackedStringArray("NodesToCenter")]
 script = ExtResource("1_7vgyp")
+NodesToCenter = [NodePath("../Player2D")]
+
+[node name="Crosshair094" type="Sprite2D" parent="CenterNodes"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_0tjfq")
+
+[node name="Player2D" parent="." instance=ExtResource("1_qk5qg")]
 
 [node name="Walls" type="Node" parent="."]
 script = ExtResource("2_wqtgl")
