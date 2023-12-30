@@ -34,6 +34,8 @@ var wallsettings : Dictionary = {
 	},
 }
 
+var map : TileMap
+
 @export_category("Walls Setup")
 @export var walls : Array[PackedScene]
 
@@ -41,25 +43,41 @@ var wallsettings : Dictionary = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	map = get_tree().current_scene.get_node_or_null("TileMap")
+	var mapRect : Rect2i = map.get_used_rect()
+	var mapSize : Vector2i = mapRect.size * 64
 	printt("ViewPort Size: ", vpsize)
+	printt("TileMap Size: ", mapSize)
 	print("Screen Center: (%s / %s)" % [vpsize.x / 2.0, vpsize.y / 2.0])
 	
-	wallsettings["NORTH"]["wallposition"] = Vector2i(0, 0)
-	wallsettings["EAST"]["wallposition"] = Vector2i(vpsize.x, 0)
-	wallsettings["SOUTH"]["wallposition"] = vpsize
-	wallsettings["WEST"]["wallposition"] = Vector2i(0,vpsize.y)
+	
+	#TODO: Fix Position and Size to Map
+	wallsettings["NORTH"]["wallposition"] = mapRect.position
+	wallsettings["EAST"]["wallposition"] = Vector2i(mapRect.end.x, 0)
+	wallsettings["SOUTH"]["wallposition"] = mapRect.end
+	wallsettings["WEST"]["wallposition"] = Vector2i(mapRect.position.x,mapRect.end.y)
 
-	wallsettings["NORTH"]["wallsize"] = Vector2i(vpsize.x, 16)
-	wallsettings["EAST"]["wallsize"] = Vector2i(vpsize.y, 16)
-	wallsettings["SOUTH"]["wallsize"] = Vector2i(vpsize.x, 16)
-	wallsettings["WEST"]["wallsize"] = Vector2i(vpsize.y, 16)
+	wallsettings["NORTH"]["wallsize"] = Vector2i(mapRect.size.x, 16)
+	wallsettings["EAST"]["wallsize"] = Vector2i(mapRect.size.y, 16)
+	wallsettings["SOUTH"]["wallsize"] = Vector2i(mapRect.size.x, 16)
+	wallsettings["WEST"]["wallsize"] = Vector2i(mapRect.size.y, 16)
+	
+	#wallsettings["NORTH"]["wallposition"] = Vector2i(0, 0)
+	#wallsettings["EAST"]["wallposition"] = Vector2i(vpsize.x, 0)
+	#wallsettings["SOUTH"]["wallposition"] = vpsize
+	#wallsettings["WEST"]["wallposition"] = Vector2i(0,vpsize.y)
+#
+	#wallsettings["NORTH"]["wallsize"] = Vector2i(vpsize.x, 16)
+	#wallsettings["EAST"]["wallsize"] = Vector2i(vpsize.y, 16)
+	#wallsettings["SOUTH"]["wallsize"] = Vector2i(vpsize.x, 16)
+	#wallsettings["WEST"]["wallsize"] = Vector2i(vpsize.y, 16)
 	
 	#print(wallsettings)
-	
-	createwall(WallDirection.NORTH)
-	createwall(WallDirection.EAST)
-	createwall(WallDirection.SOUTH)
-	createwall(WallDirection.WEST)
+	#
+	#createwall(WallDirection.NORTH)
+	#createwall(WallDirection.EAST)
+	#createwall(WallDirection.SOUTH)
+	#createwall(WallDirection.WEST)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
