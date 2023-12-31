@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://df3x3lemdkqhn"]
+[gd_scene load_steps=2 format=3 uid="uid://df3x3lemdkqhn"]
+
+[ext_resource type="TileSet" uid="uid://dauv6gcl2garg" path="res://maps/firepower/map/firepower_tile_set.tres" id="1_kbw53"]
 
 [node name="Map02" type="TileMap"]
+tile_set = ExtResource("1_kbw53")
 format = 2
