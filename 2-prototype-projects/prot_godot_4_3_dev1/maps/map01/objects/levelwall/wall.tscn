@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://jxpy0gxflxqp"]
 
-[ext_resource type="Script" path="res://wall.gd" id="1_ad0vv"]
+[ext_resource type="Script" path="res://maps/map01/objects/levelwall/wall.gd" id="1_ad0vv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_165ue"]
 bounce = 0.1
