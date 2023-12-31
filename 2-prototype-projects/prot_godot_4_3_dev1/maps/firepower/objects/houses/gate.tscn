@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=3 uid="uid://qfl4bwbj7aam"]
+
+[ext_resource type="Texture2D" uid="uid://tmh46vbbxl32" path="res://maps/firepower/objects/gate/gate_W_O-sheet.png" id="1_1q4eg"]
+[ext_resource type="Script" path="res://maps/firepower/objects/houses/gate.gd" id="1_5v2cb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i62cc"]
+atlas = ExtResource("1_1q4eg")
+region = Rect2(384, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcfcw"]
+atlas = ExtResource("1_1q4eg")
+region = Rect2(256, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qif26"]
+atlas = ExtResource("1_1q4eg")
+region = Rect2(128, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4kbs"]
+atlas = ExtResource("1_1q4eg")
+region = Rect2(0, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77gpe"]
+atlas = ExtResource("1_1q4eg")
+region = Rect2(0, 0, 128, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hc6g8"]
+animations = [{
+"frames": [{
+"duration": 1.4,
+"texture": SubResource("AtlasTexture_i62cc")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_pcfcw")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_qif26")
+}, {
+"duration": 1.4,
+"texture": SubResource("AtlasTexture_m4kbs")
+}],
+"loop": true,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77gpe")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.4,
+"texture": SubResource("AtlasTexture_m4kbs")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_qif26")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_pcfcw")
+}, {
+"duration": 1.4,
+"texture": SubResource("AtlasTexture_i62cc")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1o2qk"]
+size = Vector2(35, 70)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_frjk3"]
+radius = 62.0725
+
+[node name="Gate" type="StaticBody2D"]
+collision_layer = 16
+script = ExtResource("1_5v2cb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hc6g8")
+animation = &"open"
+frame = 3
+frame_progress = 1.0
+
+[node name="CollisionGateLeft" type="CollisionShape2D" parent="."]
+position = Vector2(-46.5, 0)
+shape = SubResource("RectangleShape2D_1o2qk")
+
+[node name="CollisionGateRight" type="CollisionShape2D" parent="."]
+position = Vector2(48, 0)
+shape = SubResource("RectangleShape2D_1o2qk")
+
+[node name="AreaGate" type="Area2D" parent="."]
+
+[node name="CollisionGate" type="CollisionShape2D" parent="AreaGate"]
+shape = SubResource("CircleShape2D_frjk3")
