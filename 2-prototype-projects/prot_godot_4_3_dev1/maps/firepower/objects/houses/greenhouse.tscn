@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bavioyb8grrqa"]
+
+[ext_resource type="Script" path="res://maps/firepower/objects/houses/greenhouse.gd" id="1_5s8tr"]
+[ext_resource type="Texture2D" uid="uid://d16gj1xpcnw7p" path="res://maps/firepower/objects/houses/greenhouse.png" id="1_fery2"]
+[ext_resource type="Texture2D" uid="uid://ve4gjqwhvx1p" path="res://maps/firepower/objects/houses/greenhouse_destroyed.png" id="2_0v0lc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_04aq0"]
+size = Vector2(138, 92)
+
+[node name="Greenhouse" type="StaticBody2D"]
+script = ExtResource("1_5s8tr")
+
+[node name="SpriteGreenHouse" type="Sprite2D" parent="."]
+texture = ExtResource("1_fery2")
+
+[node name="SpriteDestroyed" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_0v0lc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_04aq0")
