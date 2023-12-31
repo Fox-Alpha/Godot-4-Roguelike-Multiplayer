@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7qlunrkyc5lc"]
+
+[ext_resource type="Script" path="res://maps/firepower/objects/houses/jail_house.gd" id="1_8kuym"]
+[ext_resource type="Texture2D" uid="uid://bfk61rwtvhfff" path="res://maps/firepower/objects/houses/haus_2.png" id="1_hifpv"]
+[ext_resource type="Texture2D" uid="uid://jx5kl11m0o31" path="res://maps/firepower/objects/houses/haus_1_Destruct_1.png" id="2_xjhty"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_remp1"]
+size = Vector2(92, 92)
+
+[node name="JailHouse" type="StaticBody2D"]
+script = ExtResource("1_8kuym")
+
+[node name="SpriteJail" type="Sprite2D" parent="."]
+texture = ExtResource("1_hifpv")
+
+[node name="SpriteDestroyed" type="Sprite2D" parent="."]
+texture = ExtResource("2_xjhty")
+
+[node name="CollisionJail" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_remp1")
