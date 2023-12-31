@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://t25u4fl6fkqn"]
+
+[ext_resource type="Script" path="res://maps/firepower/objects/houses/labor.gd" id="1_cshcr"]
+[ext_resource type="Texture2D" uid="uid://iysd44kdnp6c" path="res://maps/firepower/objects/houses/labor-export.png" id="1_xmdm2"]
+[ext_resource type="Texture2D" uid="uid://dvkyq6ptjf2l5" path="res://maps/firepower/objects/houses/labor-destroyed.png" id="2_v3282"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_greog"]
+radius = 37.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yo4et"]
+radius = 17.0275
+height = 46.6572
+
+[node name="Labor" type="StaticBody2D"]
+script = ExtResource("1_cshcr")
+metadata/_edit_lock_ = true
+
+[node name="SpriteLabor" type="Sprite2D" parent="."]
+texture = ExtResource("1_xmdm2")
+metadata/_edit_lock_ = true
+
+[node name="SpriteDestroyed" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_v3282")
+metadata/_edit_lock_ = true
+
+[node name="CollisionLaborMain" type="CollisionShape2D" parent="."]
+position = Vector2(-9, -17)
+shape = SubResource("CircleShape2D_greog")
+metadata/_edit_lock_ = true
+
+[node name="CollisionLaborSub" type="CollisionShape2D" parent="."]
+position = Vector2(33, 28)
+rotation = -0.71733
+shape = SubResource("CapsuleShape2D_yo4et")
