@@ -4,10 +4,15 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 @onready var FoW = $"../FogOfWar"
+@onready var camera_2d : Camera2D = $"../Camera2D"
 
 
 #func _ready():
 	#pass
+
+
+func _process(_delta):
+	camera_2d.global_position = global_position
 
 
 func _physics_process(_delta):
