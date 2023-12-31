@@ -43,7 +43,7 @@ var map : TileMap
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	map = get_tree().current_scene.get_node_or_null("TileMap")
+	map = get_tree().current_scene.get_node_or_null("Map01")
 	var mapRect : Rect2i = map.get_used_rect()
 	var mapSize : Vector2i = mapRect.size * 64
 	printt("ViewPort Size: ", vpsize)

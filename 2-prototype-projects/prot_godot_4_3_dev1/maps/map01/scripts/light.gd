@@ -1,6 +1,6 @@
 extends Node2D
 
-const LightTexture = preload("res://map/light.png")
+const LightTexture = preload("res://maps/map01/scripts/light.png")
 const GRID_SIZE = 32
 
 @onready var fog := %Fog
@@ -21,7 +21,7 @@ func _ready():
 	lightImage.convert(Image.FORMAT_RGBAH)
 	fog.scale *= GRID_SIZE
 	
-	var ppos = %TileMap.to_local(%Player2D.global_position)
+	var ppos = %Map01.to_local(%Player2D.global_position)
 	update_fog(ppos/GRID_SIZE)
 
 func update_fog(new_grid_position):
