@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c760a4pcsmjdj"]
+
+[ext_resource type="Script" path="res://maps/firepower/objects/mine/mine.gd" id="1_3rq7f"]
+[ext_resource type="Texture2D" uid="uid://khbghrl5ixd4" path="res://maps/firepower/objects/mine/mine_32_32_T.png" id="1_gi224"]
+
+[node name="Mine" type="Node2D"]
+script = ExtResource("1_3rq7f")
+
+[node name="SpriteMine" type="Sprite2D" parent="."]
+texture = ExtResource("1_gi224")
