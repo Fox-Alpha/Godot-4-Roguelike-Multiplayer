@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://qfl4bwbj7aam"]
 
 [ext_resource type="Texture2D" uid="uid://tmh46vbbxl32" path="res://maps/firepower/objects/gate/gate_W_O-sheet.png" id="1_1q4eg"]
-[ext_resource type="Script" path="res://maps/firepower/objects/houses/gate.gd" id="1_5v2cb"]
+[ext_resource type="Script" path="res://maps/firepower/objects/gate/gate.gd" id="1_5v2cb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i62cc"]
 atlas = ExtResource("1_1q4eg")
@@ -80,9 +80,7 @@ script = ExtResource("1_5v2cb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hc6g8")
-animation = &"open"
-frame = 3
-frame_progress = 1.0
+animation = &"idle"
 
 [node name="CollisionGateLeft" type="CollisionShape2D" parent="."]
 position = Vector2(-46.5, 0)
