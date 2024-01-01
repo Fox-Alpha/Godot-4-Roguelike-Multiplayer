@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c2oia7vmn3nob"]
 
-[ext_resource type="Script" path="res://maps/firepower/objects/houses/defence_tower.gd" id="1_awf1x"]
+[ext_resource type="Script" path="res://maps/firepower/objects/tower/defence_tower.gd" id="1_awf1x"]
 [ext_resource type="Texture2D" uid="uid://bx1q1ulhla7at" path="res://maps/firepower/objects/tower/turm_gross.png" id="1_gyed7"]
 [ext_resource type="Texture2D" uid="uid://tiodd0uqo5wl" path="res://maps/firepower/objects/tower/Tower_Destroyed.png" id="2_cbrly"]
 [ext_resource type="Texture2D" uid="uid://b2hkuw8cmfsa5" path="res://maps/firepower/objects/tower/Turm_Cannon.png" id="3_v7oxg"]
@@ -12,10 +12,10 @@ size = Vector2(42, 42)
 radius = 60.0
 
 [node name="DefenceTower" type="StaticBody2D"]
+position = Vector2(14, 20)
 script = ExtResource("1_awf1x")
 
 [node name="CollisionTower" type="CollisionShape2D" parent="."]
-top_level = true
 shape = SubResource("RectangleShape2D_1fism")
 
 [node name="CollisionBaseRadius" type="CollisionShape2D" parent="."]
@@ -49,9 +49,18 @@ offset = Vector2(0, -1)
 [node name="MarkerMuzzle" type="Marker2D" parent="NodeTowerBase/NodeTowerCannon"]
 position = Vector2(0, -30)
 
+[node name="RayCastCannon2" type="RayCast2D" parent="NodeTowerBase/NodeTowerCannon"]
+rotation = 0.20944
+target_position = Vector2(0, -250)
+
 [node name="RayCastCannon" type="RayCast2D" parent="NodeTowerBase/NodeTowerCannon"]
 target_position = Vector2(0, -250)
 
+[node name="RayCastCannon3" type="RayCast2D" parent="NodeTowerBase/NodeTowerCannon"]
+rotation = -0.20944
+target_position = Vector2(0, -250)
+
 [node name="CollisionTowerBase" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2(0, -3.85)
 polygon = PackedVector2Array(24, -20.15, 65, -17.15, 65, 26.85, 24, 26.85, 22, 62.85, -24, 62.85, -24, 26.85, -62, 27, -62, -17, -23, -19.15, -20, -63.15, 21, -63.15)
