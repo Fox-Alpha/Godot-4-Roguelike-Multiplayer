@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4tmbj83tgpdi"]
+
+[ext_resource type="Texture2D" uid="uid://2x3r8ijrsvw6" path="res://maps/firepower/objects/tank/bulletYellow_outline.png" id="1_om1nk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5w4c7"]
+radius = 11.0
+height = 38.0
+
+[node name="TankBullet" type="RigidBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_om1nk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_5w4c7")

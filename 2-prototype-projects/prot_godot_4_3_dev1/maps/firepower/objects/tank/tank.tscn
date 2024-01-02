@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://lx6witrqvfw8"]
+
+[ext_resource type="Script" path="res://maps/firepower/objects/tank/tank.gd" id="1_f03dg"]
+[ext_resource type="Texture2D" uid="uid://ct7ejwn2c3q02" path="res://maps/firepower/objects/tank/tankBlue_outline.png" id="1_ho0ah"]
+[ext_resource type="Texture2D" uid="uid://87688hui72a4" path="res://maps/firepower/objects/tank/barrelBlue_outline.png" id="2_itxcn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pqo2b"]
+radius = 32.0
+height = 94.0
+
+[node name="Tank" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_f03dg")
+
+[node name="SpriteTank" type="Sprite2D" parent="."]
+texture = ExtResource("1_ho0ah")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("2_itxcn")
+offset = Vector2(0, -20)
+
+[node name="BulletSpawner" type="Marker2D" parent="Node2D"]
+position = Vector2(0, -49.31)
+
+[node name="CollisionTank" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_pqo2b")
